@@ -1,5 +1,5 @@
 -- =============================================================================
--- BATCH INSERT SCRIPT: TreatmentActiveIngredient Table (E41)
+-- BATCH INSERT SCRIPT: TreatmentIngredient Table (E41)
 -- =============================================================================
 
 BEGIN TRANSACTION;
@@ -52,11 +52,11 @@ INSERT INTO #SourceData (IngredientCode, Description) VALUES
 (268, 'ISOXAFLUTOLE'),
 (269, 'TOLFENPYRAD');
 
-INSERT INTO [TreatmentActiveIngredient] (IngredientCode, Description)
+INSERT INTO [TreatmentIngredient] (IngredientCode, Description)
 SELECT s.IngredientCode, s.Description
 FROM #SourceData s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [TreatmentActiveIngredient] t 
+    SELECT 1 FROM [TreatmentIngredient] t 
     WHERE t.IngredientCode = s.IngredientCode
 );
 
@@ -64,7 +64,7 @@ SET @IngredientCount = @@ROWCOUNT;
 DROP TABLE #SourceData;
 
 IF @IngredientCount > 0
-    PRINT CAST(@IngredientCount AS NVARCHAR(10)) + ' records inserted successfully into Table TreatmentActiveIngredient.';
+    PRINT CAST(@IngredientCount AS NVARCHAR(10)) + ' records inserted successfully into Table TreatmentIngredient.';
 
 COMMIT TRANSACTION;
 GO

@@ -9,10 +9,10 @@ DECLARE @UseCount INT = 0;
 
 CREATE TABLE #SourceData (
     UseCode NVARCHAR(10),
-    IntendedUse NVARCHAR(100)
+    Description NVARCHAR(100)
 );
 
-INSERT INTO #SourceData (UseCode, IntendedUse) VALUES
+INSERT INTO #SourceData (UseCode, Description) VALUES
 ('0001', 'PLANTING'),
 ('0002', 'CONSUMPTION'),
 ('0003', 'PROCESSING'),
@@ -20,8 +20,8 @@ INSERT INTO #SourceData (UseCode, IntendedUse) VALUES
 ('0005', 'SPROUTING FOR CONSUMPTION'),
 ('0006', 'RESEARCH');
 
-INSERT INTO [IntendedUse] (UseCode, IntendedUse)
-SELECT s.UseCode, s.IntendedUse
+INSERT INTO [IntendedUse] (UseCode, Description)
+SELECT s.UseCode, s.Description
 FROM #SourceData s
 WHERE NOT EXISTS (
     SELECT 1 FROM [IntendedUse] t 

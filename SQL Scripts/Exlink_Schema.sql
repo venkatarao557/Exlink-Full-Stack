@@ -64,7 +64,7 @@ Technical data regarding the handling, safety, and shelf-life of products.
 
     TreatmentIngredients (E41): Active chemical ingredients used in treatments.
 
-    TreatmentConcentrationUnits (E42): Units of measure for treatment concentration.
+    TreatmentConcentrations (E42): Units of measure for treatment concentration.
 
 5. Certification, RFP & Regulatory Logic
 
@@ -78,7 +78,7 @@ The logic-driven tables for the Request for Permit (RFP) and certification lifec
 
     ProcessTypes (E20): Methods of establishment processing.
 
-    RFPComplianceStatuses (E23): Tracks the compliance state of a permit request.
+    RFPStatuses (E23): Tracks the compliance state of a permit request.
 
     RFPReasons (E24): Reason codes for RFP transactions.
 
@@ -112,7 +112,7 @@ Supporting tables for numeric data and descriptive attributes.
 
     TransportModes (E26): Methods of transport (e.g., Air, Sea).
 
-    CommodityNatures (E33): Defines the nature of the commodity.
+    NatureOfCommoditys (E33): Defines the nature of the commodity.
 
     CustomsWeightUnits (E36): Specific units required for customs reporting.
 
@@ -122,10 +122,8 @@ Supporting tables for numeric data and descriptive attributes.
 use exlink
 go
 
-
-
 -- =============================================================================
--- 1. GEOGRAPHIC & ADMINISTRATIVE DATA
+-- 1. GEOGRAPHIC & ADMINISTRATIVE DATA (MASTER)
 -- =============================================================================
 
 -- Table 1: Region (E1)
@@ -141,6 +139,21 @@ BEGIN
     PRINT 'Table Region created successfully';
 END
 ELSE PRINT 'Table Region already exists';
+GO
+
+-- Table 5: Country (E5)
+IF OBJECT_ID('[Country]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [Country] (
+        [CountryID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [CountryCode] NVARCHAR(5) NOT NULL,
+        [CountryName] NVARCHAR(100) NOT NULL,
+        CONSTRAINT UQ_Country_Code UNIQUE ([CountryCode])
+    );
+    CREATE INDEX IX_Country_Name ON [Country] ([CountryName]);
+    PRINT 'Table Country created successfully';
+END
+ELSE PRINT 'Table Country already exists';
 GO
 
 -- Table 2: CountryCommodity Mapping (E2)
@@ -173,21 +186,6 @@ END
 ELSE PRINT 'Table Port already exists';
 GO
 
--- Table 5: Country (E5)
-IF OBJECT_ID('[Country]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [Country] (
-        [CountryID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [CountryCode] NVARCHAR(5) NOT NULL,
-        [CountryName] NVARCHAR(100) NOT NULL,
-        CONSTRAINT UQ_Country_Code UNIQUE ([CountryCode])
-    );
-    CREATE INDEX IX_Country_Name ON [Country] ([CountryName]);
-    PRINT 'Table Country created successfully';
-END
-ELSE PRINT 'Table Country already exists';
-GO
-
 -- Table 9: EUCountry (E9)
 IF OBJECT_ID('[EUCountry]', 'U') IS NULL
 BEGIN
@@ -216,22 +214,6 @@ END
 ELSE PRINT 'Table USTerritory already exists';
 GO
 
--- Table 29: Office (E29)
-IF OBJECT_ID('[Office]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [Office] (
-        [OfficeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [OfficeCode] NVARCHAR(10) NOT NULL,
-        [OfficeName] NVARCHAR(150) NOT NULL,
-        [State] NVARCHAR(10) NOT NULL,
-        CONSTRAINT UQ_Office_Code UNIQUE ([OfficeCode])
-    );
-    CREATE INDEX IX_Office_State ON [Office] ([State]);
-    PRINT 'Table Office created successfully';
-END
-ELSE PRINT 'Table Office already exists';
-GO
-
 -- Table 35: State (E35)
 IF OBJECT_ID('[State]', 'U') IS NULL
 BEGIN
@@ -244,6 +226,22 @@ BEGIN
     PRINT 'Table State created successfully';
 END
 ELSE PRINT 'Table State already exists';
+GO
+
+-- Table 29: RegionalOffice (E29)
+IF OBJECT_ID('[RegionalOffice]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [RegionalOffice] (
+        [OfficeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [OfficeCode] NVARCHAR(10) NOT NULL,
+        [OfficeName] NVARCHAR(150) NOT NULL,
+        [State] NVARCHAR(10) NOT NULL,
+        CONSTRAINT UQ_Office_Code UNIQUE ([OfficeCode])
+    );
+    CREATE INDEX IX_RegionalOffice_State ON [RegionalOffice] ([State]);
+    PRINT 'Table RegionalOffice created successfully';
+END
+ELSE PRINT 'Table RegionalOffice already exists';
 GO
 
 -- Table 13: LocationQualifier (E13)
@@ -260,7 +258,7 @@ ELSE PRINT 'Table LocationQualifier already exists';
 GO
 
 -- =============================================================================
--- 2. COMMODITY & PRODUCT SPECIFICATIONS
+-- 2. COMMODITY & PRODUCT SPECIFICATIONS (MASTER)
 -- =============================================================================
 
 -- Table 4: Commodity (E4)
@@ -270,48 +268,12 @@ BEGIN
         [CommodityID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [CommodityCode] NVARCHAR(5) NOT NULL,
         [Description] NVARCHAR(100) NOT NULL,
-        CONSTRAINT UQ_Commodity_Code UNIQUE ([CommodityCode])
+        CONSTRAINT UQ_Commodity_Code UNIQUE ([CommodityCode]),
+        CONSTRAINT UQ_Commodity_ID UNIQUE ([CommodityID])
     );
     PRINT 'Table Commodity created successfully';
 END
 ELSE PRINT 'Table Commodity already exists';
-GO
-
--- Table 7: CutType (E7) 
-IF OBJECT_ID('[CutType]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [CutType] (
-        [CutTypeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [CommodityID] UNIQUEIDENTIFIER NULL,
-        [CutCode] NVARCHAR(20) NOT NULL,
-        [Description] NVARCHAR(255) NOT NULL,
-        [IsBoneIn] CHAR(1),
-        [IsBeefVeal] CHAR(1),
-        [IsChemicalLean] CHAR(1),
-        CONSTRAINT UQ_CutType_Code UNIQUE ([CutCode]),
-        CONSTRAINT FK_CutType_Commodity FOREIGN KEY ([CommodityID]) REFERENCES [Commodity]([CommodityID])
-    );
-    CREATE INDEX IX_CutType_CommID ON [CutType] ([CommodityID]);
-    PRINT 'Table CutType created successfully';
-END
-ELSE PRINT 'Table CutType already exists';
-GO
-
--- Table 21: ProductType (E21)
-IF OBJECT_ID('[ProductType]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [ProductType] (
-        [ProductTypeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [CommodityID] UNIQUEIDENTIFIER NOT NULL,
-        [ProductTypeCode] NVARCHAR(10) NOT NULL,
-        [Description] NVARCHAR(255) NOT NULL,
-        [ScientificName] NVARCHAR(255),
-        CONSTRAINT UQ_ProductType_Logic UNIQUE ([CommodityID], [ProductTypeCode]),
-        CONSTRAINT FK_ProductType_Commodity FOREIGN KEY ([CommodityID]) REFERENCES [Commodity]([CommodityID])
-    );
-    PRINT 'Table ProductType created successfully';
-END
-ELSE PRINT 'Table ProductType already exists';
 GO
 
 -- Table 38: DominantProduct (E38)
@@ -331,9 +293,9 @@ GO
 IF OBJECT_ID('[ProductCondition]', 'U') IS NULL
 BEGIN
     CREATE TABLE [ProductCondition] (
-        [ProductConditionID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [ConditionID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [ConditionCode] CHAR(4) NOT NULL,
-        [Description] NVARCHAR(100) NOT NULL,
+        [ConditionName] NVARCHAR(100) NOT NULL,
         CONSTRAINT UQ_ProdCondition_Code UNIQUE ([ConditionCode])
     );
     PRINT 'Table ProductCondition created successfully';
@@ -347,7 +309,7 @@ BEGIN
     CREATE TABLE [ProductPart] (
         [ProductPartID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [PartCode] CHAR(4) NOT NULL,
-        [Description] NVARCHAR(100) NOT NULL,
+        [PartName] NVARCHAR(100) NOT NULL,
         CONSTRAINT UQ_ProdPart_Code UNIQUE ([PartCode])
     );
     PRINT 'Table ProductPart created successfully';
@@ -355,95 +317,140 @@ END
 ELSE PRINT 'Table ProductPart already exists';
 GO
 
--- Table 33: CommodityNature (E33)
-IF OBJECT_ID('[CommodityNature]', 'U') IS NULL
+-- Table 33: NatureOfCommodity (E33)
+IF OBJECT_ID('[NatureOfCommodity]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [CommodityNature] (
+    CREATE TABLE [NatureOfCommodity] (
         [NatureID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [NatureCode] NVARCHAR(10) NOT NULL,
+        [NatureOfCommodityCode] NVARCHAR(10) NOT NULL,
         [Description] NVARCHAR(255) NOT NULL,
-        CONSTRAINT UQ_CommNature_Code UNIQUE ([NatureCode])
+        CONSTRAINT UQ_CommNature_Code UNIQUE ([NatureOfCommodityCode])
     );
-    PRINT 'Table CommodityNature created successfully';
+    PRINT 'Table NatureOfCommodity created successfully';
 END
-ELSE PRINT 'Table CommodityNature already exists';
+ELSE PRINT 'Table NatureOfCommodity already exists';
 GO
 
 -- =============================================================================
--- 3. CLASSIFICATIONS & MAPPINGS
+-- 3. MEASUREMENTS, UNITS & QUALIFIERS (MASTER)
 -- =============================================================================
 
--- Table 37: AHECCProductMapping (E37)
-IF OBJECT_ID('[AHECCProductMapping]', 'U') IS NULL
+-- Table 6: Currency (E6)
+IF OBJECT_ID('[Currency]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [AHECCProductMapping] (
-        [AHECCMappingID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [AHECCCode] NVARCHAR(20) NOT NULL,
-        [CutTypeID] UNIQUEIDENTIFIER NOT NULL, -- Reference updated
-        [ProductTypeID] UNIQUEIDENTIFIER NOT NULL,
-        [Description] NVARCHAR(255),
-        CONSTRAINT FK_AHECC_CutType FOREIGN KEY ([CutTypeID]) REFERENCES [CutType]([CutTypeID]), -- Reference updated
-        CONSTRAINT FK_AHECC_ProductType FOREIGN KEY ([ProductTypeID]) REFERENCES [ProductType]([ProductTypeID])
+    CREATE TABLE [Currency] (
+        [CurrencyID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [CurrencyUnit] NVARCHAR(10) NOT NULL,
+        [Description] NVARCHAR(100) NOT NULL,
+        CONSTRAINT UQ_Currency_Unit UNIQUE ([CurrencyUnit])
     );
-    PRINT 'Table AHECCProductMapping created successfully';
+    PRINT 'Table Currency created successfully';
 END
-ELSE PRINT 'Table AHECCProductMapping already exists';
+ELSE PRINT 'Table Currency already exists';
 GO
 
--- Table 40: ClassificationMaster (E40)
-IF OBJECT_ID('[ClassificationMaster]', 'U') IS NULL
+-- Table 12: WeightUnitShort (E12)
+IF OBJECT_ID('[WeightUnitShort]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [ClassificationMaster] (
-        [ClassificationID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [CNCode] NVARCHAR(20) NOT NULL,
-        [AHECCCode] NVARCHAR(20) NOT NULL DEFAULT '',
-        [Description] NVARCHAR(MAX) NOT NULL,
-        [StartDate] DATETIME2(7) NOT NULL,
-        [EndDate] DATETIME2(7) NULL
+    CREATE TABLE [WeightUnitShort] (
+        [WeightUnitShortID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [WeightUnit] NVARCHAR(10) NOT NULL,
+        [Description] NVARCHAR(100) NOT NULL,
+        CONSTRAINT UQ_WeightShort_Code UNIQUE ([WeightUnit])
     );
-    CREATE INDEX IX_ClassMaster_AHECC ON [ClassificationMaster] ([AHECCCode]);
-    PRINT 'Table ClassificationMaster created successfully';
+    PRINT 'Table WeightUnitShort created successfully';
 END
-ELSE PRINT 'Table ClassificationMaster already exists';
+ELSE PRINT 'Table WeightUnitShort already exists';
 GO
 
--- Table 40-B: ProductClassification
-IF OBJECT_ID('[ProductClassification]', 'U') IS NULL
+-- Table 14: UnitOfMeasure (E14)
+IF OBJECT_ID('[UnitOfMeasure]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [ProductClassification] (
-        [ProductClassID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [CNCode] NVARCHAR(20) NOT NULL,
-        [AHECC] NVARCHAR(20) NOT NULL,
-        [Description] NVARCHAR(MAX) NOT NULL,
-        [StartDate] DATETIME2 NOT NULL,
-        [EndDate] DATETIME2 NULL
+    CREATE TABLE [UnitOfMeasure] (
+        [UOMID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [UnitCode] NVARCHAR(10) NOT NULL,
+        [UnitType] NVARCHAR(50) NOT NULL,
+        [Description] NVARCHAR(100) NOT NULL,
+        CONSTRAINT UQ_UOM_Code UNIQUE ([UnitCode])
     );
-    CREATE INDEX IX_ProdClass_AHECC ON [ProductClassification] ([AHECC]);
-    PRINT 'Table ProductClassification created successfully';
+    CREATE INDEX IX_UOM_Type ON [UnitOfMeasure] ([UnitType]);
+    PRINT 'Table UnitOfMeasure created successfully';
 END
-ELSE PRINT 'Table ProductClassification already exists';
+ELSE PRINT 'Table UnitOfMeasure already exists';
+GO
+
+-- Table 15: WeightUnitAlternate (E15)
+IF OBJECT_ID('[WeightUnitAlternate]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [WeightUnitAlternate] (
+        [WeightUnitAltID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [WeightUnit] NVARCHAR(10) NOT NULL,
+        [Description] NVARCHAR(100) NOT NULL,
+        CONSTRAINT UQ_WeightAlt_Code UNIQUE ([WeightUnit])
+    );
+    PRINT 'Table WeightUnitAlternate created successfully';
+END
+ELSE PRINT 'Table WeightUnitAlternate already exists';
+GO
+
+-- Table 22: QualityQualifier (E22)
+IF OBJECT_ID('[QualityQualifier]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [QualityQualifier] (
+        [QualityQualifierID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [QualityQualifier] NVARCHAR(100) NOT NULL,
+        CONSTRAINT UQ_QualityQual_Name UNIQUE ([QualityQualifier])
+    );
+    PRINT 'Table QualityQualifier created successfully';
+END
+ELSE PRINT 'Table QualityQualifier already exists';
+GO
+
+-- Table 25: SupplementaryCode (E25)
+IF OBJECT_ID('[SupplementaryCode]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [SupplementaryCode] (
+        [SupplementaryCodeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [SupplementaryCode] NVARCHAR(10) NOT NULL,
+        [Description] NVARCHAR(255) NOT NULL,
+        [ApplicableCommodities] NVARCHAR(100), 
+        CONSTRAINT UQ_SuppCode UNIQUE ([SupplementaryCode])
+    );
+    PRINT 'Table SupplementaryCode created successfully';
+END
+ELSE PRINT 'Table SupplementaryCode already exists';
+GO
+
+-- Table 26: TransportMode (E26)
+IF OBJECT_ID('[TransportMode]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [TransportMode] (
+        [TransportModeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [ModeCode] INT NOT NULL,
+        [Description] NVARCHAR(50) NOT NULL,
+        CONSTRAINT UQ_TransMode_Code UNIQUE ([ModeCode])
+    );
+    PRINT 'Table TransportMode created successfully';
+END
+ELSE PRINT 'Table TransportMode already exists';
+GO
+
+-- Table 36: CustomsWeightUnit (E36)
+IF OBJECT_ID('[CustomsWeightUnit]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [CustomsWeightUnit] (
+        [CustomsWeightID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [UnitCode] NVARCHAR(10) NOT NULL,
+        CONSTRAINT UQ_CustomsWeight_Code UNIQUE ([UnitCode])
+    );
+    PRINT 'Table CustomsWeightUnit created successfully';
+END
+ELSE PRINT 'Table CustomsWeightUnit already exists';
 GO
 
 -- =============================================================================
--- 4. PRESERVATION, PACKAGING & TREATMENT
+-- 4. PRESERVATION, PACKAGING & TREATMENT (MASTER)
 -- =============================================================================
-
--- Table 10: CommodityConfiguration (E10)
-IF OBJECT_ID('[CommodityConfiguration]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [CommodityConfiguration] (
-        [ConfigurationID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [CommodityID] UNIQUEIDENTIFIER NOT NULL,
-        [PreservationCode] NVARCHAR(5) NOT NULL,
-        [ProductTypeCode] NVARCHAR(10) NOT NULL,
-        [PackTypeCode] NVARCHAR(10) NOT NULL,
-        [SupplementaryCode] NVARCHAR(10) NOT NULL DEFAULT '',
-        CONSTRAINT FK_Config_Commodity FOREIGN KEY ([CommodityID]) REFERENCES [Commodity]([CommodityID])
-    );
-    PRINT 'Table CommodityConfiguration created successfully';
-END
-ELSE PRINT 'Table CommodityConfiguration already exists';
-GO
 
 -- Table 16: PackType (E16)
 IF OBJECT_ID('[PackType]', 'U') IS NULL
@@ -529,22 +536,22 @@ END
 ELSE PRINT 'Table TreatmentIngredient already exists';
 GO
 
--- Table 42: TreatmentConcentrationUnit (E42)
-IF OBJECT_ID('[TreatmentConcentrationUnit]', 'U') IS NULL
+-- Table 42: TreatmentConcentration (E42)
+IF OBJECT_ID('[TreatmentConcentration]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [TreatmentConcentrationUnit] (
+    CREATE TABLE [TreatmentConcentration] (
         [ConcentrationUnitID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [UnitCode] NVARCHAR(10) NOT NULL,
         [Description] NVARCHAR(255) NOT NULL,
         CONSTRAINT UQ_TreatConcUnit_Code UNIQUE ([UnitCode])
     );
-    PRINT 'Table TreatmentConcentrationUnit created successfully';
+    PRINT 'Table TreatmentConcentration created successfully';
 END
-ELSE PRINT 'Table TreatmentConcentrationUnit already exists';
+ELSE PRINT 'Table TreatmentConcentration already exists';
 GO
 
 -- =============================================================================
--- 5. CERTIFICATION, RFP & REGULATORY LOGIC
+-- 5. CERTIFICATION, RFP & REGULATORY LOGIC (MASTER)
 -- =============================================================================
 
 -- Table 8: DeclarationIndicator (E8)
@@ -603,25 +610,25 @@ END
 ELSE PRINT 'Table ProcessType already exists';
 GO
 
--- Table 23: RFPComplianceStatus (E23)
-IF OBJECT_ID('[RFPComplianceStatus]', 'U') IS NULL
+-- Table 23: RFPStatus (E23)
+IF OBJECT_ID('[RFPStatus]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [RFPComplianceStatus] (
-        [ComplianceStatusID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+    CREATE TABLE [RFPStatus] (
+        [StatusID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [StatusCode] NVARCHAR(10) NOT NULL,
         [Description] NVARCHAR(100) NOT NULL,
         CONSTRAINT UQ_RFPStatus_Code UNIQUE ([StatusCode])
     );
-    PRINT 'Table RFPComplianceStatus created successfully';
+    PRINT 'Table RFPStatus created successfully';
 END
-ELSE PRINT 'Table RFPComplianceStatus already exists';
+ELSE PRINT 'Table RFPStatus already exists';
 GO
 
 -- Table 24: RFPReason (E24)
 IF OBJECT_ID('[RFPReason]', 'U') IS NULL
 BEGIN
     CREATE TABLE [RFPReason] (
-        [RFPReasonID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [ReasonID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [ReasonCode] INT NOT NULL,
         [Description] NVARCHAR(100) NOT NULL,
         CONSTRAINT UQ_RFPReason_Code UNIQUE ([ReasonCode])
@@ -635,7 +642,7 @@ GO
 IF OBJECT_ID('[CertificateReason]', 'U') IS NULL
 BEGIN
     CREATE TABLE [CertificateReason] (
-        [CertReasonID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [ReasonID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [ReasonCode] INT NOT NULL,
         [Description] NVARCHAR(100) NOT NULL,
         CONSTRAINT UQ_CertReason_Code UNIQUE ([ReasonCode])
@@ -652,6 +659,7 @@ BEGIN
         [RequestStatusID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
         [StatusCode] CHAR(1) NOT NULL,
         [Description] NVARCHAR(255) NOT NULL,
+        [DateEffective] DATETIME2 DEFAULT GETDATE(),
         CONSTRAINT UQ_CertReqStatus_Code UNIQUE ([StatusCode])
     );
     PRINT 'Table CertificateRequestStatus created successfully';
@@ -702,118 +710,102 @@ ELSE PRINT 'Table ApprovedCertifier already exists';
 GO
 
 -- =============================================================================
--- 6. MEASUREMENTS, UNITS & QUALIFIERS
+-- 6. CLASSIFICATIONS (MASTER)
+-- =============================================================================
+-- Table 40: ProductClassification
+IF OBJECT_ID('[ProductClassification]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [ProductClassification] (
+        [ProductClassificationID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [CNCode] NVARCHAR(20) NOT NULL,
+        [AHECC] NVARCHAR(20) NOT NULL,
+        [Description] NVARCHAR(MAX) NOT NULL,
+        [StartDate] DATETIME2 NOT NULL,
+        [EndDate] DATETIME2 NULL
+    );
+    CREATE INDEX IX_ProdClass_AHECC ON [ProductClassification] ([AHECC]);
+    PRINT 'Table ProductClassification created successfully';
+END
+ELSE PRINT 'Table ProductClassification already exists';
+GO
+
+-- =============================================================================
+-- 7. DEPENDENT TABLES (CHILDREN)
 -- =============================================================================
 
--- Table 6: Currency (E6)
-IF OBJECT_ID('[Currency]', 'U') IS NULL
+-- Table 7: CutType (E7) 
+IF OBJECT_ID('[CutType]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [Currency] (
-        [CurrencyID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [CurrencyUnit] NVARCHAR(10) NOT NULL,
-        [Description] NVARCHAR(100) NOT NULL,
-        CONSTRAINT UQ_Currency_Unit UNIQUE ([CurrencyUnit])
-    );
-    PRINT 'Table Currency created successfully';
-END
-ELSE PRINT 'Table Currency already exists';
-GO
-
--- Table 12: WeightUnitShort (E12)
-IF OBJECT_ID('[WeightUnitShort]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [WeightUnitShort] (
-        [WeightUnitShortID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [WeightUnit] NVARCHAR(10) NOT NULL,
-        [Description] NVARCHAR(100) NOT NULL,
-        CONSTRAINT UQ_WeightShort_Code UNIQUE ([WeightUnit])
-    );
-    PRINT 'Table WeightUnitShort created successfully';
-END
-ELSE PRINT 'Table WeightUnitShort already exists';
-GO
-
--- Table 14: UnitOfMeasure (E14)
-IF OBJECT_ID('[UnitOfMeasure]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [UnitOfMeasure] (
-        [UOMID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [UnitCode] NVARCHAR(10) NOT NULL,
-        [UnitType] NVARCHAR(50) NOT NULL,
-        [Description] NVARCHAR(100) NOT NULL,
-        CONSTRAINT UQ_UOM_Code UNIQUE ([UnitCode])
-    );
-    CREATE INDEX IX_UOM_Type ON [UnitOfMeasure] ([UnitType]);
-    PRINT 'Table UnitOfMeasure created successfully';
-END
-ELSE PRINT 'Table UnitOfMeasure already exists';
-GO
-
--- Table 15: WeightUnitAlternate (E15)
-IF OBJECT_ID('[WeightUnitAlternate]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [WeightUnitAlternate] (
-        [WeightUnitAltID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [WeightUnit] NVARCHAR(10) NOT NULL,
-        [Description] NVARCHAR(100) NOT NULL,
-        CONSTRAINT UQ_WeightAlt_Code UNIQUE ([WeightUnit])
-    );
-    PRINT 'Table WeightUnitAlternate created successfully';
-END
-ELSE PRINT 'Table WeightUnitAlternate already exists';
-GO
-
--- Table 22: QualityQualifier (E22)
-IF OBJECT_ID('[QualityQualifier]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [QualityQualifier] (
-        [QualityQualID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [QualityQualifier] NVARCHAR(100) NOT NULL,
-        CONSTRAINT UQ_QualityQual_Name UNIQUE ([QualityQualifier])
-    );
-    PRINT 'Table QualityQualifier created successfully';
-END
-ELSE PRINT 'Table QualityQualifier already exists';
-GO
-
--- Table 25: SupplementaryCode (E25)
-IF OBJECT_ID('[SupplementaryCode]', 'U') IS NULL
-BEGIN
-    CREATE TABLE [SupplementaryCode] (
-        [SupplementaryCodeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [SupplementaryCode] NVARCHAR(10) NOT NULL,
+    CREATE TABLE [CutType] (
+        [CutTypeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [CommodityID] UNIQUEIDENTIFIER NULL,
+        [CutCode] NVARCHAR(20) NOT NULL,
         [Description] NVARCHAR(255) NOT NULL,
-        [ApplicableCommodities] NVARCHAR(100), 
-        CONSTRAINT UQ_SuppCode UNIQUE ([SupplementaryCode])
+        [BoneInIndicator] CHAR(1),
+        [BeefVealIndicator] CHAR(1),
+        [ChemicalLeanIndicator] CHAR(1),
+        CONSTRAINT UQ_CutType_Code UNIQUE ([CutCode]),
+        CONSTRAINT FK_CutType_Commodity FOREIGN KEY ([CommodityID]) REFERENCES [Commodity]([CommodityID])
     );
-    PRINT 'Table SupplementaryCode created successfully';
+    CREATE INDEX IX_CutType_CommID ON [CutType] ([CommodityID]);
+    PRINT 'Table CutType created successfully';
 END
-ELSE PRINT 'Table SupplementaryCode already exists';
+ELSE PRINT 'Table CutType already exists';
 GO
 
--- Table 26: TransportMode (E26)
-IF OBJECT_ID('[TransportMode]', 'U') IS NULL
+-- Table 21: ProductType (E21)
+IF OBJECT_ID('[ProductType]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [TransportMode] (
-        [TransportModeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [ModeCode] INT NOT NULL,
-        [Description] NVARCHAR(50) NOT NULL,
-        CONSTRAINT UQ_TransMode_Code UNIQUE ([ModeCode])
+    CREATE TABLE [ProductType] (
+        [ProductTypeID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [CommodityCode] NVARCHAR(5) NOT NULL,
+        [ProductTypeCode] NVARCHAR(10) NOT NULL,
+        [Description] NVARCHAR(255) NOT NULL,
+        [ScientificName] NVARCHAR(255),
+        CONSTRAINT UQ_ProductType_Logic UNIQUE ([CommodityCode], [ProductTypeCode]),
+        CONSTRAINT UQ_ProductType_Code UNIQUE ([ProductTypeCode]), -- Required for referencing in Table 10
+        CONSTRAINT FK_ProductType_Commodity FOREIGN KEY ([CommodityCode]) REFERENCES [Commodity]([CommodityCode])
     );
-    PRINT 'Table TransportMode created successfully';
+    PRINT 'Table ProductType created successfully';
 END
-ELSE PRINT 'Table TransportMode already exists';
+ELSE PRINT 'Table ProductType already exists';
 GO
 
--- Table 36: CustomsWeightUnit (E36)
-IF OBJECT_ID('[CustomsWeightUnit]', 'U') IS NULL
+-- Table 37: AHECCProductMapping (E37)
+IF OBJECT_ID('[AHECCProductMapping]', 'U') IS NULL
 BEGIN
-    CREATE TABLE [CustomsWeightUnit] (
-        [CustomsWeightID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-        [UnitCode] NVARCHAR(10) NOT NULL,
-        CONSTRAINT UQ_CustomsWeight_Code UNIQUE ([UnitCode])
+    CREATE TABLE [AHECCProductMapping] (
+        [MappingID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [AHECC] NVARCHAR(20) NOT NULL,
+        [CutCode] NVARCHAR(20) NOT NULL,
+        [ProductTypeCode] NVARCHAR(10) NOT NULL,
+        [Description] NVARCHAR(255) NULL,
+        CONSTRAINT FK_AHECC_CutType_Code FOREIGN KEY ([CutCode]) REFERENCES [CutType]([CutCode]),
+        CONSTRAINT FK_AHECC_ProductType_Code FOREIGN KEY ([ProductTypeCode]) REFERENCES [ProductType]([ProductTypeCode]),
+        CONSTRAINT UQ_AHECC_Natural_Mapping UNIQUE ([AHECC], [CutCode], [ProductTypeCode])
     );
-    PRINT 'Table CustomsWeightUnit created successfully';
+    CREATE INDEX IX_AHECC_Lookup ON [AHECCProductMapping] ([AHECC], [ProductTypeCode]);
+    PRINT 'Table AHECCProductMapping created successfully with Natural Keys';
 END
-ELSE PRINT 'Table CustomsWeightUnit already exists';
+ELSE PRINT 'Table AHECCProductMapping already exists';
+GO
+
+
+-- Table 10: CommodityConfiguration (E10) / Product
+IF OBJECT_ID('[Product]', 'U') IS NULL
+BEGIN
+    CREATE TABLE [Product] (
+        [ProductID] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+        [CommodityCode] NVARCHAR(5) NOT NULL,
+        [PreservationCode] CHAR(1) NOT NULL,
+        [ProductTypeCode] NVARCHAR(10) NOT NULL,
+        [PackTypeCode] NVARCHAR(10) NOT NULL,
+        CONSTRAINT FK_Product_Comm FOREIGN KEY ([CommodityCode]) REFERENCES [Commodity]([CommodityCode]),
+        CONSTRAINT FK_Product_Pres FOREIGN KEY ([PreservationCode]) REFERENCES [PreservationType]([PreservationCode]),
+        CONSTRAINT FK_Product_Type FOREIGN KEY ([ProductTypeCode]) REFERENCES [ProductType]([ProductTypeCode]),
+        CONSTRAINT FK_Product_Pack FOREIGN KEY ([PackTypeCode]) REFERENCES [PackType]([PackTypeCode])
+    );
+    PRINT 'Table Product created successfully';
+END
+ELSE PRINT 'Table Product already exists';
 GO

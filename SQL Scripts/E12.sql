@@ -1,5 +1,5 @@
 -- =============================================================================
--- BATCH INSERT SCRIPT: WeightUnitShort Table (E12)
+-- BATCH INSERT SCRIPT: WeightUnit Table (E12)
 -- =============================================================================
 
 BEGIN TRANSACTION;
@@ -21,11 +21,11 @@ INSERT INTO #SourceData (WeightUnit, Description) VALUES
 ('STI', 'STONE(UK)[cite_start]'), -- [cite: 2]
 ('STN', 'TON (US) OR SHORT TON(UK/US)'); [cite_start]-- [cite: 2]
 
-INSERT INTO [WeightUnitShort] (WeightUnit, Description)
+INSERT INTO [WeightUnit] (WeightUnit, Description)
 SELECT s.WeightUnit, s.Description
 FROM #SourceData s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [WeightUnitShort] t 
+    SELECT 1 FROM [WeightUnit] t 
     WHERE t.WeightUnit = s.WeightUnit
 );
 
@@ -34,9 +34,9 @@ SET @WeightShortCount = @@ROWCOUNT;
 DROP TABLE #SourceData;
 
 IF @WeightShortCount > 0
-    PRINT CAST(@WeightShortCount AS NVARCHAR(10)) + ' records inserted successfully into Table WeightUnitShort.';
+    PRINT CAST(@WeightShortCount AS NVARCHAR(10)) + ' records inserted successfully into Table WeightUnit.';
 ELSE
-    PRINT 'No new records were inserted into Table WeightUnitShort.';
+    PRINT 'No new records were inserted into Table WeightUnit.';
 
 COMMIT TRANSACTION;
 GO

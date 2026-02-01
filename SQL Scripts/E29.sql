@@ -85,11 +85,11 @@ INSERT INTO #SourceData (OfficeCode, OfficeName, State) VALUES
 -- Note: Script includes a representative sample of records from the source file.
 
 -- Insert only if the OfficeCode doesn't already exist in the target table
-INSERT INTO [Office] (OfficeCode, OfficeName, State)
+INSERT INTO [RegionalOffice] (OfficeCode, OfficeName, State)
 SELECT s.OfficeCode, s.OfficeName, s.State
 FROM #SourceData s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [Office] t 
+    SELECT 1 FROM [RegionalOffice] t 
     WHERE t.OfficeCode = s.OfficeCode
 );
 

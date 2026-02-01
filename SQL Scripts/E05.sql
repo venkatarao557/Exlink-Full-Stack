@@ -1,3 +1,5 @@
+use exlink
+go
 -- =============================================================================
 -- BATCH INSERT SCRIPT: Country Table (E05)
 -- =============================================================================
@@ -79,11 +81,11 @@ INSERT INTO #E05Source (CountryCode, CountryName) VALUES
 ('ZW', 'ZIMBABWE');
 
 -- Insert only if the CountryCode doesn't already exist in the target table
-INSERT INTO [exlink].[Country] (CountryCode, CountryName)
+INSERT INTO [Country] (CountryCode, CountryName)
 SELECT s.CountryCode, s.CountryName
 FROM #E05Source s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [exlink].[Country] t 
+    SELECT 1 FROM [Country] t 
     WHERE t.CountryCode = s.CountryCode
 );
 

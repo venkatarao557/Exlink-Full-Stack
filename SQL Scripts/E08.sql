@@ -20,11 +20,11 @@ INSERT INTO #E08Source (Indicator, [Description]) VALUES
 ('N', 'Non-Confirming'); -- 
 
 -- Insert only if the Indicator doesn't already exist in the target table
-INSERT INTO [exlink].[DeclarationEstimate] (Indicator, [Description])
+INSERT INTO [exlink].[DeclarationIndicator] (Indicator, [Description])
 SELECT s.Indicator, s.[Description]
 FROM #E08Source s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [exlink].[DeclarationEstimate] t 
+    SELECT 1 FROM [exlink].[DeclarationIndicator] t 
     WHERE t.Indicator = s.Indicator
 );
 
@@ -33,9 +33,9 @@ SET @E08InsertCount = @@ROWCOUNT;
 DROP TABLE #E08Source;
 
 IF @E08InsertCount > 0
-    PRINT CAST(@E08InsertCount AS NVARCHAR(10)) + ' records inserted successfully into [exlink].[DeclarationEstimate].';
+    PRINT CAST(@E08InsertCount AS NVARCHAR(10)) + ' records inserted successfully into [exlink].[DeclarationIndicator].';
 ELSE
-    PRINT 'No new records were inserted into [exlink].[DeclarationEstimate] (all records already exist).';
+    PRINT 'No new records were inserted into [exlink].[DeclarationIndicator] (all records already exist).';
 
 COMMIT TRANSACTION;
 GO

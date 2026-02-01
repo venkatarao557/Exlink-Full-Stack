@@ -1,5 +1,5 @@
 -- =============================================================================
--- BATCH INSERT SCRIPT: EU_ProductMapping Table (E40)
+-- BATCH INSERT SCRIPT: ProductClassification Table (E40)
 -- =============================================================================
 
 BEGIN TRANSACTION;
@@ -11,12 +11,12 @@ DECLARE @MappingCount INT = 0;
 CREATE TABLE #SourceData (
     CNCode NVARCHAR(20),
     AHECC NVARCHAR(20),
-    CNDescription NVARCHAR(MAX),
+    Description NVARCHAR(MAX),
     StartDate DATETIME
 );
 
 -- Inserting data from E40.txt
-INSERT INTO #SourceData (CNCode, AHECC, CNDescription, StartDate) VALUES
+INSERT INTO #SourceData (CNCode, AHECC, Description, StartDate) VALUES
 ('020110', '02011010', 'BOVINE CARCASSES AND HALF-CARCASSES, FRESH OR CHILLED - BEEF', '1/01/1990 12:00:00 AM'),
 ('020110', '02011040', 'MEAT OF BOVINE ANIMALS, FRESH OR CHILLED BOVINE CARCASSES AND HALF-CARCASSES, FRESH OR CHILLED', '1/01/1990 12:00:00 AM'),
 ('020110', '02011090', 'BOVINE-CARCASSES AND HALF-CARCASSES, FRESH OR CHILLED - OTHER (BUFFALO, VEAL)', '1/01/1990 12:00:00 AM'),
@@ -624,15 +624,15 @@ INSERT INTO #SourceData (CNCode, AHECC, CNDescription, StartDate) VALUES
 ('999999', 'UNK', 'KANGAROO', '21/03/2016 12:00:00 AM'),
 ('H9999', 'UNK', 'HOARSE', '21/03/2016 12:00:00 AM');
 -- Insert only if the unique combination of CNCode and AHECC doesn't exist
-INSERT INTO [EU_ProductMapping] (CNCode, AHECC, CNDescription, StartDate)
+INSERT INTO [ProductClassification] (CNCode, AHECC, Description, StartDate)
 SELECT 
     LTRIM(RTRIM(s.CNCode)), 
     NULLIF(LTRIM(RTRIM(s.AHECC)), ''), -- Handle blank AHECC as NULL
-    s.CNDescription, 
+    s.Description, 
     s.StartDate
 FROM #SourceData s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [EU_ProductMapping] t 
+    SELECT 1 FROM [ProductClassification] t 
     WHERE t.CNCode = s.CNCode 
     AND (t.AHECC = s.AHECC OR (t.AHECC IS NULL AND s.AHECC = ''))
 );
@@ -642,9 +642,9 @@ SET @MappingCount = @@ROWCOUNT;
 DROP TABLE #SourceData;
 
 IF @MappingCount > 0
-    PRINT CAST(@MappingCount AS NVARCHAR(10)) + ' records inserted successfully into Table EU_ProductMapping.';
+    PRINT CAST(@MappingCount AS NVARCHAR(10)) + ' records inserted successfully into Table ProductClassification.';
 ELSE
-    PRINT 'No new records were inserted into Table EU_ProductMapping.';
+    PRINT 'No new records were inserted into Table ProductClassification.';
 
 COMMIT TRANSACTION;
 GO
