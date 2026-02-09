@@ -57,14 +57,14 @@ INSERT INTO #SourceData (SupplementaryCode, Description, ApplicableCommodities) 
 ('M', 'MILK FED', 'M'),
 ('O', 'ORGANIC', 'M'),
 ('PF', 'PERFORMANCE ENHANCEMENT FREE', 'M'),
-('R', 'FED', 'M'), -- Derived from "RANGE FED" spanning lines
+('R', 'FED', 'M'), 
 ('S', 'GRASS FED', 'M'),
 ('T', 'TENDER STRETCHED', 'M'),
 ('T1', 'JJ', 'M'),
 ('TX', 'EU TRANSIT', 'M'),
 ('V', 'GILT PORK - SINGAPORE ONLY', 'M'),
 ('WO', 'NON VIABLE WILD ORIGIN', 'F'),
-('X', 'BARROW PORK - SINGAPORE ONLY', 'M')[cite_start]; [cite: 15, 16]
+('X', 'BARROW PORK - SINGAPORE ONLY', 'M')
 
 INSERT INTO [SupplementaryCode] (SupplementaryCode, Description, ApplicableCommodities)
 SELECT s.SupplementaryCode, s.Description, s.ApplicableCommodities

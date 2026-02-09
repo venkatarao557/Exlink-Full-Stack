@@ -12,20 +12,20 @@ CREATE TABLE #SourceData (
     Description NVARCHAR(100)
 );
 
-[cite_start]-- Inserting data from E20.txt [cite: 11]
+-- Inserting data from E20.txt 
 INSERT INTO #SourceData (ProcessTypeCode, Description) VALUES
-('AQ', 'AQUACULTURE FARM')[cite_start], -- [cite: 11]
-('CT', 'CATCHER VESSEL')[cite_start], -- [cite: 11]
-('FF', 'FISHING AND FACTORY VESSEL')[cite_start], -- [cite: 11]
-('FR', 'FREEZING')[cite_start], -- [cite: 11]
-('FV', 'FISHING VESSEL')[cite_start], -- [cite: 11]
-('IR', 'INDEPENDENT COLD STORE RAW MATERIAL')[cite_start], -- [cite: 11]
-('LO', 'LOADOUT')[cite_start], -- [cite: 11]
-('PC', 'PROCESSING')[cite_start], -- [cite: 11]
-('PK', 'PACKING')[cite_start], -- [cite: 11]
-('SL', 'SLAUGHTER')[cite_start], -- [cite: 11]
-('ST', 'STORAGE')[cite_start], -- [cite: 11]
-('TV', 'TRANSPORT FISHING VESSEL'); [cite_start]-- [cite: 11]
+('AQ', 'AQUACULTURE FARM'), 
+('CT', 'CATCHER VESSEL'), 
+('FF', 'FISHING AND FACTORY VESSEL'), 
+('FR', 'FREEZING'), 
+('FV', 'FISHING VESSEL'), 
+('IR', 'INDEPENDENT COLD STORE RAW MATERIAL'), 
+('LO', 'LOADOUT'), 
+('PC', 'PROCESSING'), 
+('PK', 'PACKING'), 
+('SL', 'SLAUGHTER'), 
+('ST', 'STORAGE'), 
+('TV', 'TRANSPORT FISHING VESSEL'); 
 
 INSERT INTO [ProcessType] (ProcessTypeCode, Description)
 SELECT s.ProcessTypeCode, s.Description

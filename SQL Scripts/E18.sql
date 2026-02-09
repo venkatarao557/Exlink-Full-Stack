@@ -12,21 +12,21 @@ CREATE TABLE #SourceData (
     Description NVARCHAR(255)
 );
 
-[cite_start]-- Inserting data from E18.txt [cite: 8, 9]
+-- Inserting data from E18.txt 
 INSERT INTO #SourceData (DocumentTypeCode, Description) VALUES
-('AFM', 'AUSTRALIAN FISHERIES MANAGEMENT AUT')[cite_start], -- [cite: 8]
-('AHB', 'AUSTRALIAN HONEY BOARD')[cite_start], -- [cite: 8]
-('AHC', 'AUSTRALIAN HORTICULTURAL CORPORATIO')[cite_start], -- [cite: 8]
-('AWB', 'AUSTRALIAN WHEAT BOARD')[cite_start], -- [cite: 8]
-('CSH', 'DEPT OF HEALTH SERVICES - DRUG TREA')[cite_start], -- [cite: 8]
-('HAL', 'HORTICULTURE AUSTRALIA LIMITED')[cite_start], -- [cite: 8]
-('HBE', 'DEPT. OF HEALTH SERVICES - BLOOD EX')[cite_start], -- [cite: 8, 9]
-('HEA', 'DEPT. OF HEALTH SERVICES - GENERAL')[cite_start], -- [cite: 8]
-('HIA', 'HORTICULTURE INNOVATION AUSTRALIA')[cite_start], -- [cite: 8]
-('IMP', 'IMPORT PERMIT')[cite_start], -- [cite: 8]
-('PWS', 'ENVIRONMENT AUSTRALIA')[cite_start], -- [cite: 8]
-('WBC', 'AUSTRALIAN WINE AND BRANDY CORPORAT')[cite_start], -- [cite: 8]
-('WEA', 'WHEAT EXPORT AUTHORITY'); [cite_start]-- [cite: 8]
+('AFM', 'AUSTRALIAN FISHERIES MANAGEMENT AUT'), 
+('AHB', 'AUSTRALIAN HONEY BOARD'), 
+('AHC', 'AUSTRALIAN HORTICULTURAL CORPORATIO'), 
+('AWB', 'AUSTRALIAN WHEAT BOARD'), 
+('CSH', 'DEPT OF HEALTH SERVICES - DRUG TREA'), 
+('HAL', 'HORTICULTURE AUSTRALIA LIMITED'), 
+('HBE', 'DEPT. OF HEALTH SERVICES - BLOOD EX'), 
+('HEA', 'DEPT. OF HEALTH SERVICES - GENERAL'), 
+('HIA', 'HORTICULTURE INNOVATION AUSTRALIA'), 
+('IMP', 'IMPORT PERMIT'), 
+('PWS', 'ENVIRONMENT AUSTRALIA'), 
+('WBC', 'AUSTRALIAN WINE AND BRANDY CORPORAT'), 
+('WEA', 'WHEAT EXPORT AUTHORITY'); 
 
 INSERT INTO [RegulatoryDocument] (DocumentTypeCode, Description)
 SELECT s.DocumentTypeCode, s.Description

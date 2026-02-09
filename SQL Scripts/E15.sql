@@ -12,29 +12,29 @@ CREATE TABLE #SourceData (
     Description NVARCHAR(100)
 );
 
-[cite_start]-- Inserting data from E15.txt [cite: 5]
+-- Inserting data from E15.txt 
 INSERT INTO #SourceData (WeightUnit, Description) VALUES
-('CGM', 'CENTIGRAM')[cite_start], -- [cite: 5]
-('CMK', 'CM²')[cite_start], -- [cite: 5]
-('CU ', 'CUBIC METRE')[cite_start], -- [cite: 5]
-('DTN', 'DECITONNE')[cite_start], -- [cite: 5]
-('GRM', 'GRAM')[cite_start], -- [cite: 5]
-('GRN', 'GRAIN')[cite_start], -- [cite: 5]
-('HGM', 'HECTOGRAM')[cite_start], -- [cite: 5]
-('JCM', 'JAS CBM')[cite_start], -- [cite: 5]
-('KGM', 'KILOGRAM')[cite_start], -- [cite: 5]
-('KTN', 'KILOTONNE')[cite_start], -- [cite: 5]
-('MGM', 'MILLIGRAM')[cite_start], -- [cite: 5]
-('MT ', 'M/TONS')[cite_start], -- [cite: 5]
-('MTK', 'METRIC TONNES OF 1,000 KILOS EACH')[cite_start], -- [cite: 5]
-('MTN', 'METRIC TONS')[cite_start], -- [cite: 5]
-('MTO', 'METRIC TON')[cite_start], -- [cite: 5]
-('MTS', 'M/TS')[cite_start], -- [cite: 5]
-('NO ', 'NUMBER')[cite_start], -- [cite: 5]
-('SM ', 'SQUARE METRE')[cite_start], -- [cite: 5]
-('SS ', 'STEMS')[cite_start], -- [cite: 5]
-('TN ', 'TONNES')[cite_start], -- [cite: 5]
-('TNE', 'TONNE (METRIC TONNE)'); [cite_start]-- [cite: 5]
+('CGM', 'CENTIGRAM'), 
+('CMK', 'CM²'), 
+('CU ', 'CUBIC METRE'), 
+('DTN', 'DECITONNE'), 
+('GRM', 'GRAM'), 
+('GRN', 'GRAIN'), 
+('HGM', 'HECTOGRAM'), 
+('JCM', 'JAS CBM'), 
+('KGM', 'KILOGRAM'), 
+('KTN', 'KILOTONNE'), 
+('MGM', 'MILLIGRAM'), 
+('MT ', 'M/TONS'), 
+('MTK', 'METRIC TONNES OF 1,000 KILOS EACH'), 
+('MTN', 'METRIC TONS'), 
+('MTO', 'METRIC TON'), 
+('MTS', 'M/TS'), 
+('NO ', 'NUMBER'), 
+('SM ', 'SQUARE METRE'), 
+('SS ', 'STEMS'), 
+('TN ', 'TONNES'), 
+('TNE', 'TONNE (METRIC TONNE)'); 
 
 INSERT INTO [WeightUnitAlternate] (WeightUnit, Description)
 SELECT s.WeightUnit, s.Description

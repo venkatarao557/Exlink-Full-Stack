@@ -8,24 +8,24 @@ GO
 DECLARE @ProdUseCount INT = 0;
 
 CREATE TABLE #SourceData (
-    IndicatorCode CHAR(1),
+    UseCode CHAR(1),
     Description NVARCHAR(100)
 );
 
 -- Inserting data from E32.txt
-INSERT INTO #SourceData (IndicatorCode, Description) VALUES
+INSERT INTO #SourceData (UseCode, Description) VALUES
 ('H', 'Human Consumption'),
 ('A', 'Animal Feeding Stuff'),
 ('F', 'Further Process'),
 ('T', 'Technical Use'),
 ('O', 'Other');
 
-INSERT INTO [ProductUseIndicator] (IndicatorCode, Description)
-SELECT s.IndicatorCode, s.Description
+INSERT INTO [ProductUseIndicator] (UseCode, Description)
+SELECT s.UseCode, s.Description
 FROM #SourceData s
 WHERE NOT EXISTS (
     SELECT 1 FROM [ProductUseIndicator] t 
-    WHERE t.IndicatorCode = s.IndicatorCode
+    WHERE t.UseCode = s.UseCode
 );
 
 SET @ProdUseCount = @@ROWCOUNT;

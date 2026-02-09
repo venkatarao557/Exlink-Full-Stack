@@ -16,7 +16,7 @@ CREATE TABLE #SourceData (
 INSERT INTO #SourceData (ModeCode, Description) VALUES
 (1, 'SEA'),
 (4, 'AIR'),
-(5, 'MAIL')[cite_start]; [cite: 17]
+(5, 'MAIL')
 
 INSERT INTO [TransportMode] (ModeCode, Description)
 SELECT s.ModeCode, s.Description

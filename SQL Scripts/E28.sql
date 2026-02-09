@@ -16,7 +16,7 @@ CREATE TABLE #SourceData (
 INSERT INTO #SourceData (ReasonCode, Description) VALUES
 (9, 'Cert Request'),
 (98, 'Cert Request Acknowledgement'),
-(99, 'Remote Print Acknowledgement')[cite_start]; [cite: 19]
+(99, 'Remote Print Acknowledgement'); 
 
 INSERT INTO [CertificateReason] (ReasonCode, Description)
 SELECT s.ReasonCode, s.Description

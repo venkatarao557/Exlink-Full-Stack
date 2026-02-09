@@ -27,7 +27,7 @@ INSERT INTO #SourceData (ReasonCode, Description) VALUES
 (90, 'Transfer'),
 (91, 'Transfer Advice'),
 (92, 'Accept'),
-(93, 'Accept Advice')[cite_start]; [cite: 14]
+(93, 'Accept Advice'); 
 
 INSERT INTO [RFPReason] (ReasonCode, Description)
 SELECT s.ReasonCode, s.Description

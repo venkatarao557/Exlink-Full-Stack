@@ -11,10 +11,10 @@ CREATE TABLE #SourceData (
     LocationQualifier NVARCHAR(100)
 );
 
-[cite_start]-- Inserting data from E13.txt [cite: 3]
+-- Inserting data from E13.txt [cite: 3]
 INSERT INTO #SourceData (LocationQualifier) VALUES
-('Australian')[cite_start], -- [cite: 3]
-('Tasmanian'); [cite_start]-- [cite: 3]
+('Australian'),
+('Tasmanian'); 
 
 INSERT INTO [LocationQualifier] (LocationQualifier)
 SELECT s.LocationQualifier

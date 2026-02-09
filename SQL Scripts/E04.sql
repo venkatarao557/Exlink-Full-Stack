@@ -10,11 +10,11 @@ DECLARE @CommInsertCount INT = 0;
 -- Temporary table to hold the source data from E04.txt
 CREATE TABLE #E04Source (
     CommodityCode NVARCHAR(1),
-    CommodityDescription NVARCHAR(100)
+    Description NVARCHAR(100)
 );
 
 -- Inserting data from E04.txt 
-INSERT INTO #E04Source (CommodityCode, CommodityDescription) VALUES
+INSERT INTO #E04Source (CommodityCode, Description) VALUES
 ('A', 'HONEY'),
 ('D', 'DAIRY'),
 ('E', 'EGGS'),
@@ -28,11 +28,11 @@ INSERT INTO #E04Source (CommodityCode, CommodityDescription) VALUES
 ('X', 'OTHER GOODS');
 
 -- Insert only if the CommodityCode doesn't already exist in the target table
-INSERT INTO [exlink].[Commodity] (CommodityCode, CommodityDescription)
-SELECT s.CommodityCode, s.CommodityDescription
+INSERT INTO [Commodity] (CommodityCode, Description)
+SELECT s.CommodityCode, s.Description
 FROM #E04Source s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [exlink].[Commodity] t 
+    SELECT 1 FROM [Commodity] t 
     WHERE t.CommodityCode = s.CommodityCode
 );
 

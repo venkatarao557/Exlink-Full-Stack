@@ -1,5 +1,5 @@
 -- =============================================================================
--- BATCH INSERT SCRIPT: RFPComplianceStatus Table (E23)
+-- BATCH INSERT SCRIPT: RFPStatus Table (E23)
 -- =============================================================================
 
 BEGIN TRANSACTION;
@@ -22,13 +22,13 @@ INSERT INTO #SourceData (StatusCode, Description) VALUES
 ('INIT', 'INITIAL'),
 ('INSP', 'INSPECTED'),
 ('ORDR', 'ORDER'),
-('SUSP', 'SUSPENDED')[cite_start]; [cite: 13]
+('SUSP', 'SUSPENDED'); 
 
-INSERT INTO [RFPComplianceStatus] (StatusCode, Description)
+INSERT INTO [RFPStatus] (StatusCode, Description)
 SELECT s.StatusCode, s.Description
 FROM #SourceData s
 WHERE NOT EXISTS (
-    SELECT 1 FROM [RFPComplianceStatus] t 
+    SELECT 1 FROM [RFPStatus] t 
     WHERE t.StatusCode = s.StatusCode
 );
 

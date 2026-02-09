@@ -1014,7 +1014,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('3200', 'BRISKET - 10 RIB (BREAST)', 'M', 'I', 'N', 'N'),
 ('3201', 'BRISKET - 11 RIB (BREAST)', 'M', 'I', 'N', 'N'),
 ('3202', 'BRISKET - 12 RIB (BREAST)', 'M', 'I', 'N', 'N'),
-('3203', 'BRISKET - 13 RIB (BREAST)', 'M', 'I', 'N', 'N'),
+('3203', 'BRISKET - 13 RIB (BREAST)', 'M', 'I', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('3209', 'RACK - 8 RIBS', 'M', 'I', 'N', 'N'),
 ('3210', 'RACK - 7 RIBS', 'M', 'I', 'N', 'N'),
 ('3210W', 'RACK (SPECIAL TRIM)', 'M', 'I', 'N', 'N'),
@@ -1851,8 +1855,8 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('5013W', 'FLAP - 9 RIB', 'M', 'I', 'N', 'N'),
 ('5015', 'SPARE RIBS (RIBS)', 'M', 'I', 'N', 'N'),
 ('5015W', '6 SPARE RIBS (RIBS)', 'M', 'N', 'N', 'N'),
-('5016', 'SPARE RIBS (RIBS)', 'I', 'I', 'N', 'N'),
-('5016', 'SPARE RIBS (RIBS)', 'M', 'I', 'N', 'N'),
+('5016I', 'SPARE RIBS (RIBS)', 'I', 'I', 'N', 'N'),
+('5016M', 'SPARE RIBS (RIBS)', 'M', 'I', 'N', 'N'),
 ('5019', 'BONE IN LAMB - SHOULDER RIBS', 'M', 'I', 'N', 'N'),
 ('5020', 'NECK', 'M', 'I', 'N', 'N'),
 ('5020W', 'NECK (SPECIAL TRIM)', 'M', 'I', 'N', 'N'),
@@ -2013,7 +2017,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('6000', 'TONGUE - LONG CUT', 'M', 'N', 'N', 'N'),
 ('6010', 'TONGUE - SHORT CUT', 'M', 'N', 'N', 'N'),
 ('6010W', 'TONGUE - SHORT CUT - SPECIAL TRIM', 'M', 'N', 'N', 'N'),
-('6011', 'TONGUE DAMAGED (TONGUE ASSORTED (DG))', 'M', 'N', 'N', 'N'),
+('6011', 'TONGUE DAMAGED (TONGUE ASSORTED (DG))', 'M', 'N', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('6020', 'TONGUE SHORT CUT SPECIAL TRIM (TONGUE SHORT CUT S/T)', 'M', 'N', 'N', 'N'),
 ('6025', 'TONGUE SWISS CUT SPECIAL TRIM (TONGUE SWISS CUT S/T)', 'M', 'N', 'N', 'N'),
 ('6030', 'TONGUE - SWISS CUT', 'M', 'N', 'N', 'N'),
@@ -2373,8 +2381,8 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('CA242', 'CAMEL - OTHER PROCESSED', 'M', 'N', 'N', 'N'),
 ('D0010', 'CARCASE', 'M', 'I', 'N', 'N'),
 ('D0011', 'DEER BONE-IN FORQUARTER CARCASE', 'M', 'N', 'N', 'N'),
-('D0015', 'LEG', 'I', 'I', 'N', 'N'),
-('D0015', 'LEG', 'M', 'I', 'N', 'N'),
+('D0015I', 'LEG', 'I', 'I', 'N', 'N'),
+('D0015M', 'LEG', 'M', 'I', 'N', 'N'),
 ('D0016', 'LEG FEMUR', 'M', 'I', 'N', 'N'),
 ('D0017', 'SHANK', 'M', 'I', 'N', 'N'),
 ('D0019', 'SADDLE', 'M', 'I', 'N', 'N'),
@@ -2409,7 +2417,7 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('D0091', 'CHUCK (SQUARE CUT)', 'M', 'O', 'N', 'N'),
 ('D0092', 'NECK', 'M', 'O', 'N', 'N'),
 ('D0094', 'ASSORTED CUTS', 'M', 'I', 'N', 'N'),
-('D0095', 'TRIMMINGS', 'I', 'O', 'N', 'N'),
+('D0095I', 'TRIMMINGS', 'I', 'O', 'N', 'N'),
 ('D0095', 'TRIMMINGS', 'M', 'O', 'N', 'N'),
 ('D0096', 'DICED VENISON', 'M', 'O', 'N', 'N'),
 ('D0097', 'PIZZLE', 'M', 'N', 'N', 'N'),
@@ -3010,7 +3018,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('DC0667', 'SMOKED BARRAMUNDI AND DILL DIP (CREAM CHEESE BASED)', 'D', 'N', 'N', 'N'),
 ('DC0668', 'RED PEPPER AND BASIL PESTO DIP (CREAM CHEESE BASED)', 'D', 'N', 'N', 'N'),
 ('DC0669', 'GUACOMOLE AND SALSA DIP (CREAM CHEESE BASED)', 'D', 'N', 'N', 'N'),
-('DC0670', 'LEMON GARLIC PRAWN AND AVOCADO MAYONNAISE DIP (CREAM CHEESE BASED)', 'D', 'N', 'N', 'N'),
+('DC0670', 'LEMON GARLIC PRAWN AND AVOCADO MAYONNAISE DIP (CREAM CHEESE BASED)', 'D', 'N', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('DC0671', 'ACID CASEIN', 'D', 'N', 'N', 'N'),
 ('DC0672', 'UHT HONEYCOMB FLAVOURED MILK', 'D', 'N', 'N', 'N'),
 ('DC0673', 'GUACAMOLE (CREAM CHEESE BASED DIP)', 'D', 'N', 'N', 'N'),
@@ -4006,7 +4018,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('DC1710', 'ICE CREAM (WITH COCOA)', 'D', 'N', 'N', 'N'),
 ('DC1711', 'ICE CREAM (WITHOUT COCOA)', 'D', 'N', 'N', 'N'),
 ('DC1712', 'ICE CREAM (WITHOUT COCOA)', 'D', 'N', 'N', 'N'),
-('DC1713', 'UHT MANGO FLAVOURED MILK', 'D', 'N', 'N', 'N'),
+('DC1713', 'UHT MANGO FLAVOURED MILK', 'D', 'N', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('DC1714', 'COCONUT AND PINEAPPLE', 'D', 'N', 'N', 'N'),
 ('DC1715', 'GREEK BURNT FIG & SALTED CARAMEL', 'D', 'N', 'N', 'N'),
 ('DC1716', 'SOAKED BIRCHER MUESLI - FIG & CRANBERRY', 'D', 'N', 'N', 'N'),
@@ -5002,7 +5018,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('FC1092', 'BLACK BREAM - FILLETS', 'F', 'N', 'N', 'N'),
 ('FC1094', 'BLUE GRENADIER', 'F', 'N', 'N', 'N'),
 ('FC1095', 'BLUE GRENADIER - GILLED AND GUTTED', 'F', 'N', 'N', 'N'),
-('FC1096', 'BLUE GRENADIER - HEADED AND GUTTED', 'F', 'N', 'N', 'N'),
+('FC1096', 'BLUE GRENADIER - HEADED AND GUTTED', 'F', 'N', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('FC1097', 'BLUE WAREHOU', 'F', 'N', 'N', 'N'),
 ('FC1098', 'BLUE WAREHOU - GILLED AND GUTTED', 'F', 'N', 'N', 'N'),
 ('FC1099', 'BLUE WAREHOU - HEADED AND GUTTED', 'F', 'N', 'N', 'N'),
@@ -5998,7 +6018,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('FF0488', 'BLACK DEEPSEA CARDINALFISH - MINCE', 'F', 'N', 'N', 'N'),
 ('FF0489', 'BLACK DEEPSEA CARDINALFISH - HEADED, GUTTED AND TAILED', 'F', 'N', 'N', 'N'),
 ('FF0490', 'RIBBONFISH - FILLETS', 'F', 'N', 'N', 'N'),
-('FF0491', 'RIBBONFISH - SKIN ON FILLETS', 'F', 'N', 'N', 'N'),
+('FF0491', 'RIBBONFISH - SKIN ON FILLETS', 'F', 'N', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('FF0492', 'RIBBONFISH - ROE FOR FURTHER PROCESSING', 'F', 'N', 'N', 'N'),
 ('FF0493', 'RIBBONFISH - SKIN OFF FILLETS - BLOCK', 'F', 'N', 'N', 'N'),
 ('FF0494', 'RIBBONFISH - MINCE', 'F', 'N', 'N', 'N'),
@@ -6994,7 +7018,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('FF1656', 'BLUE MACKEREL - GUTTED', 'F', 'N', 'N', 'N'),
 ('FF1657', 'MORWONG - GUTTED', 'F', 'N', 'N', 'N'),
 ('FF1658', 'BLUE MORWONG - GUTTED', 'F', 'N', 'N', 'N'),
-('FF1659', 'RIBALDO - GUTTED', 'F', 'N', 'N', 'N'),
+('FF1659', 'RIBALDO - GUTTED', 'F', 'N', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('FF1660', 'ORANGE ROUGHY - GUTTED', 'F', 'N', 'N', 'N'),
 ('FF1661', 'RUDDERFISH - GUTTED', 'F', 'N', 'N', 'N'),
 ('FF1662', 'ANGEL SHARK - GUTTED', 'F', 'N', 'N', 'N'),
@@ -7990,7 +8018,11 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('IN6000', 'FILTERED', 'I', 'N', 'N', 'N'),
 ('IN6001', 'PROCESSED, NOT FILTERED', 'I', 'N', 'N', 'N'),
 ('IN6002', 'RAW', 'I', 'N', 'N', 'N'),
-('IN6003', 'FILTERED', 'I', 'N', 'N', 'N'),
+('IN6003', 'FILTERED', 'I', 'N', 'N', 'N');
+
+Go
+
+INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator) VALUES
 ('IN6004', 'PROCESSED, NOT FILTERED', 'I', 'N', 'N', 'N'),
 ('IN6005', 'RAW', 'I', 'N', 'N', 'N'),
 ('IN6006', 'SPRAY DRIED PLASMA', 'I', 'N', 'N', 'N'),
@@ -8404,7 +8436,7 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('W00420', 'WOOL OPEN TOP', 'W', 'N', 'N', 'N'),
 ('W00421', 'UNCARBONISED NOILS', 'W', 'N', 'N', 'N'),
 ('W00422', 'WOOL WASTE', 'W', 'N', 'N', 'N'),
-('W00423', 'WOOL GREASE', 'I', 'N', 'N', 'N'),
+('W00423I', 'WOOL GREASE', 'I', 'N', 'N', 'N'),
 ('W00423', 'WOOL GREASE', 'W', 'N', 'N', 'N'),
 ('W00424', 'AUSTRALIAN SCOURED WOOL', 'W', 'N', 'N', 'N'),
 ('W00425', 'AUSTRALIAN GREASY WOOL', 'W', 'N', 'N', 'N'),
@@ -8427,7 +8459,7 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('W00444', 'AUSTRALIAN WOOL OPEN TOP', 'W', 'N', 'N', 'N'),
 ('W00445', 'AUSTRALIAN UNCARBONISED NOILS', 'W', 'N', 'N', 'N'),
 ('W00446', 'AUSTRALIAN WOOL WASTE (WOOL OFFCUTS)', 'W', 'N', 'N', 'N'),
-('W00447', 'AUSTRALIAN WOOL GREASE', 'I', 'N', 'N', 'N'),
+('W00447I', 'AUSTRALIAN WOOL GREASE', 'I', 'N', 'N', 'N'),
 ('W00447', 'AUSTRALIAN WOOL GREASE', 'W', 'N', 'N', 'N'),
 ('W00448', 'AUSTRALIAN GREASY CARDING WOOL', 'W', 'N', 'N', 'N'),
 ('W00449', 'AUSTRALIAN MERINO SCOURED WOOL', 'W', 'N', 'N', 'N'),
@@ -8542,16 +8574,17 @@ INSERT INTO #E07Source (CutCode, CutDescription, Commodity, BoneInIndicator, Bee
 ('WP80', 'TROTTER', 'M', 'N', 'N', 'N'),
 ('WP90', 'TOPSIDE', 'M', 'N', 'N', 'N'),
 ('WP93', 'NECK', 'M', 'N', 'N', 'N');
+go
 -- Bulk insert with duplicate prevention
-INSERT INTO [exlink].[Cut] (CutCode, CutDescription, Commodity, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator)
-SELECT s.CutCode, s.CutDescription, s.Commodity, s.BoneInIndicator, s.BeefVealIndicator, s.ChemicalLeanIndicator
-FROM #E07Source s
+INSERT INTO [CutType] (CutCode, Description, CommodityID, BoneInIndicator, BeefVealIndicator, ChemicalLeanIndicator)
+SELECT s.CutCode, s.CutDescription, c.CommodityID, s.BoneInIndicator, s.BeefVealIndicator, s.ChemicalLeanIndicator
+FROM #E07Source s join Commodity c on c.CommodityCode = s.Commodity
 WHERE NOT EXISTS (
-    SELECT 1 FROM [exlink].[Cut] t 
+    SELECT 1 FROM [CutType] t 
     WHERE t.CutCode = s.CutCode
 );
 
-PRINT CAST(@@ROWCOUNT AS NVARCHAR(10)) + ' records processed into [exlink].[Cut].';
+PRINT CAST(@@ROWCOUNT AS NVARCHAR(10)) + ' records processed into [CutType].';
 
 DROP TABLE #E07Source;
 COMMIT TRANSACTION;

@@ -12,12 +12,12 @@ CREATE TABLE #SourceData (
     Description NVARCHAR(50)
 );
 
-[cite_start]-- Inserting data from E19.txt [cite: 10]
+-- Inserting data from E19.txt 
 INSERT INTO #SourceData (PreservationCode, Description) VALUES
-('C', 'CHILLED')[cite_start], -- [cite: 10]
-('F', 'FROZEN')[cite_start], -- [cite: 10]
-('U', 'UNREFRIGERATED')[cite_start], -- [cite: 10]
-('X', 'NULL'); [cite_start]-- [cite: 10]
+('C', 'CHILLED'), 
+('F', 'FROZEN'), 
+('U', 'UNREFRIGERATED'), 
+('X', 'NULL'); 
 
 INSERT INTO [PreservationType] (PreservationCode, Description)
 SELECT s.PreservationCode, s.Description
