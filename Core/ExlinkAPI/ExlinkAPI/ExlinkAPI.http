@@ -1,0 +1,6 @@
+@ExlinkAPI_HostAddress = http://localhost:5243
+
+GET {{ExlinkAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

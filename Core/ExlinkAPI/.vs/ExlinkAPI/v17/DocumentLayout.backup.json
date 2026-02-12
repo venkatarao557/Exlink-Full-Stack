@@ -1,0 +1,670 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\weightunitshortscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\weightunitshortscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\weightunitalternatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\weightunitalternatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\usterritoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\usterritoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\unitofmeasurescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\unitofmeasurescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\treatmenttypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\treatmenttypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\treatmentingredientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\treatmentingredientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\treatmentconcentrationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\treatmentconcentrationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\treatmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\treatmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\transportmodescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\transportmodescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\supplementarycodescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\supplementarycodescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\statescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\statescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\rfpstatuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\rfpstatuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\rfpreasonscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\rfpreasonscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\regulatorydocumentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\regulatorydocumentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\regionalofficescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\regionalofficescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\regionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\regionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\qualityqualifierscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\qualityqualifierscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\productuseindicatorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\productuseindicatorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\productclassificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\productclassificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\processtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\processtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\preservationtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\preservationtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\portscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\portscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\packtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\packtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\packagetypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\packagetypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\natureofcommoditiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\natureofcommoditiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\locationqualifierscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\locationqualifierscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\intendedusescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\intendedusescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\eucountriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\eucountriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\dominantproductscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\dominantproductscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\declarationindicatorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\declarationindicatorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\cuttypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\cuttypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\customsweightunitscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\customsweightunitscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\currenciescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\currenciescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\approvedcertifierscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\approvedcertifierscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\countrycommoditiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\countrycommoditiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A56DF67-F3AA-4477-9278-8580189322AF}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Program.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Program.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Program.cs",
+              "RelativeToolTip": "ExlinkAPI\\Program.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAADgvxwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:56:59.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WeightUnitShortsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\WeightUnitShortsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\WeightUnitShortsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\WeightUnitShortsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\WeightUnitShortsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:54:53.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WeightUnitAlternatesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\WeightUnitAlternatesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\WeightUnitAlternatesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\WeightUnitAlternatesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\WeightUnitAlternatesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:53:59.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "USTerritoriesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\USTerritoriesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\USTerritoriesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\USTerritoriesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\USTerritoriesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:52:39.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UnitOfMeasuresController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\UnitOfMeasuresController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\UnitOfMeasuresController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\UnitOfMeasuresController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\UnitOfMeasuresController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:51:28.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TreatmentTypesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentTypesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\TreatmentTypesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentTypesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\TreatmentTypesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:50:20.282Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TreatmentIngredientsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentIngredientsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\TreatmentIngredientsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentIngredientsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\TreatmentIngredientsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:49:33.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TreatmentConcentrationsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentConcentrationsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\TreatmentConcentrationsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentConcentrationsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\TreatmentConcentrationsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:48:53.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TreatmentsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\TreatmentsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TreatmentsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\TreatmentsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:48:16.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TransportModesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TransportModesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\TransportModesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\TransportModesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\TransportModesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:47:02.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SupplementaryCodesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\SupplementaryCodesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\SupplementaryCodesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\SupplementaryCodesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\SupplementaryCodesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:45:50.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "StatesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\StatesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\StatesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\StatesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\StatesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:45:07.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "RfpstatusController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RfpstatusController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\RfpstatusController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RfpstatusController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\RfpstatusController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:44:23.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RfpreasonsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RfpreasonsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\RfpreasonsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RfpreasonsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\RfpreasonsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:43:28.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "RegulatoryDocumentsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RegulatoryDocumentsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\RegulatoryDocumentsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RegulatoryDocumentsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\RegulatoryDocumentsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:41:14.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RegionalOfficesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RegionalOfficesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\RegionalOfficesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RegionalOfficesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\RegionalOfficesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:40:00.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "RegionsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RegionsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\RegionsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\RegionsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\RegionsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:39:24.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "QualityQualifiersController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\QualityQualifiersController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\QualityQualifiersController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\QualityQualifiersController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\QualityQualifiersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:38:27.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ProductUseIndicatorsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProductUseIndicatorsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\ProductUseIndicatorsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProductUseIndicatorsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\ProductUseIndicatorsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:36:52.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ProductClassificationsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProductClassificationsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\ProductClassificationsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProductClassificationsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\ProductClassificationsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:32:13.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:28:03.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ProcessTypesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProcessTypesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\ProcessTypesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ProcessTypesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\ProcessTypesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:27:20.05Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "PreservationTypesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PreservationTypesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\PreservationTypesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PreservationTypesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\PreservationTypesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:25:55.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "PortsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PortsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\PortsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PortsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\PortsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:25:00.453Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "PackTypesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PackTypesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\PackTypesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PackTypesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\PackTypesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:23:59.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "PackageTypesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PackageTypesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\PackageTypesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\PackageTypesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\PackageTypesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:22:29.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "NatureOfCommoditiesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\NatureOfCommoditiesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\NatureOfCommoditiesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\NatureOfCommoditiesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\NatureOfCommoditiesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:20:42.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "LocationQualifiersController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\LocationQualifiersController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\LocationQualifiersController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\LocationQualifiersController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\LocationQualifiersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:19:47.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "IntendedUsesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\IntendedUsesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\IntendedUsesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\IntendedUsesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\IntendedUsesController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:16:49.637Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "EUCountriesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\EUCountriesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\EUCountriesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\EUCountriesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\EUCountriesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:16:10.9Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "DominantProductsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\DominantProductsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\DominantProductsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\DominantProductsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\DominantProductsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:14:59.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "DeclarationIndicatorsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\DeclarationIndicatorsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\DeclarationIndicatorsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\DeclarationIndicatorsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\DeclarationIndicatorsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:11:13.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CutTypesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CutTypesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\CutTypesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CutTypesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\CutTypesController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:10:26.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "CustomsWeightUnitsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CustomsWeightUnitsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\CustomsWeightUnitsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CustomsWeightUnitsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\CustomsWeightUnitsController.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:09:35.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "CurrenciesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CurrenciesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\CurrenciesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CurrenciesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\CurrenciesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:06:12.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ApprovedCertifiersController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ApprovedCertifiersController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\ApprovedCertifiersController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\ApprovedCertifiersController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\ApprovedCertifiersController.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T12:00:28.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "CountryCommoditiesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CountryCommoditiesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\CountryCommoditiesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CountryCommoditiesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\CountryCommoditiesController.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAswGEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T11:59:47.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "CountriesController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CountriesController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\CountriesController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\CountriesController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\CountriesController.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAswHYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T11:58:05.25Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=exlink;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ExdocContext -DataAnnotations
