@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B2A55430-8F41-4BAF-9418-3D1D18DBB3CC}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\controllers\\aheccmappingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2A55430-8F41-4BAF-9418-3D1D18DBB3CC}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\controllers\\aheccmappingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B2A55430-8F41-4BAF-9418-3D1D18DBB3CC}|ExlinkAPI\\ExlinkAPI.csproj|c:\\v-sharp\\projects\\exports\\exlink-full-stack\\core\\exlinkapi\\exlinkapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B2A55430-8F41-4BAF-9418-3D1D18DBB3CC}|ExlinkAPI\\ExlinkAPI.csproj|solutionrelative:exlinkapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -39,6 +43,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AheccMappingsController.cs",
+              "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\AheccMappingsController.cs",
+              "RelativeDocumentMoniker": "ExlinkAPI\\Controllers\\AheccMappingsController.cs",
+              "ToolTip": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Controllers\\AheccMappingsController.cs",
+              "RelativeToolTip": "ExlinkAPI\\Controllers\\AheccMappingsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-14T02:38:29.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "ExlinkAPI\\Properties\\launchSettings.json",
@@ -51,7 +68,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\appsettings.Development.json",
               "RelativeDocumentMoniker": "ExlinkAPI\\appsettings.Development.json",
@@ -59,12 +76,11 @@
               "RelativeToolTip": "ExlinkAPI\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-14T01:04:16.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-14T01:04:16.009Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ExlinkAPI.http",
               "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\ExlinkAPI.http",
               "RelativeDocumentMoniker": "ExlinkAPI\\ExlinkAPI.http",
@@ -72,12 +88,11 @@
               "RelativeToolTip": "ExlinkAPI\\ExlinkAPI.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2026-02-14T01:01:51.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-14T01:01:51.004Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\appsettings.json",
               "RelativeDocumentMoniker": "ExlinkAPI\\appsettings.json",
@@ -85,12 +100,11 @@
               "RelativeToolTip": "ExlinkAPI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-14T01:01:42.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-14T01:01:42.028Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\V-Sharp\\projects\\exports\\Exlink-Full-Stack\\Core\\ExlinkAPI\\ExlinkAPI\\Program.cs",
               "RelativeDocumentMoniker": "ExlinkAPI\\Program.cs",
@@ -98,8 +112,7 @@
               "RelativeToolTip": "ExlinkAPI\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T13:37:40.979Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-13T13:37:40.979Z"
             }
           ]
         }
