@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.Models;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +9,95 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class IntendedUsesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IIntendedUseRepository _repository;
 
-        public IntendedUsesController(ExdocContext context)
+        public IntendedUsesController(IIntendedUseRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/IntendedUses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IntendedUse>>> GetIntendedUses()
+        public async Task<ActionResult<IEnumerable<IntendedUseDto>>> GetIntendedUses()
         {
-            return await _context.IntendedUses.ToListAsync();
+            var entities = await _repository.GetAllAsync();
+            var dtos = entities.Select(e => MapToDto(e));
+            return Ok(dtos);
         }
 
-        // GET: api/IntendedUses/5
+        // GET: api/IntendedUses/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<IntendedUse>> GetIntendedUse(Guid id)
+        public async Task<ActionResult<IntendedUseDto>> GetIntendedUse(Guid id)
         {
-            var intendedUse = await _context.IntendedUses.FindAsync(id);
-
-            if (intendedUse == null)
+            var entity = await _repository.GetByIdAsync(id);
+            if (entity == null)
             {
                 return NotFound();
             }
-
-            return intendedUse;
+            return Ok(MapToDto(entity));
         }
 
-        // PUT: api/IntendedUses/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/IntendedUses/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIntendedUse(Guid id, IntendedUse intendedUse)
+        public async Task<IActionResult> PutIntendedUse(Guid id, IntendedUseDto dto)
         {
-            if (id != intendedUse.IntendedUseId)
+            if (id != dto.IntendedUseId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(intendedUse).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(MapToEntity(dto));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!IntendedUseExists(id))
+                if (!await _repository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
         // POST: api/IntendedUses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<IntendedUse>> PostIntendedUse(IntendedUse intendedUse)
+        public async Task<ActionResult<IntendedUseDto>> PostIntendedUse(IntendedUseDto dto)
         {
-            _context.IntendedUses.Add(intendedUse);
-            await _context.SaveChangesAsync();
+            var entity = MapToEntity(dto);
+            await _repository.AddAsync(entity);
 
-            return CreatedAtAction("GetIntendedUse", new { id = intendedUse.IntendedUseId }, intendedUse);
+            return CreatedAtAction("GetIntendedUse", new { id = entity.IntendedUseId }, MapToDto(entity));
         }
 
-        // DELETE: api/IntendedUses/5
+        // DELETE: api/IntendedUses/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIntendedUse(Guid id)
         {
-            var intendedUse = await _context.IntendedUses.FindAsync(id);
-            if (intendedUse == null)
+            if (!await _repository.ExistsAsync(id))
             {
                 return NotFound();
             }
 
-            _context.IntendedUses.Remove(intendedUse);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
         }
 
-        private bool IntendedUseExists(Guid id)
+        // Mapping Helpers
+        private static IntendedUseDto MapToDto(IntendedUse e) => new()
         {
-            return _context.IntendedUses.Any(e => e.IntendedUseId == id);
-        }
+            IntendedUseId = e.IntendedUseId,
+            UseCode = e.UseCode,
+            Description = e.Description
+        };
+
+        private static IntendedUse MapToEntity(IntendedUseDto d) => new()
+        {
+            IntendedUseId = d.IntendedUseId,
+            UseCode = d.UseCode,
+            Description = d.Description
+        };
     }
 }

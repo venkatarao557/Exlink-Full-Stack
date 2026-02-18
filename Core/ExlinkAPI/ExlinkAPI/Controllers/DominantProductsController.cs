@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.Models;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +9,93 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class DominantProductsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IDominantProductRepository _repository;
 
-        public DominantProductsController(ExdocContext context)
+        public DominantProductsController(IDominantProductRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/DominantProducts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DominantProduct>>> GetDominantProducts()
+        public async Task<ActionResult<IEnumerable<DominantProductDto>>> GetDominantProducts()
         {
-            return await _context.DominantProducts.ToListAsync();
+            var products = await _repository.GetAllAsync();
+            var dtos = products.Select(p => MapToDto(p));
+            return Ok(dtos);
         }
 
-        // GET: api/DominantProducts/5
+        // GET: api/DominantProducts/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<DominantProduct>> GetDominantProduct(Guid id)
+        public async Task<ActionResult<DominantProductDto>> GetDominantProduct(Guid id)
         {
-            var dominantProduct = await _context.DominantProducts.FindAsync(id);
-
-            if (dominantProduct == null)
+            var product = await _repository.GetByIdAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-
-            return dominantProduct;
+            return Ok(MapToDto(product));
         }
 
-        // PUT: api/DominantProducts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/DominantProducts/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDominantProduct(Guid id, DominantProduct dominantProduct)
+        public async Task<IActionResult> PutDominantProduct(Guid id, DominantProductDto dto)
         {
-            if (id != dominantProduct.DominantProductId)
+            if (id != dto.DominantProductId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(dominantProduct).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(MapToEntity(dto));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!DominantProductExists(id))
+                if (!await _repository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
         // POST: api/DominantProducts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DominantProduct>> PostDominantProduct(DominantProduct dominantProduct)
+        public async Task<ActionResult<DominantProductDto>> PostDominantProduct(DominantProductDto dto)
         {
-            _context.DominantProducts.Add(dominantProduct);
-            await _context.SaveChangesAsync();
+            var product = MapToEntity(dto);
+            await _repository.AddAsync(product);
 
-            return CreatedAtAction("GetDominantProduct", new { id = dominantProduct.DominantProductId }, dominantProduct);
+            return CreatedAtAction("GetDominantProduct", new { id = product.DominantProductId }, MapToDto(product));
         }
 
-        // DELETE: api/DominantProducts/5
+        // DELETE: api/DominantProducts/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDominantProduct(Guid id)
         {
-            var dominantProduct = await _context.DominantProducts.FindAsync(id);
-            if (dominantProduct == null)
+            if (!await _repository.ExistsAsync(id))
             {
                 return NotFound();
             }
 
-            _context.DominantProducts.Remove(dominantProduct);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
         }
 
-        private bool DominantProductExists(Guid id)
+        // Manual Mapping Helpers
+        private static DominantProductDto MapToDto(DominantProduct p) => new()
         {
-            return _context.DominantProducts.Any(e => e.DominantProductId == id);
-        }
+            DominantProductId = p.DominantProductId,
+            ProductName = p.ProductName
+        };
+
+        private static DominantProduct MapToEntity(DominantProductDto d) => new()
+        {
+            DominantProductId = d.DominantProductId,
+            ProductName = d.ProductName
+        };
     }
 }

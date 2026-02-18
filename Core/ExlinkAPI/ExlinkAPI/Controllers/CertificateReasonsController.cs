@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -8,103 +9,65 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class CertificateReasonsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ICertificateReasonRepository _repository;
 
-        public CertificateReasonsController(ExdocContext context)
+        public CertificateReasonsController(ICertificateReasonRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/CertificateReasons
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CertificateReason>>> GetReasons()
+        public async Task<ActionResult<IEnumerable<CertificateReasonDto>>> GetReasons()
         {
-            return await _context.CertificateReasons.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/CertificateReasons/{id}
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<CertificateReason>> GetReasonById(Guid id)
+        public async Task<ActionResult<CertificateReasonDto>> GetReasonById(Guid id)
         {
-            var reason = await _context.CertificateReasons.FindAsync(id);
+            var reason = await _repository.GetByIdAsync(id);
             if (reason == null) return NotFound();
-            return reason;
+            return Ok(reason);
         }
 
-        // GET: api/CertificateReasons/code/{code}
         [HttpGet("code/{code:int}")]
-        public async Task<ActionResult<CertificateReason>> GetReasonByCode(int code)
+        public async Task<ActionResult<CertificateReasonDto>> GetReasonByCode(int code)
         {
-            var reason = await _context.CertificateReasons
-                .FirstOrDefaultAsync(r => r.ReasonCode == code);
-
+            var reason = await _repository.GetByCodeAsync(code);
             if (reason == null) return NotFound();
-            return reason;
+            return Ok(reason);
         }
 
-        // POST: api/CertificateReasons
         [HttpPost]
-        public async Task<ActionResult<CertificateReason>> CreateReason(CertificateReason reason)
+        public async Task<ActionResult<CertificateReasonDto>> CreateReason(CertificateReasonDto reasonDto)
         {
-            if (reason.ReasonId == Guid.Empty)
+            if (await _repository.ExistsAsync(reasonDto.ReasonCode))
             {
-                reason.ReasonId = Guid.NewGuid();
+                return Conflict("Reason code already exists.");
             }
 
-            _context.CertificateReasons.Add(reason);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (_context.CertificateReasons.Any(r => r.ReasonCode == reason.ReasonCode))
-                {
-                    return Conflict("Reason code already exists.");
-                }
-                throw;
-            }
-
-            return CreatedAtAction(nameof(GetReasonById), new { id = reason.ReasonId }, reason);
+            var result = await _repository.CreateAsync(reasonDto);
+            return CreatedAtAction(nameof(GetReasonById), new { id = result.ReasonId }, result);
         }
 
-        // PUT: api/CertificateReasons/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateReason(Guid id, CertificateReason reason)
+        public async Task<IActionResult> UpdateReason(Guid id, CertificateReasonDto reasonDto)
         {
-            if (id != reason.ReasonId) return BadRequest();
+            if (id != reasonDto.ReasonId) return BadRequest();
 
-            _context.Entry(reason).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ReasonExists(id)) return NotFound();
-                throw;
-            }
+            var success = await _repository.UpdateAsync(id, reasonDto);
+            if (!success) return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/CertificateReasons/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReason(Guid id)
         {
-            var reason = await _context.CertificateReasons.FindAsync(id);
-            if (reason == null) return NotFound();
-
-            _context.CertificateReasons.Remove(reason);
-            await _context.SaveChangesAsync();
+            var success = await _repository.DeleteAsync(id);
+            if (!success) return NotFound();
 
             return NoContent();
-        }
-
-        private bool ReasonExists(Guid id)
-        {
-            return _context.CertificateReasons.Any(e => e.ReasonId == id);
         }
     }
 }

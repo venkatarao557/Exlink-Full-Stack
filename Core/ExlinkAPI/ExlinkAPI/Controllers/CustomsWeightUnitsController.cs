@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.Models;
+using ExlinkAPI.Repositories;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,36 +9,36 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class CustomsWeightUnitsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ICustomsWeightUnitRepository _repository;
 
-        public CustomsWeightUnitsController(ExdocContext context)
+        public CustomsWeightUnitsController(ICustomsWeightUnitRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/CustomsWeightUnits
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomsWeightUnit>>> GetCustomsWeightUnits()
         {
-            return await _context.CustomsWeightUnits.ToListAsync();
+            var units = await _repository.GetAllAsync();
+            return Ok(units);
         }
 
-        // GET: api/CustomsWeightUnits/5
+        // GET: api/CustomsWeightUnits/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomsWeightUnit>> GetCustomsWeightUnit(Guid id)
         {
-            var customsWeightUnit = await _context.CustomsWeightUnits.FindAsync(id);
+            var customsWeightUnit = await _repository.GetByIdAsync(id);
 
             if (customsWeightUnit == null)
             {
                 return NotFound();
             }
 
-            return customsWeightUnit;
+            return Ok(customsWeightUnit);
         }
 
-        // PUT: api/CustomsWeightUnits/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/CustomsWeightUnits/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomsWeightUnit(Guid id, CustomsWeightUnit customsWeightUnit)
         {
@@ -51,57 +47,41 @@ namespace ExlinkAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(customsWeightUnit).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(customsWeightUnit);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!CustomsWeightUnitExists(id))
+                if (!await _repository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
         // POST: api/CustomsWeightUnits
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<CustomsWeightUnit>> PostCustomsWeightUnit(CustomsWeightUnit customsWeightUnit)
         {
-            _context.CustomsWeightUnits.Add(customsWeightUnit);
-            await _context.SaveChangesAsync();
-
+            await _repository.AddAsync(customsWeightUnit);
             return CreatedAtAction("GetCustomsWeightUnit", new { id = customsWeightUnit.CustomsWeightId }, customsWeightUnit);
         }
 
-        // DELETE: api/CustomsWeightUnits/5
+        // DELETE: api/CustomsWeightUnits/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomsWeightUnit(Guid id)
         {
-            var customsWeightUnit = await _context.CustomsWeightUnits.FindAsync(id);
-            if (customsWeightUnit == null)
+            if (!await _repository.ExistsAsync(id))
             {
                 return NotFound();
             }
 
-            _context.CustomsWeightUnits.Remove(customsWeightUnit);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool CustomsWeightUnitExists(Guid id)
-        {
-            return _context.CustomsWeightUnits.Any(e => e.CustomsWeightId == id);
         }
     }
 }

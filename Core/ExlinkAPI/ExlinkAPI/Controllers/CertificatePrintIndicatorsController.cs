@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -8,84 +8,52 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class CertificatePrintIndicatorsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ICertificatePrintIndicatorRepository _repository;
 
-        public CertificatePrintIndicatorsController(ExdocContext context)
+        public CertificatePrintIndicatorsController(ICertificatePrintIndicatorRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/CertificatePrintIndicators
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CertificatePrintIndicator>>> GetIndicators()
+        public async Task<ActionResult<IEnumerable<CertificatePrintIndicatorDto>>> GetIndicators()
         {
-            return await _context.CertificatePrintIndicators.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/CertificatePrintIndicators/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<CertificatePrintIndicator>> GetIndicator(Guid id)
+        public async Task<ActionResult<CertificatePrintIndicatorDto>> GetIndicator(Guid id)
         {
-            var indicator = await _context.CertificatePrintIndicators.FindAsync(id);
-
+            var indicator = await _repository.GetByIdAsync(id);
             if (indicator == null) return NotFound();
-
-            return indicator;
+            return Ok(indicator);
         }
 
-        // POST: api/CertificatePrintIndicators
         [HttpPost]
-        public async Task<ActionResult<CertificatePrintIndicator>> CreateIndicator(CertificatePrintIndicator indicator)
+        public async Task<ActionResult<CertificatePrintIndicatorDto>> CreateIndicator(CertificatePrintIndicatorDto indicatorDto)
         {
-            // Ensure a new ID is generated if not provided
-            if (indicator.PrintIndicatorId == Guid.Empty)
-            {
-                indicator.PrintIndicatorId = Guid.NewGuid();
-            }
-
-            _context.CertificatePrintIndicators.Add(indicator);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetIndicator), new { id = indicator.PrintIndicatorId }, indicator);
+            var result = await _repository.CreateAsync(indicatorDto);
+            return CreatedAtAction(nameof(GetIndicator), new { id = result.PrintIndicatorId }, result);
         }
 
-        // PUT: api/CertificatePrintIndicators/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateIndicator(Guid id, CertificatePrintIndicator indicator)
+        public async Task<IActionResult> UpdateIndicator(Guid id, CertificatePrintIndicatorDto indicatorDto)
         {
-            if (id != indicator.PrintIndicatorId) return BadRequest();
+            if (id != indicatorDto.PrintIndicatorId) return BadRequest();
 
-            _context.Entry(indicator).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IndicatorExists(id)) return NotFound();
-                throw;
-            }
+            var success = await _repository.UpdateAsync(id, indicatorDto);
+            if (!success) return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/CertificatePrintIndicators/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIndicator(Guid id)
         {
-            var indicator = await _context.CertificatePrintIndicators.FindAsync(id);
-            if (indicator == null) return NotFound();
-
-            _context.CertificatePrintIndicators.Remove(indicator);
-            await _context.SaveChangesAsync();
+            var success = await _repository.DeleteAsync(id);
+            if (!success) return NotFound();
 
             return NoContent();
-        }
-
-        private bool IndicatorExists(Guid id)
-        {
-            return _context.CertificatePrintIndicators.Any(e => e.PrintIndicatorId == id);
         }
     }
 }

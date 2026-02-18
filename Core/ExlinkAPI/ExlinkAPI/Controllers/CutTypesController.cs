@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using ExlinkAPI.DTOs;
 using ExlinkAPI.Models;
+using ExlinkAPI.Repositories;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +10,88 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class CutTypesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ICutTypeRepository _repository;
 
-        public CutTypesController(ExdocContext context)
+        public CutTypesController(ICutTypeRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/CutTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CutType>>> GetCutTypes()
+        public async Task<ActionResult<IEnumerable<CutTypeDto>>> GetCutTypes()
         {
-            return await _context.CutTypes.ToListAsync();
+            var cuts = await _repository.GetAllAsync();
+            return Ok(cuts.Select(c => MapToDto(c)));
         }
 
-        // GET: api/CutTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CutType>> GetCutType(Guid id)
+        public async Task<ActionResult<CutTypeDto>> GetCutType(Guid id)
         {
-            var cutType = await _context.CutTypes.FindAsync(id);
-
-            if (cutType == null)
-            {
-                return NotFound();
-            }
-
-            return cutType;
+            var cutType = await _repository.GetByIdAsync(id);
+            if (cutType == null) return NotFound();
+            return Ok(MapToDto(cutType));
         }
 
-        // PUT: api/CutTypes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCutType(Guid id, CutType cutType)
+        public async Task<IActionResult> PutCutType(Guid id, CutTypeDto cutTypeDto)
         {
-            if (id != cutType.CutTypeId)
-            {
-                return BadRequest();
-            }
+            if (id != cutTypeDto.CutTypeId) return BadRequest();
 
-            _context.Entry(cutType).State = EntityState.Modified;
+            var cutType = MapToEntity(cutTypeDto);
+            _repository.Update(cutType);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!CutTypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/CutTypes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CutType>> PostCutType(CutType cutType)
+        public async Task<ActionResult<CutTypeDto>> PostCutType(CutTypeDto cutTypeDto)
         {
-            _context.CutTypes.Add(cutType);
-            await _context.SaveChangesAsync();
+            var cutType = MapToEntity(cutTypeDto);
+            await _repository.AddAsync(cutType);
+            await _repository.SaveChangesAsync();
 
-            return CreatedAtAction("GetCutType", new { id = cutType.CutTypeId }, cutType);
+            return CreatedAtAction(nameof(GetCutType), new { id = cutType.CutTypeId }, MapToDto(cutType));
         }
 
-        // DELETE: api/CutTypes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCutType(Guid id)
         {
-            var cutType = await _context.CutTypes.FindAsync(id);
-            if (cutType == null)
-            {
-                return NotFound();
-            }
-
-            _context.CutTypes.Remove(cutType);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
+            if (!await _repository.SaveChangesAsync()) return NotFound();
             return NoContent();
         }
 
-        private bool CutTypeExists(Guid id)
+        // Simple manual mapping helpers (Consider AutoMapper for larger projects)
+        private static CutTypeDto MapToDto(CutType c) => new()
         {
-            return _context.CutTypes.Any(e => e.CutTypeId == id);
-        }
+            CutTypeId = c.CutTypeId,
+            CommodityId = c.CommodityId,
+            CutCode = c.CutCode,
+            Description = c.Description,
+            BoneInIndicator = c.BoneInIndicator,
+            BeefVealIndicator = c.BeefVealIndicator,
+            ChemicalLeanIndicator = c.ChemicalLeanIndicator
+        };
+
+        private static CutType MapToEntity(CutTypeDto d) => new()
+        {
+            CutTypeId = d.CutTypeId,
+            CommodityId = d.CommodityId,
+            CutCode = d.CutCode,
+            Description = d.Description,
+            BoneInIndicator = d.BoneInIndicator,
+            BeefVealIndicator = d.BeefVealIndicator,
+            ChemicalLeanIndicator = d.ChemicalLeanIndicator
+        };
     }
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.Models;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +9,95 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class DeclarationIndicatorsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IDeclarationIndicatorRepository _repository;
 
-        public DeclarationIndicatorsController(ExdocContext context)
+        public DeclarationIndicatorsController(IDeclarationIndicatorRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/DeclarationIndicators
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DeclarationIndicator>>> GetDeclarationIndicators()
+        public async Task<ActionResult<IEnumerable<DeclarationIndicatorDto>>> GetDeclarationIndicators()
         {
-            return await _context.DeclarationIndicators.ToListAsync();
+            var indicators = await _repository.GetAllAsync();
+            var dtos = indicators.Select(i => MapToDto(i));
+            return Ok(dtos);
         }
 
-        // GET: api/DeclarationIndicators/5
+        // GET: api/DeclarationIndicators/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<DeclarationIndicator>> GetDeclarationIndicator(Guid id)
+        public async Task<ActionResult<DeclarationIndicatorDto>> GetDeclarationIndicator(Guid id)
         {
-            var declarationIndicator = await _context.DeclarationIndicators.FindAsync(id);
-
-            if (declarationIndicator == null)
+            var indicator = await _repository.GetByIdAsync(id);
+            if (indicator == null)
             {
                 return NotFound();
             }
-
-            return declarationIndicator;
+            return Ok(MapToDto(indicator));
         }
 
-        // PUT: api/DeclarationIndicators/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/DeclarationIndicators/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDeclarationIndicator(Guid id, DeclarationIndicator declarationIndicator)
+        public async Task<IActionResult> PutDeclarationIndicator(Guid id, DeclarationIndicatorDto dto)
         {
-            if (id != declarationIndicator.DeclarationId)
+            if (id != dto.DeclarationId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(declarationIndicator).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(MapToEntity(dto));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!DeclarationIndicatorExists(id))
+                if (!await _repository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
         // POST: api/DeclarationIndicators
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DeclarationIndicator>> PostDeclarationIndicator(DeclarationIndicator declarationIndicator)
+        public async Task<ActionResult<DeclarationIndicatorDto>> PostDeclarationIndicator(DeclarationIndicatorDto dto)
         {
-            _context.DeclarationIndicators.Add(declarationIndicator);
-            await _context.SaveChangesAsync();
+            var indicator = MapToEntity(dto);
+            await _repository.AddAsync(indicator);
 
-            return CreatedAtAction("GetDeclarationIndicator", new { id = declarationIndicator.DeclarationId }, declarationIndicator);
+            return CreatedAtAction("GetDeclarationIndicator", new { id = indicator.DeclarationId }, MapToDto(indicator));
         }
 
-        // DELETE: api/DeclarationIndicators/5
+        // DELETE: api/DeclarationIndicators/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDeclarationIndicator(Guid id)
         {
-            var declarationIndicator = await _context.DeclarationIndicators.FindAsync(id);
-            if (declarationIndicator == null)
+            if (!await _repository.ExistsAsync(id))
             {
                 return NotFound();
             }
 
-            _context.DeclarationIndicators.Remove(declarationIndicator);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
         }
 
-        private bool DeclarationIndicatorExists(Guid id)
+        // Mapping Helpers
+        private static DeclarationIndicatorDto MapToDto(DeclarationIndicator e) => new()
         {
-            return _context.DeclarationIndicators.Any(e => e.DeclarationId == id);
-        }
+            DeclarationId = e.DeclarationId,
+            IndicatorCode = e.IndicatorCode,
+            Description = e.Description
+        };
+
+        private static DeclarationIndicator MapToEntity(DeclarationIndicatorDto d) => new()
+        {
+            DeclarationId = d.DeclarationId,
+            IndicatorCode = d.IndicatorCode,
+            Description = d.Description
+        };
     }
 }

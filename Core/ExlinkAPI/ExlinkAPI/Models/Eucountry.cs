@@ -7,18 +7,18 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("EUCountry")]
-[Index("EucountryCode", Name = "UQ_EUCountry_Code", IsUnique = true)]
-public partial class Eucountry
+[Index("EUCountryCode", Name = "UQ_EUCountry_Code", IsUnique = true)]
+public partial class EUCountry
 {
     [Key]
     [Column("EUCountryID")]
-    public Guid EucountryId { get; set; }
+    public Guid EUCountryId { get; set; }
 
     [Column("EUCountryCode")]
     [StringLength(5)]
-    public string EucountryCode { get; set; } = null!;
+    public string EUCountryCode { get; set; } = null!;
 
     [Column("EUCountryName")]
     [StringLength(100)]
-    public string EucountryName { get; set; } = null!;
+    public string EUCountryName { get; set; } = null!;
 }

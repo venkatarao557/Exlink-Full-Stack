@@ -41,7 +41,7 @@ public partial class ExdocContext : DbContext
 
     public virtual DbSet<DominantProduct> DominantProducts { get; set; }
 
-    public virtual DbSet<Eucountry> Eucountries { get; set; }
+    public virtual DbSet<EUCountry> Eucountries { get; set; }
 
     public virtual DbSet<IntendedUse> IntendedUses { get; set; }
 
@@ -213,11 +213,11 @@ public partial class ExdocContext : DbContext
             entity.Property(e => e.DominantProductId).HasDefaultValueSql("(newsequentialid())");
         });
 
-        modelBuilder.Entity<Eucountry>(entity =>
+        modelBuilder.Entity<EUCountry>(entity =>
         {
-            entity.HasKey(e => e.EucountryId).HasName("PK__EUCountr__2ABEECCD107475D7");
+            entity.HasKey(e => e.EUCountryId).HasName("PK__EUCountr__2ABEECCD107475D7");
 
-            entity.Property(e => e.EucountryId).HasDefaultValueSql("(newsequentialid())");
+            entity.Property(e => e.EUCountryId).HasDefaultValueSql("(newsequentialid())");
         });
 
         modelBuilder.Entity<IntendedUse>(entity =>

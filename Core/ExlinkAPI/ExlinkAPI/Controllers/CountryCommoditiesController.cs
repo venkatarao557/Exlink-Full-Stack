@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -8,89 +9,55 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class CountryCommoditiesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ICountryCommodityRepository _repository;
 
-        public CountryCommoditiesController(ExdocContext context)
+        public CountryCommoditiesController(ICountryCommodityRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/CountryCommodities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CountryCommodity>>> GetCountryCommodities()
+        public async Task<ActionResult<IEnumerable<CountryCommodityDto>>> GetCountryCommodities()
         {
-            return await _context.CountryCommodities.ToListAsync(); //
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/CountryCommodities/code/{countryCode}
         [HttpGet("code/{countryCode}")]
-        public async Task<ActionResult<CountryCommodity>> GetByCountryCode(string countryCode)
+        public async Task<ActionResult<CountryCommodityDto>> GetByCountryCode(string countryCode)
         {
-            var mapping = await _context.CountryCommodities
-                .FirstOrDefaultAsync(c => c.CountryCode == countryCode); //
-
+            var mapping = await _repository.GetByCountryCodeAsync(countryCode);
             if (mapping == null) return NotFound();
-
-            return mapping;
+            return Ok(mapping);
         }
 
-        // POST: api/CountryCommodities
         [HttpPost]
-        public async Task<ActionResult<CountryCommodity>> CreateMapping(CountryCommodity mapping)
+        public async Task<ActionResult<CountryCommodityDto>> CreateMapping(CountryCommodityDto dto)
         {
-            if (mapping.CountryCommodityId == Guid.Empty)
+            if (await _repository.MappingExistsAsync(dto.CountryCode))
             {
-                mapping.CountryCommodityId = Guid.NewGuid(); //
+                return Conflict("A mapping for this country code already exists.");
             }
 
-            _context.CountryCommodities.Add(mapping); //
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (_context.CountryCommodities.Any(c => c.CountryCode == mapping.CountryCode))
-                {
-                    return Conflict("A mapping for this country code already exists."); //
-                }
-                throw;
-            }
-
-            return CreatedAtAction(nameof(GetByCountryCode), new { countryCode = mapping.CountryCode }, mapping);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetByCountryCode), new { countryCode = result.CountryCode }, result);
         }
 
-        // PUT: api/CountryCommodities/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMapping(Guid id, CountryCommodity mapping)
+        public async Task<IActionResult> UpdateMapping(Guid id, CountryCommodityDto dto)
         {
-            if (id != mapping.CountryCommodityId) return BadRequest(); //
+            if (id != dto.CountryCommodityId) return BadRequest();
 
-            _context.Entry(mapping).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.CountryCommodities.Any(e => e.CountryCommodityId == id)) return NotFound();
-                throw;
-            }
+            var success = await _repository.UpdateAsync(id, dto);
+            if (!success) return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/CountryCommodities/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMapping(Guid id)
         {
-            var mapping = await _context.CountryCommodities.FindAsync(id);
-            if (mapping == null) return NotFound();
-
-            _context.CountryCommodities.Remove(mapping);
-            await _context.SaveChangesAsync();
+            var success = await _repository.DeleteAsync(id);
+            if (!success) return NotFound();
 
             return NoContent();
         }

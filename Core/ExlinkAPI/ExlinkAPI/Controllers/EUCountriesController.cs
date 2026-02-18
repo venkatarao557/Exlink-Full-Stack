@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using ExlinkAPI.DTOs;
 using ExlinkAPI.Models;
+using ExlinkAPI.Repositories.Implementations;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +10,95 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class EUCountriesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IEUCountryRepository _repository;
 
-        public EUCountriesController(ExdocContext context)
+        public EUCountriesController(IEUCountryRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/EUCountries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Eucountry>>> GetEucountries()
+        public async Task<ActionResult<IEnumerable<EUCountryDto>>> GetEucountries()
         {
-            return await _context.Eucountries.ToListAsync();
+            var entities = await _repository.GetAllAsync();
+            var dtos = entities.Select(e => MapToDto(e));
+            return Ok(dtos);
         }
 
-        // GET: api/EUCountries/5
+        // GET: api/EUCountries/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Eucountry>> GetEucountry(Guid id)
+        public async Task<ActionResult<EUCountryDto>> GetEUCountry(Guid id)
         {
-            var eucountry = await _context.Eucountries.FindAsync(id);
-
-            if (eucountry == null)
+            var entity = await _repository.GetByIdAsync(id);
+            if (entity == null)
             {
                 return NotFound();
             }
-
-            return eucountry;
+            return Ok(MapToDto(entity));
         }
 
-        // PUT: api/EUCountries/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/EUCountries/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEucountry(Guid id, Eucountry eucountry)
+        public async Task<IActionResult> PutEUCountry(Guid id, EUCountryDto dto)
         {
-            if (id != eucountry.EucountryId)
+            if (id != dto.EUCountryId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(eucountry).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(MapToEntity(dto));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!EucountryExists(id))
+                if (!await _repository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
         // POST: api/EUCountries
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Eucountry>> PostEucountry(Eucountry eucountry)
+        public async Task<ActionResult<EUCountryDto>> PostEUCountry(EUCountryDto dto)
         {
-            _context.Eucountries.Add(eucountry);
-            await _context.SaveChangesAsync();
+            var entity = MapToEntity(dto);
+            await _repository.AddAsync(entity);
 
-            return CreatedAtAction("GetEucountry", new { id = eucountry.EucountryId }, eucountry);
+            return CreatedAtAction("GetEUCountry", new { id = entity.EUCountryId }, MapToDto(entity));
         }
 
-        // DELETE: api/EUCountries/5
+        // DELETE: api/EUCountries/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEucountry(Guid id)
+        public async Task<IActionResult> DeleteEUCountry(Guid id)
         {
-            var eucountry = await _context.Eucountries.FindAsync(id);
-            if (eucountry == null)
+            if (!await _repository.ExistsAsync(id))
             {
                 return NotFound();
             }
 
-            _context.Eucountries.Remove(eucountry);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
         }
 
-        private bool EucountryExists(Guid id)
+        // Mapping Logic
+        private static EUCountryDto MapToDto(EUCountry e) => new()
         {
-            return _context.Eucountries.Any(e => e.EucountryId == id);
-        }
+            EUCountryId = e.EUCountryId,
+            EUCountryCode = e.EUCountryCode,
+            EUCountryName = e.EUCountryName
+        };
+
+        private static EUCountry MapToEntity(EUCountryDto d) => new()
+        {
+            EUCountryId = d.EUCountryId,
+            EUCountryCode = d.EUCountryCode,
+            EUCountryName = d.EUCountryName
+        };
     }
 }

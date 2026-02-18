@@ -1,0 +1,8 @@
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\ExlinkAPI.csproj.AssemblyReference.cache
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\ExlinkAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\ExlinkAPI.AssemblyInfoInputs.cache
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\ExlinkAPI.AssemblyInfo.cs
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\ExlinkAPI.csproj.CoreCompileInputs.cache
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\ExlinkAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\V-Sharp\projects\exports\Exlink-Full-Stack\Core\ExlinkAPI\ExlinkAPI\obj\Debug\net9.0\ExlinkAPI.sourcelink.json

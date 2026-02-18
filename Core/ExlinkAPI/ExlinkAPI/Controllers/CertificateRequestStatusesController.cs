@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -8,103 +9,57 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class CertificateRequestStatusesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ICertificateRequestStatusRepository _repository;
 
-        public CertificateRequestStatusesController(ExdocContext context)
+        public CertificateRequestStatusesController(ICertificateRequestStatusRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/CertificateRequestStatuses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CertificateRequestStatus>>> GetStatuses()
+        public async Task<ActionResult<IEnumerable<CertificateRequestStatusDto>>> GetStatuses()
         {
-            return await _context.CertificateRequestStatuses.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/CertificateRequestStatuses/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<CertificateRequestStatus>> GetStatus(Guid id)
+        public async Task<ActionResult<CertificateRequestStatusDto>> GetStatus(Guid id)
         {
-            var status = await _context.CertificateRequestStatuses.FindAsync(id);
-
+            var status = await _repository.GetByIdAsync(id);
             if (status == null) return NotFound();
-
-            return status;
+            return Ok(status);
         }
 
-        // POST: api/CertificateRequestStatuses
         [HttpPost]
-        public async Task<ActionResult<CertificateRequestStatus>> CreateStatus(CertificateRequestStatus status)
+        public async Task<ActionResult<CertificateRequestStatusDto>> CreateStatus(CertificateRequestStatusDto statusDto)
         {
-            if (status.RequestStatusId == Guid.Empty)
+            if (await _repository.CodeExistsAsync(statusDto.StatusCode))
             {
-                status.RequestStatusId = Guid.NewGuid();
+                return Conflict("Status code already exists.");
             }
 
-            // Optional: Auto-set DateEffective if not provided
-            status.DateEffective ??= DateTime.UtcNow;
-
-            _context.CertificateRequestStatuses.Add(status);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (StatusExists(status.StatusCode))
-                {
-                    return Conflict("Status code already exists.");
-                }
-                throw;
-            }
-
-            return CreatedAtAction(nameof(GetStatus), new { id = status.RequestStatusId }, status);
+            var result = await _repository.CreateAsync(statusDto);
+            return CreatedAtAction(nameof(GetStatus), new { id = result.RequestStatusId }, result);
         }
 
-        // PUT: api/CertificateRequestStatuses/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStatus(Guid id, CertificateRequestStatus status)
+        public async Task<IActionResult> UpdateStatus(Guid id, CertificateRequestStatusDto statusDto)
         {
-            if (id != status.RequestStatusId) return BadRequest();
+            if (id != statusDto.RequestStatusId) return BadRequest();
 
-            _context.Entry(status).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IdExists(id)) return NotFound();
-                throw;
-            }
+            var success = await _repository.UpdateAsync(id, statusDto);
+            if (!success) return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/CertificateRequestStatuses/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStatus(Guid id)
         {
-            var status = await _context.CertificateRequestStatuses.FindAsync(id);
-            if (status == null) return NotFound();
-
-            _context.CertificateRequestStatuses.Remove(status);
-            await _context.SaveChangesAsync();
+            var success = await _repository.DeleteAsync(id);
+            if (!success) return NotFound();
 
             return NoContent();
-        }
-
-        private bool IdExists(Guid id)
-        {
-            return _context.CertificateRequestStatuses.Any(e => e.RequestStatusId == id);
-        }
-
-        private bool StatusExists(string code)
-        {
-            return _context.CertificateRequestStatuses.Any(e => e.StatusCode == code);
         }
     }
 }

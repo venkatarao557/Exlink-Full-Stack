@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -8,101 +9,57 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class CommoditiesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ICommodityRepository _repository;
 
-        public CommoditiesController(ExdocContext context)
+        public CommoditiesController(ICommodityRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Commodities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Commodity>>> GetCommodities()
+        public async Task<ActionResult<IEnumerable<CommodityDto>>> GetCommodities()
         {
-            // We usually don't include all Products/ProductTypes here to keep the list fast
-            return await _context.Commodities.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/Commodities/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Commodity>> GetCommodity(Guid id)
+        public async Task<ActionResult<CommodityDto>> GetCommodity(Guid id)
         {
-            // Use .Include if you want to see the associated ProductTypes or Products
-            var commodity = await _context.Commodities
-                .Include(c => c.ProductTypes)
-                .FirstOrDefaultAsync(c => c.CommodityId == id);
-
+            var commodity = await _repository.GetByIdAsync(id);
             if (commodity == null) return NotFound();
-
-            return commodity;
+            return Ok(commodity);
         }
 
-        // POST: api/Commodities
         [HttpPost]
-        public async Task<ActionResult<Commodity>> CreateCommodity(Commodity commodity)
+        public async Task<ActionResult<CommodityDto>> CreateCommodity(CommodityDto commodityDto)
         {
-            if (commodity.CommodityId == Guid.Empty)
+            if (await _repository.CodeExistsAsync(commodityDto.CommodityCode))
             {
-                commodity.CommodityId = Guid.NewGuid();
+                return Conflict("Commodity code already exists.");
             }
 
-            _context.Commodities.Add(commodity);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CommodityExists(commodity.CommodityCode))
-                {
-                    return Conflict("Commodity code already exists.");
-                }
-                throw;
-            }
-
-            return CreatedAtAction(nameof(GetCommodity), new { id = commodity.CommodityId }, commodity);
+            var result = await _repository.CreateAsync(commodityDto);
+            return CreatedAtAction(nameof(GetCommodity), new { id = result.CommodityId }, result);
         }
 
-        // PUT: api/Commodities/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCommodity(Guid id, Commodity commodity)
+        public async Task<IActionResult> UpdateCommodity(Guid id, CommodityDto commodityDto)
         {
-            if (id != commodity.CommodityId) return BadRequest();
+            if (id != commodityDto.CommodityId) return BadRequest();
 
-            _context.Entry(commodity).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Commodities.Any(e => e.CommodityId == id)) return NotFound();
-                throw;
-            }
+            var success = await _repository.UpdateAsync(id, commodityDto);
+            if (!success) return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/Commodities/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCommodity(Guid id)
         {
-            var commodity = await _context.Commodities.FindAsync(id);
-            if (commodity == null) return NotFound();
-
-            // Note: If there are related Products, this may fail depending on your 
-            // SQL Foreign Key "On Delete" settings.
-            _context.Commodities.Remove(commodity);
-            await _context.SaveChangesAsync();
+            var success = await _repository.DeleteAsync(id);
+            if (!success) return NotFound();
 
             return NoContent();
-        }
-
-        private bool CommodityExists(string code)
-        {
-            return _context.Commodities.Any(e => e.CommodityCode == code);
         }
     }
 }

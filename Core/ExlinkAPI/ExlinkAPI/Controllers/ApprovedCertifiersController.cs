@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using ExlinkAPI.DTOs;
+
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExlinkAPI.Controllers
 {
@@ -8,70 +9,50 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class ApprovedCertifiersController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IApprovedCertifierRepository _repository;
 
-        public ApprovedCertifiersController(ExdocContext context)
+        public ApprovedCertifiersController(IApprovedCertifierRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/ApprovedCertifiers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ApprovedCertifier>>> GetCertifiers()
+        public async Task<ActionResult<IEnumerable<ApprovedCertifierDto>>> GetCertifiers()
         {
-            return await _context.ApprovedCertifiers.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/ApprovedCertifiers/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<ApprovedCertifier>> GetCertifier(Guid id)
+        public async Task<ActionResult<ApprovedCertifierDto>> GetCertifier(Guid id)
         {
-            var certifier = await _context.ApprovedCertifiers.FindAsync(id);
+            var certifier = await _repository.GetByIdAsync(id);
             if (certifier == null) return NotFound();
-            return certifier;
+            return Ok(certifier);
         }
 
-        // POST: api/ApprovedCertifiers
         [HttpPost]
-        public async Task<ActionResult<ApprovedCertifier>> CreateCertifier(ApprovedCertifier certifier)
+        public async Task<ActionResult<ApprovedCertifierDto>> CreateCertifier(ApprovedCertifierDto certifierDto)
         {
-            certifier.CertifierId = Guid.NewGuid(); // Ensure new ID
-            _context.ApprovedCertifiers.Add(certifier);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCertifier), new { id = certifier.CertifierId }, certifier);
+            var result = await _repository.CreateAsync(certifierDto);
+            return CreatedAtAction(nameof(GetCertifier), new { id = result.CertifierId }, result);
         }
 
-        // PUT: api/ApprovedCertifiers/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCertifier(Guid id, ApprovedCertifier certifier)
+        public async Task<IActionResult> UpdateCertifier(Guid id, ApprovedCertifierDto certifierDto)
         {
-            if (id != certifier.CertifierId) return BadRequest();
+            if (id != certifierDto.CertifierId) return BadRequest();
 
-            _context.Entry(certifier).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.ApprovedCertifiers.Any(e => e.CertifierId == id)) return NotFound();
-                throw;
-            }
+            var success = await _repository.UpdateAsync(id, certifierDto);
+            if (!success) return NotFound();
 
             return NoContent();
         }
 
-        // DELETE: api/ApprovedCertifiers/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCertifier(Guid id)
         {
-            var certifier = await _context.ApprovedCertifiers.FindAsync(id);
-            if (certifier == null) return NotFound();
-
-            _context.ApprovedCertifiers.Remove(certifier);
-            await _context.SaveChangesAsync();
+            var success = await _repository.DeleteAsync(id);
+            if (!success) return NotFound();
 
             return NoContent();
         }

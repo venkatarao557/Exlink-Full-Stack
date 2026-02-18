@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using ExlinkAPI.DTOs;
 using ExlinkAPI.Models;
+using ExlinkAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExlinkAPI.Controllers
 {
@@ -8,51 +10,38 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class AheccMappingsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IAheccMappingRepository _repository;
 
-        public AheccMappingsController(ExdocContext context)
+        public AheccMappingsController(IAheccMappingRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/AheccMappings
         // Fetches all mappings, including the related CutType data
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AheccproductMapping>>> GetMappings()
+        public async Task<ActionResult<IEnumerable<AheccproductMappingDto>>> GetMappings()
         {
-            return await _context.AheccproductMappings
-                .Include(m => m.CutCodeNavigation)
-                .ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
         // GET: api/AheccMappings/search?ahecc=123
         // Since there is no Primary Key, we search by the indexed Ahecc code
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<AheccproductMapping>>> GetByAhecc([FromQuery] string ahecc)
+        public async Task<ActionResult<IEnumerable<AheccproductMappingDto>>> GetByAhecc([FromQuery] string ahecc)
         {
-            var results = await _context.AheccproductMappings
-                .Where(m => m.Ahecc == ahecc)
-                .Include(m => m.CutCodeNavigation)
-                .ToListAsync();
-
+            var results = await _repository.SearchByAheccAsync(ahecc);
             if (!results.Any()) return NotFound();
-            return results;
+            return Ok(results);
         }
 
         // POST: api/AheccMappings
         // You can still Insert into keyless tables
         [HttpPost]
-        public async Task<ActionResult<AheccproductMapping>> CreateMapping(AheccproductMapping mapping)
+        public async Task<ActionResult<AheccproductMappingDto>> CreateMapping(AheccproductMappingDto mappingDto)
         {
-            if (mapping.MappingId == Guid.Empty)
-            {
-                mapping.MappingId = Guid.NewGuid();
-            }
-
-            _context.AheccproductMappings.Add(mapping);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetByAhecc), new { ahecc = mapping.Ahecc }, mapping);
+            var result = await _repository.CreateAsync(mappingDto);
+            return CreatedAtAction(nameof(GetByAhecc), new { ahecc = result.Ahecc }, result);
         }
     }
 }
