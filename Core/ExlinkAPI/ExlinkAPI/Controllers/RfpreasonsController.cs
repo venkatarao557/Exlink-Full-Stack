@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class RfpreasonsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IRfpreasonRepository _repository;
 
-        public RfpreasonsController(ExdocContext context)
+        public RfpreasonsController(IRfpreasonRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Rfpreasons
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rfpreason>>> GetRfpreasons()
+        public async Task<ActionResult<IEnumerable<RfpreasonDto>>> GetRfpreasons()
         {
-            return await _context.Rfpreasons.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/Rfpreasons/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Rfpreason>> GetRfpreason(Guid id)
+        public async Task<ActionResult<RfpreasonDto>> GetRfpreason(Guid id)
         {
-            var rfpreason = await _context.Rfpreasons.FindAsync(id);
-
-            if (rfpreason == null)
-            {
-                return NotFound();
-            }
-
-            return rfpreason;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/Rfpreasons/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRfpreason(Guid id, Rfpreason rfpreason)
+        public async Task<IActionResult> PutRfpreason(Guid id, RfpreasonDto dto)
         {
-            if (id != rfpreason.ReasonId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(rfpreason).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RfpreasonExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/Rfpreasons
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Rfpreason>> PostRfpreason(Rfpreason rfpreason)
+        public async Task<ActionResult<RfpreasonDto>> PostRfpreason(RfpreasonDto dto)
         {
-            _context.Rfpreasons.Add(rfpreason);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRfpreason", new { id = rfpreason.ReasonId }, rfpreason);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetRfpreason), new { id = result.ReasonId }, result);
         }
 
-        // DELETE: api/Rfpreasons/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRfpreason(Guid id)
         {
-            var rfpreason = await _context.Rfpreasons.FindAsync(id);
-            if (rfpreason == null)
-            {
-                return NotFound();
-            }
-
-            _context.Rfpreasons.Remove(rfpreason);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool RfpreasonExists(Guid id)
-        {
-            return _context.Rfpreasons.Any(e => e.ReasonId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

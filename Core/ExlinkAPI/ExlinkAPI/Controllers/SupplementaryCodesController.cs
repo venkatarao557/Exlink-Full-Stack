@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using ExlinkAPI.Models;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,36 +8,36 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class SupplementaryCodesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ISupplementaryCodeRepository _repository;
 
-        public SupplementaryCodesController(ExdocContext context)
+        public SupplementaryCodesController(ISupplementaryCodeRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/SupplementaryCodes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SupplementaryCode>>> GetSupplementaryCodes()
         {
-            return await _context.SupplementaryCodes.ToListAsync();
+            var codes = await _repository.GetAllAsync();
+            return Ok(codes);
         }
 
         // GET: api/SupplementaryCodes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SupplementaryCode>> GetSupplementaryCode(Guid id)
         {
-            var supplementaryCode = await _context.SupplementaryCodes.FindAsync(id);
+            var supplementaryCode = await _repository.GetByIdAsync(id);
 
             if (supplementaryCode == null)
             {
                 return NotFound();
             }
 
-            return supplementaryCode;
+            return Ok(supplementaryCode);
         }
 
         // PUT: api/SupplementaryCodes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSupplementaryCode(Guid id, SupplementaryCode supplementaryCode)
         {
@@ -51,57 +46,46 @@ namespace ExlinkAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(supplementaryCode).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(supplementaryCode);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!SupplementaryCodeExists(id))
+                if (!await _repository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
         // POST: api/SupplementaryCodes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<SupplementaryCode>> PostSupplementaryCode(SupplementaryCode supplementaryCode)
         {
-            _context.SupplementaryCodes.Add(supplementaryCode);
-            await _context.SaveChangesAsync();
+            var createdCode = await _repository.AddAsync(supplementaryCode);
 
-            return CreatedAtAction("GetSupplementaryCode", new { id = supplementaryCode.SupplementaryCodeId }, supplementaryCode);
+            return CreatedAtAction(
+                nameof(GetSupplementaryCode), 
+                new { id = createdCode.SupplementaryCodeId }, 
+                createdCode
+            );
         }
 
         // DELETE: api/SupplementaryCodes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSupplementaryCode(Guid id)
         {
-            var supplementaryCode = await _context.SupplementaryCodes.FindAsync(id);
-            if (supplementaryCode == null)
+            if (!await _repository.ExistsAsync(id))
             {
                 return NotFound();
             }
 
-            _context.SupplementaryCodes.Remove(supplementaryCode);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool SupplementaryCodeExists(Guid id)
-        {
-            return _context.SupplementaryCodes.Any(e => e.SupplementaryCodeId == id);
         }
     }
 }

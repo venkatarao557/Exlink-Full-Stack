@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class RegionalOfficesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IRegionalOfficeRepository _repository;
 
-        public RegionalOfficesController(ExdocContext context)
+        public RegionalOfficesController(IRegionalOfficeRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/RegionalOffices
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RegionalOffice>>> GetRegionalOffices()
+        public async Task<ActionResult<IEnumerable<RegionalOfficeDto>>> GetRegionalOffices()
         {
-            return await _context.RegionalOffices.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/RegionalOffices/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RegionalOffice>> GetRegionalOffice(Guid id)
+        public async Task<ActionResult<RegionalOfficeDto>> GetRegionalOffice(Guid id)
         {
-            var regionalOffice = await _context.RegionalOffices.FindAsync(id);
-
-            if (regionalOffice == null)
-            {
-                return NotFound();
-            }
-
-            return regionalOffice;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/RegionalOffices/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRegionalOffice(Guid id, RegionalOffice regionalOffice)
+        public async Task<IActionResult> PutRegionalOffice(Guid id, RegionalOfficeDto dto)
         {
-            if (id != regionalOffice.OfficeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(regionalOffice).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RegionalOfficeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/RegionalOffices
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RegionalOffice>> PostRegionalOffice(RegionalOffice regionalOffice)
+        public async Task<ActionResult<RegionalOfficeDto>> PostRegionalOffice(RegionalOfficeDto dto)
         {
-            _context.RegionalOffices.Add(regionalOffice);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRegionalOffice", new { id = regionalOffice.OfficeId }, regionalOffice);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetRegionalOffice), new { id = result.OfficeId }, result);
         }
 
-        // DELETE: api/RegionalOffices/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRegionalOffice(Guid id)
         {
-            var regionalOffice = await _context.RegionalOffices.FindAsync(id);
-            if (regionalOffice == null)
-            {
-                return NotFound();
-            }
-
-            _context.RegionalOffices.Remove(regionalOffice);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool RegionalOfficeExists(Guid id)
-        {
-            return _context.RegionalOffices.Any(e => e.OfficeId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

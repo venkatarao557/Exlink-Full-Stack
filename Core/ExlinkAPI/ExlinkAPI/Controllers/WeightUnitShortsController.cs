@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class WeightUnitShortsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IWeightUnitShortRepository _repository;
 
-        public WeightUnitShortsController(ExdocContext context)
+        public WeightUnitShortsController(IWeightUnitShortRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/WeightUnitShorts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WeightUnitShort>>> GetWeightUnitShorts()
+        public async Task<ActionResult<IEnumerable<WeightUnitShortDto>>> GetWeightUnitShorts()
         {
-            return await _context.WeightUnitShorts.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/WeightUnitShorts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<WeightUnitShort>> GetWeightUnitShort(Guid id)
+        public async Task<ActionResult<WeightUnitShortDto>> GetWeightUnitShort(Guid id)
         {
-            var weightUnitShort = await _context.WeightUnitShorts.FindAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            if (result == null) return NotFound();
 
-            if (weightUnitShort == null)
-            {
-                return NotFound();
-            }
-
-            return weightUnitShort;
+            return Ok(result);
         }
 
-        // PUT: api/WeightUnitShorts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWeightUnitShort(Guid id, WeightUnitShort weightUnitShort)
+        public async Task<IActionResult> PutWeightUnitShort(Guid id, WeightUnitShortDto dto)
         {
-            if (id != weightUnitShort.WeightUnitShortId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(weightUnitShort).State = EntityState.Modified;
+            if (id != dto.WeightUnitShortId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(dto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!WeightUnitShortExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/WeightUnitShorts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<WeightUnitShort>> PostWeightUnitShort(WeightUnitShort weightUnitShort)
+        public async Task<ActionResult<WeightUnitShortDto>> PostWeightUnitShort(WeightUnitShortDto dto)
         {
-            _context.WeightUnitShorts.Add(weightUnitShort);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetWeightUnitShort", new { id = weightUnitShort.WeightUnitShortId }, weightUnitShort);
+            var created = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetWeightUnitShort), new { id = created.WeightUnitShortId }, created);
         }
 
-        // DELETE: api/WeightUnitShorts/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWeightUnitShort(Guid id)
         {
-            var weightUnitShort = await _context.WeightUnitShorts.FindAsync(id);
-            if (weightUnitShort == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.WeightUnitShorts.Remove(weightUnitShort);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool WeightUnitShortExists(Guid id)
-        {
-            return _context.WeightUnitShorts.Any(e => e.WeightUnitShortId == id);
         }
     }
 }

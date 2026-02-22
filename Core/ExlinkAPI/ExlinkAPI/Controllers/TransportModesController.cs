@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class TransportModesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ITransportModeRepository _repository;
 
-        public TransportModesController(ExdocContext context)
+        public TransportModesController(ITransportModeRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/TransportModes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TransportMode>>> GetTransportModes()
+        public async Task<ActionResult<IEnumerable<TransportModeDto>>> GetTransportModes()
         {
-            return await _context.TransportModes.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/TransportModes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TransportMode>> GetTransportMode(Guid id)
+        public async Task<ActionResult<TransportModeDto>> GetTransportMode(Guid id)
         {
-            var transportMode = await _context.TransportModes.FindAsync(id);
+            var transportMode = await _repository.GetByIdAsync(id);
+            if (transportMode == null) return NotFound();
 
-            if (transportMode == null)
-            {
-                return NotFound();
-            }
-
-            return transportMode;
+            return Ok(transportMode);
         }
 
-        // PUT: api/TransportModes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTransportMode(Guid id, TransportMode transportMode)
+        public async Task<IActionResult> PutTransportMode(Guid id, TransportModeDto transportModeDto)
         {
-            if (id != transportMode.TransportModeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(transportMode).State = EntityState.Modified;
+            if (id != transportModeDto.TransportModeId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(transportModeDto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!TransportModeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/TransportModes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TransportMode>> PostTransportMode(TransportMode transportMode)
+        public async Task<ActionResult<TransportModeDto>> PostTransportMode(TransportModeDto transportModeDto)
         {
-            _context.TransportModes.Add(transportMode);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTransportMode", new { id = transportMode.TransportModeId }, transportMode);
+            var created = await _repository.CreateAsync(transportModeDto);
+            return CreatedAtAction(nameof(GetTransportMode), new { id = created.TransportModeId }, created);
         }
 
-        // DELETE: api/TransportModes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransportMode(Guid id)
         {
-            var transportMode = await _context.TransportModes.FindAsync(id);
-            if (transportMode == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.TransportModes.Remove(transportMode);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool TransportModeExists(Guid id)
-        {
-            return _context.TransportModes.Any(e => e.TransportModeId == id);
         }
     }
 }

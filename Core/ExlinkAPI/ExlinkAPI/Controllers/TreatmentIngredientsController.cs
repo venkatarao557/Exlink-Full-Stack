@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class TreatmentIngredientsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ITreatmentIngredientRepository _repository;
 
-        public TreatmentIngredientsController(ExdocContext context)
+        public TreatmentIngredientsController(ITreatmentIngredientRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/TreatmentIngredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TreatmentIngredient>>> GetTreatmentIngredients()
+        public async Task<ActionResult<IEnumerable<TreatmentIngredientDto>>> GetTreatmentIngredients()
         {
-            return await _context.TreatmentIngredients.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/TreatmentIngredients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TreatmentIngredient>> GetTreatmentIngredient(Guid id)
+        public async Task<ActionResult<TreatmentIngredientDto>> GetTreatmentIngredient(Guid id)
         {
-            var treatmentIngredient = await _context.TreatmentIngredients.FindAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            if (result == null) return NotFound();
 
-            if (treatmentIngredient == null)
-            {
-                return NotFound();
-            }
-
-            return treatmentIngredient;
+            return Ok(result);
         }
 
-        // PUT: api/TreatmentIngredients/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTreatmentIngredient(Guid id, TreatmentIngredient treatmentIngredient)
+        public async Task<IActionResult> PutTreatmentIngredient(Guid id, TreatmentIngredientDto dto)
         {
-            if (id != treatmentIngredient.IngredientId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(treatmentIngredient).State = EntityState.Modified;
+            if (id != dto.IngredientId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(dto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!TreatmentIngredientExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/TreatmentIngredients
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TreatmentIngredient>> PostTreatmentIngredient(TreatmentIngredient treatmentIngredient)
+        public async Task<ActionResult<TreatmentIngredientDto>> PostTreatmentIngredient(TreatmentIngredientDto dto)
         {
-            _context.TreatmentIngredients.Add(treatmentIngredient);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTreatmentIngredient", new { id = treatmentIngredient.IngredientId }, treatmentIngredient);
+            var created = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetTreatmentIngredient), new { id = created.IngredientId }, created);
         }
 
-        // DELETE: api/TreatmentIngredients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTreatmentIngredient(Guid id)
         {
-            var treatmentIngredient = await _context.TreatmentIngredients.FindAsync(id);
-            if (treatmentIngredient == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.TreatmentIngredients.Remove(treatmentIngredient);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool TreatmentIngredientExists(Guid id)
-        {
-            return _context.TreatmentIngredients.Any(e => e.IngredientId == id);
         }
     }
 }

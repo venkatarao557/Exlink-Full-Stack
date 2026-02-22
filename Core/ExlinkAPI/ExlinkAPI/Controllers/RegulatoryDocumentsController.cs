@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class RegulatoryDocumentsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IRegulatoryDocumentRepository _repository;
 
-        public RegulatoryDocumentsController(ExdocContext context)
+        public RegulatoryDocumentsController(IRegulatoryDocumentRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/RegulatoryDocuments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RegulatoryDocument>>> GetRegulatoryDocuments()
+        public async Task<ActionResult<IEnumerable<RegulatoryDocumentDto>>> GetRegulatoryDocuments()
         {
-            return await _context.RegulatoryDocuments.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/RegulatoryDocuments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RegulatoryDocument>> GetRegulatoryDocument(Guid id)
+        public async Task<ActionResult<RegulatoryDocumentDto>> GetRegulatoryDocument(Guid id)
         {
-            var regulatoryDocument = await _context.RegulatoryDocuments.FindAsync(id);
-
-            if (regulatoryDocument == null)
-            {
-                return NotFound();
-            }
-
-            return regulatoryDocument;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/RegulatoryDocuments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRegulatoryDocument(Guid id, RegulatoryDocument regulatoryDocument)
+        public async Task<IActionResult> PutRegulatoryDocument(Guid id, RegulatoryDocumentDto dto)
         {
-            if (id != regulatoryDocument.RegulatoryDocId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(regulatoryDocument).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RegulatoryDocumentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/RegulatoryDocuments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RegulatoryDocument>> PostRegulatoryDocument(RegulatoryDocument regulatoryDocument)
+        public async Task<ActionResult<RegulatoryDocumentDto>> PostRegulatoryDocument(RegulatoryDocumentDto dto)
         {
-            _context.RegulatoryDocuments.Add(regulatoryDocument);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRegulatoryDocument", new { id = regulatoryDocument.RegulatoryDocId }, regulatoryDocument);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetRegulatoryDocument), new { id = result.RegulatoryDocId }, result);
         }
 
-        // DELETE: api/RegulatoryDocuments/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRegulatoryDocument(Guid id)
         {
-            var regulatoryDocument = await _context.RegulatoryDocuments.FindAsync(id);
-            if (regulatoryDocument == null)
-            {
-                return NotFound();
-            }
-
-            _context.RegulatoryDocuments.Remove(regulatoryDocument);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool RegulatoryDocumentExists(Guid id)
-        {
-            return _context.RegulatoryDocuments.Any(e => e.RegulatoryDocId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class StatesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IStateRepository _repository;
 
-        public StatesController(ExdocContext context)
+        public StatesController(IStateRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/States
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<State>>> GetStates()
+        public async Task<ActionResult<IEnumerable<StateDto>>> GetStates()
         {
-            return await _context.States.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/States/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<State>> GetState(Guid id)
+        public async Task<ActionResult<StateDto>> GetState(Guid id)
         {
-            var state = await _context.States.FindAsync(id);
-
-            if (state == null)
-            {
-                return NotFound();
-            }
-
-            return state;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/States/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutState(Guid id, State state)
+        public async Task<IActionResult> PutState(Guid id, StateDto dto)
         {
-            if (id != state.StateId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(state).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StateExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/States
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<State>> PostState(State state)
+        public async Task<ActionResult<StateDto>> PostState(StateDto dto)
         {
-            _context.States.Add(state);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetState", new { id = state.StateId }, state);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetState), new { id = result.StateId }, result);
         }
 
-        // DELETE: api/States/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteState(Guid id)
         {
-            var state = await _context.States.FindAsync(id);
-            if (state == null)
-            {
-                return NotFound();
-            }
-
-            _context.States.Remove(state);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool StateExists(Guid id)
-        {
-            return _context.States.Any(e => e.StateId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

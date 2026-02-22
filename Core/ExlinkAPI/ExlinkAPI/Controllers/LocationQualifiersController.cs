@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class LocationQualifiersController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ILocationQualifierRepository _repository;
 
-        public LocationQualifiersController(ExdocContext context)
+        public LocationQualifiersController(ILocationQualifierRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/LocationQualifiers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LocationQualifier>>> GetLocationQualifiers()
+        public async Task<ActionResult<IEnumerable<LocationQualifierDto>>> GetLocationQualifiers()
         {
-            return await _context.LocationQualifiers.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/LocationQualifiers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<LocationQualifier>> GetLocationQualifier(Guid id)
+        public async Task<ActionResult<LocationQualifierDto>> GetLocationQualifier(Guid id)
         {
-            var locationQualifier = await _context.LocationQualifiers.FindAsync(id);
-
-            if (locationQualifier == null)
-            {
-                return NotFound();
-            }
-
-            return locationQualifier;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/LocationQualifiers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLocationQualifier(Guid id, LocationQualifier locationQualifier)
+        public async Task<IActionResult> PutLocationQualifier(Guid id, LocationQualifierDto dto)
         {
-            if (id != locationQualifier.LocationQualId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(locationQualifier).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LocationQualifierExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/LocationQualifiers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<LocationQualifier>> PostLocationQualifier(LocationQualifier locationQualifier)
+        public async Task<ActionResult<LocationQualifierDto>> PostLocationQualifier(LocationQualifierDto dto)
         {
-            _context.LocationQualifiers.Add(locationQualifier);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetLocationQualifier", new { id = locationQualifier.LocationQualId }, locationQualifier);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetLocationQualifier), new { id = result.LocationQualId }, result);
         }
 
-        // DELETE: api/LocationQualifiers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLocationQualifier(Guid id)
         {
-            var locationQualifier = await _context.LocationQualifiers.FindAsync(id);
-            if (locationQualifier == null)
-            {
-                return NotFound();
-            }
-
-            _context.LocationQualifiers.Remove(locationQualifier);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool LocationQualifierExists(Guid id)
-        {
-            return _context.LocationQualifiers.Any(e => e.LocationQualId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

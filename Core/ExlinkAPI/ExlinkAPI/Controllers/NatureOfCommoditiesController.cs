@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class NatureOfCommoditiesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly INatureOfCommodityRepository _repository;
 
-        public NatureOfCommoditiesController(ExdocContext context)
+        public NatureOfCommoditiesController(INatureOfCommodityRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/NatureOfCommodities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<NatureOfCommodity>>> GetNatureOfCommodities()
+        public async Task<ActionResult<IEnumerable<NatureOfCommodityDto>>> GetNatureOfCommodities()
         {
-            return await _context.NatureOfCommodities.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/NatureOfCommodities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<NatureOfCommodity>> GetNatureOfCommodity(Guid id)
+        public async Task<ActionResult<NatureOfCommodityDto>> GetNatureOfCommodity(Guid id)
         {
-            var natureOfCommodity = await _context.NatureOfCommodities.FindAsync(id);
-
-            if (natureOfCommodity == null)
-            {
-                return NotFound();
-            }
-
-            return natureOfCommodity;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/NatureOfCommodities/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNatureOfCommodity(Guid id, NatureOfCommodity natureOfCommodity)
+        public async Task<IActionResult> PutNatureOfCommodity(Guid id, NatureOfCommodityDto dto)
         {
-            if (id != natureOfCommodity.NatureId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(natureOfCommodity).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!NatureOfCommodityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/NatureOfCommodities
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<NatureOfCommodity>> PostNatureOfCommodity(NatureOfCommodity natureOfCommodity)
+        public async Task<ActionResult<NatureOfCommodityDto>> PostNatureOfCommodity(NatureOfCommodityDto dto)
         {
-            _context.NatureOfCommodities.Add(natureOfCommodity);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetNatureOfCommodity", new { id = natureOfCommodity.NatureId }, natureOfCommodity);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetNatureOfCommodity), new { id = result.NatureId }, result);
         }
 
-        // DELETE: api/NatureOfCommodities/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNatureOfCommodity(Guid id)
         {
-            var natureOfCommodity = await _context.NatureOfCommodities.FindAsync(id);
-            if (natureOfCommodity == null)
-            {
-                return NotFound();
-            }
-
-            _context.NatureOfCommodities.Remove(natureOfCommodity);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool NatureOfCommodityExists(Guid id)
-        {
-            return _context.NatureOfCommodities.Any(e => e.NatureId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

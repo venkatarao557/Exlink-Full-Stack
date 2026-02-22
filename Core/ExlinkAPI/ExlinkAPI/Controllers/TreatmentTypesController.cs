@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class TreatmentTypesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ITreatmentTypeRepository _repository;
 
-        public TreatmentTypesController(ExdocContext context)
+        public TreatmentTypesController(ITreatmentTypeRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/TreatmentTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TreatmentType>>> GetTreatmentTypes()
+        public async Task<ActionResult<IEnumerable<TreatmentTypeDto>>> GetTreatmentTypes()
         {
-            return await _context.TreatmentTypes.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/TreatmentTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TreatmentType>> GetTreatmentType(Guid id)
+        public async Task<ActionResult<TreatmentTypeDto>> GetTreatmentType(Guid id)
         {
-            var treatmentType = await _context.TreatmentTypes.FindAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            if (result == null) return NotFound();
 
-            if (treatmentType == null)
-            {
-                return NotFound();
-            }
-
-            return treatmentType;
+            return Ok(result);
         }
 
-        // PUT: api/TreatmentTypes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTreatmentType(Guid id, TreatmentType treatmentType)
+        public async Task<IActionResult> PutTreatmentType(Guid id, TreatmentTypeDto dto)
         {
-            if (id != treatmentType.TreatmentTypeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(treatmentType).State = EntityState.Modified;
+            if (id != dto.TreatmentTypeId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(dto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!TreatmentTypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/TreatmentTypes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TreatmentType>> PostTreatmentType(TreatmentType treatmentType)
+        public async Task<ActionResult<TreatmentTypeDto>> PostTreatmentType(TreatmentTypeDto dto)
         {
-            _context.TreatmentTypes.Add(treatmentType);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTreatmentType", new { id = treatmentType.TreatmentTypeId }, treatmentType);
+            var created = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetTreatmentType), new { id = created.TreatmentTypeId }, created);
         }
 
-        // DELETE: api/TreatmentTypes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTreatmentType(Guid id)
         {
-            var treatmentType = await _context.TreatmentTypes.FindAsync(id);
-            if (treatmentType == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.TreatmentTypes.Remove(treatmentType);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool TreatmentTypeExists(Guid id)
-        {
-            return _context.TreatmentTypes.Any(e => e.TreatmentTypeId == id);
         }
     }
 }

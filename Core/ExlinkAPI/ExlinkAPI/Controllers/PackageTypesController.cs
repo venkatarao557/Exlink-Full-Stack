@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,50 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class PackageTypesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IPackageTypeRepository _repository;
 
-        public PackageTypesController(ExdocContext context)
+        public PackageTypesController(IPackageTypeRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/PackageTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PackageType>>> GetPackageTypes()
+        public async Task<ActionResult<IEnumerable<PackageTypeDto>>> GetPackageTypes()
         {
-            return await _context.PackageTypes.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
         // GET: api/PackageTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PackageType>> GetPackageType(Guid id)
+        public async Task<ActionResult<PackageTypeDto>> GetPackageType(Guid id)
         {
-            var packageType = await _context.PackageTypes.FindAsync(id);
-
-            if (packageType == null)
-            {
-                return NotFound();
-            }
-
-            return packageType;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
         // PUT: api/PackageTypes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPackageType(Guid id, PackageType packageType)
+        public async Task<IActionResult> PutPackageType(Guid id, PackageTypeDto dto)
         {
-            if (id != packageType.PackageTypeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(packageType).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PackageTypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
         // POST: api/PackageTypes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PackageType>> PostPackageType(PackageType packageType)
+        public async Task<ActionResult<PackageTypeDto>> PostPackageType(PackageTypeDto dto)
         {
-            _context.PackageTypes.Add(packageType);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPackageType", new { id = packageType.PackageTypeId }, packageType);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetPackageType), new { id = result.PackageTypeId }, result);
         }
 
         // DELETE: api/PackageTypes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePackageType(Guid id)
         {
-            var packageType = await _context.PackageTypes.FindAsync(id);
-            if (packageType == null)
-            {
-                return NotFound();
-            }
-
-            _context.PackageTypes.Remove(packageType);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool PackageTypeExists(Guid id)
-        {
-            return _context.PackageTypes.Any(e => e.PackageTypeId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

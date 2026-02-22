@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class WeightUnitAlternatesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IWeightUnitAlternateRepository _repository;
 
-        public WeightUnitAlternatesController(ExdocContext context)
+        public WeightUnitAlternatesController(IWeightUnitAlternateRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/WeightUnitAlternates
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WeightUnitAlternate>>> GetWeightUnitAlternates()
+        public async Task<ActionResult<IEnumerable<WeightUnitAlternateDto>>> GetWeightUnitAlternates()
         {
-            return await _context.WeightUnitAlternates.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/WeightUnitAlternates/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<WeightUnitAlternate>> GetWeightUnitAlternate(Guid id)
+        public async Task<ActionResult<WeightUnitAlternateDto>> GetWeightUnitAlternate(Guid id)
         {
-            var weightUnitAlternate = await _context.WeightUnitAlternates.FindAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            if (result == null) return NotFound();
 
-            if (weightUnitAlternate == null)
-            {
-                return NotFound();
-            }
-
-            return weightUnitAlternate;
+            return Ok(result);
         }
 
-        // PUT: api/WeightUnitAlternates/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWeightUnitAlternate(Guid id, WeightUnitAlternate weightUnitAlternate)
+        public async Task<IActionResult> PutWeightUnitAlternate(Guid id, WeightUnitAlternateDto dto)
         {
-            if (id != weightUnitAlternate.WeightUnitAltId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(weightUnitAlternate).State = EntityState.Modified;
+            if (id != dto.WeightUnitAltId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(dto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!WeightUnitAlternateExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/WeightUnitAlternates
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<WeightUnitAlternate>> PostWeightUnitAlternate(WeightUnitAlternate weightUnitAlternate)
+        public async Task<ActionResult<WeightUnitAlternateDto>> PostWeightUnitAlternate(WeightUnitAlternateDto dto)
         {
-            _context.WeightUnitAlternates.Add(weightUnitAlternate);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetWeightUnitAlternate", new { id = weightUnitAlternate.WeightUnitAltId }, weightUnitAlternate);
+            var created = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetWeightUnitAlternate), new { id = created.WeightUnitAltId }, created);
         }
 
-        // DELETE: api/WeightUnitAlternates/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWeightUnitAlternate(Guid id)
         {
-            var weightUnitAlternate = await _context.WeightUnitAlternates.FindAsync(id);
-            if (weightUnitAlternate == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.WeightUnitAlternates.Remove(weightUnitAlternate);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool WeightUnitAlternateExists(Guid id)
-        {
-            return _context.WeightUnitAlternates.Any(e => e.WeightUnitAltId == id);
         }
     }
 }

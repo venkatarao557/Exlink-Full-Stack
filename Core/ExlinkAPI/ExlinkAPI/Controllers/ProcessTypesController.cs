@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class ProcessTypesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IProcessTypeRepository _repository;
 
-        public ProcessTypesController(ExdocContext context)
+        public ProcessTypesController(IProcessTypeRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/ProcessTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProcessType>>> GetProcessTypes()
+        public async Task<ActionResult<IEnumerable<ProcessTypeDto>>> GetProcessTypes()
         {
-            return await _context.ProcessTypes.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/ProcessTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProcessType>> GetProcessType(Guid id)
+        public async Task<ActionResult<ProcessTypeDto>> GetProcessType(Guid id)
         {
-            var processType = await _context.ProcessTypes.FindAsync(id);
-
-            if (processType == null)
-            {
-                return NotFound();
-            }
-
-            return processType;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/ProcessTypes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProcessType(Guid id, ProcessType processType)
+        public async Task<IActionResult> PutProcessType(Guid id, ProcessTypeDto dto)
         {
-            if (id != processType.ProcessTypeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(processType).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProcessTypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/ProcessTypes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProcessType>> PostProcessType(ProcessType processType)
+        public async Task<ActionResult<ProcessTypeDto>> PostProcessType(ProcessTypeDto dto)
         {
-            _context.ProcessTypes.Add(processType);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProcessType", new { id = processType.ProcessTypeId }, processType);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetProcessType), new { id = result.ProcessTypeId }, result);
         }
 
-        // DELETE: api/ProcessTypes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProcessType(Guid id)
         {
-            var processType = await _context.ProcessTypes.FindAsync(id);
-            if (processType == null)
-            {
-                return NotFound();
-            }
-
-            _context.ProcessTypes.Remove(processType);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ProcessTypeExists(Guid id)
-        {
-            return _context.ProcessTypes.Any(e => e.ProcessTypeId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

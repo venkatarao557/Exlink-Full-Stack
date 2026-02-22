@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class TreatmentConcentrationsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ITreatmentConcentrationRepository _repository;
 
-        public TreatmentConcentrationsController(ExdocContext context)
+        public TreatmentConcentrationsController(ITreatmentConcentrationRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/TreatmentConcentrations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TreatmentConcentration>>> GetTreatmentConcentrations()
+        public async Task<ActionResult<IEnumerable<TreatmentConcentrationDto>>> GetTreatmentConcentrations()
         {
-            return await _context.TreatmentConcentrations.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/TreatmentConcentrations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TreatmentConcentration>> GetTreatmentConcentration(Guid id)
+        public async Task<ActionResult<TreatmentConcentrationDto>> GetTreatmentConcentration(Guid id)
         {
-            var treatmentConcentration = await _context.TreatmentConcentrations.FindAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            if (result == null) return NotFound();
 
-            if (treatmentConcentration == null)
-            {
-                return NotFound();
-            }
-
-            return treatmentConcentration;
+            return Ok(result);
         }
 
-        // PUT: api/TreatmentConcentrations/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTreatmentConcentration(Guid id, TreatmentConcentration treatmentConcentration)
+        public async Task<IActionResult> PutTreatmentConcentration(Guid id, TreatmentConcentrationDto dto)
         {
-            if (id != treatmentConcentration.ConcentrationUnitId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(treatmentConcentration).State = EntityState.Modified;
+            if (id != dto.ConcentrationUnitId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(dto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!TreatmentConcentrationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/TreatmentConcentrations
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TreatmentConcentration>> PostTreatmentConcentration(TreatmentConcentration treatmentConcentration)
+        public async Task<ActionResult<TreatmentConcentrationDto>> PostTreatmentConcentration(TreatmentConcentrationDto dto)
         {
-            _context.TreatmentConcentrations.Add(treatmentConcentration);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTreatmentConcentration", new { id = treatmentConcentration.ConcentrationUnitId }, treatmentConcentration);
+            var created = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetTreatmentConcentration), new { id = created.ConcentrationUnitId }, created);
         }
 
-        // DELETE: api/TreatmentConcentrations/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTreatmentConcentration(Guid id)
         {
-            var treatmentConcentration = await _context.TreatmentConcentrations.FindAsync(id);
-            if (treatmentConcentration == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.TreatmentConcentrations.Remove(treatmentConcentration);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool TreatmentConcentrationExists(Guid id)
-        {
-            return _context.TreatmentConcentrations.Any(e => e.ConcentrationUnitId == id);
         }
     }
 }

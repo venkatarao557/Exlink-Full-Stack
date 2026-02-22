@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,65 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class TreatmentsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly ITreatmentRepository _repository;
 
-        public TreatmentsController(ExdocContext context)
+        public TreatmentsController(ITreatmentRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/Treatments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Treatment>>> GetTreatments()
+        public async Task<ActionResult<IEnumerable<TreatmentDto>>> GetTreatments()
         {
-            return await _context.Treatments.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
         // GET: api/Treatments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Treatment>> GetTreatment(Guid id)
+        public async Task<ActionResult<TreatmentDto>> GetTreatment(Guid id)
         {
-            var treatment = await _context.Treatments.FindAsync(id);
+            var treatment = await _repository.GetByIdAsync(id);
+            if (treatment == null) return NotFound();
 
-            if (treatment == null)
-            {
-                return NotFound();
-            }
-
-            return treatment;
+            return Ok(treatment);
         }
 
         // PUT: api/Treatments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTreatment(Guid id, Treatment treatment)
+        public async Task<IActionResult> PutTreatment(Guid id, TreatmentDto treatmentDto)
         {
-            if (id != treatment.TreatmentId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(treatment).State = EntityState.Modified;
+            if (id != treatmentDto.TreatmentId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(treatmentDto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!TreatmentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
         // POST: api/Treatments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Treatment>> PostTreatment(Treatment treatment)
+        public async Task<ActionResult<TreatmentDto>> PostTreatment(TreatmentDto treatmentDto)
         {
-            _context.Treatments.Add(treatment);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTreatment", new { id = treatment.TreatmentId }, treatment);
+            var created = await _repository.CreateAsync(treatmentDto);
+            return CreatedAtAction(nameof(GetTreatment), new { id = created.TreatmentId }, created);
         }
 
         // DELETE: api/Treatments/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTreatment(Guid id)
         {
-            var treatment = await _context.Treatments.FindAsync(id);
-            if (treatment == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.Treatments.Remove(treatment);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool TreatmentExists(Guid id)
-        {
-            return _context.Treatments.Any(e => e.TreatmentId == id);
         }
     }
 }

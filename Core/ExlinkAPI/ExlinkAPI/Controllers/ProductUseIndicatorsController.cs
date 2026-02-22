@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class ProductUseIndicatorsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IProductUseIndicatorRepository _repository;
 
-        public ProductUseIndicatorsController(ExdocContext context)
+        public ProductUseIndicatorsController(IProductUseIndicatorRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/ProductUseIndicators
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductUseIndicator>>> GetProductUseIndicators()
+        public async Task<ActionResult<IEnumerable<ProductUseIndicatorDto>>> GetProductUseIndicators()
         {
-            return await _context.ProductUseIndicators.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/ProductUseIndicators/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductUseIndicator>> GetProductUseIndicator(Guid id)
+        public async Task<ActionResult<ProductUseIndicatorDto>> GetProductUseIndicator(Guid id)
         {
-            var productUseIndicator = await _context.ProductUseIndicators.FindAsync(id);
-
-            if (productUseIndicator == null)
-            {
-                return NotFound();
-            }
-
-            return productUseIndicator;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/ProductUseIndicators/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductUseIndicator(Guid id, ProductUseIndicator productUseIndicator)
+        public async Task<IActionResult> PutProductUseIndicator(Guid id, ProductUseIndicatorDto dto)
         {
-            if (id != productUseIndicator.ProductUseId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(productUseIndicator).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductUseIndicatorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/ProductUseIndicators
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProductUseIndicator>> PostProductUseIndicator(ProductUseIndicator productUseIndicator)
+        public async Task<ActionResult<ProductUseIndicatorDto>> PostProductUseIndicator(ProductUseIndicatorDto dto)
         {
-            _context.ProductUseIndicators.Add(productUseIndicator);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProductUseIndicator", new { id = productUseIndicator.ProductUseId }, productUseIndicator);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetProductUseIndicator), new { id = result.ProductUseId }, result);
         }
 
-        // DELETE: api/ProductUseIndicators/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductUseIndicator(Guid id)
         {
-            var productUseIndicator = await _context.ProductUseIndicators.FindAsync(id);
-            if (productUseIndicator == null)
-            {
-                return NotFound();
-            }
-
-            _context.ProductUseIndicators.Remove(productUseIndicator);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ProductUseIndicatorExists(Guid id)
-        {
-            return _context.ProductUseIndicators.Any(e => e.ProductUseId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class RegionsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IRegionRepository _repository;
 
-        public RegionsController(ExdocContext context)
+        public RegionsController(IRegionRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Regions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Region>>> GetRegions()
+        public async Task<ActionResult<IEnumerable<RegionDto>>> GetRegions()
         {
-            return await _context.Regions.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/Regions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Region>> GetRegion(Guid id)
+        public async Task<ActionResult<RegionDto>> GetRegion(Guid id)
         {
-            var region = await _context.Regions.FindAsync(id);
-
-            if (region == null)
-            {
-                return NotFound();
-            }
-
-            return region;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/Regions/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRegion(Guid id, Region region)
+        public async Task<IActionResult> PutRegion(Guid id, RegionDto dto)
         {
-            if (id != region.RegionId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(region).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RegionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/Regions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Region>> PostRegion(Region region)
+        public async Task<ActionResult<RegionDto>> PostRegion(RegionDto dto)
         {
-            _context.Regions.Add(region);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRegion", new { id = region.RegionId }, region);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetRegion), new { id = result.RegionId }, result);
         }
 
-        // DELETE: api/Regions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRegion(Guid id)
         {
-            var region = await _context.Regions.FindAsync(id);
-            if (region == null)
-            {
-                return NotFound();
-            }
-
-            _context.Regions.Remove(region);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool RegionExists(Guid id)
-        {
-            return _context.Regions.Any(e => e.RegionId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class USTerritoriesController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IUsTerritoryRepository _repository;
 
-        public USTerritoriesController(ExdocContext context)
+        public USTerritoriesController(IUsTerritoryRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/USTerritories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usterritory>>> GetUsterritories()
+        public async Task<ActionResult<IEnumerable<UsTerritoryDto>>> GetUsterritories()
         {
-            return await _context.Usterritories.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/USTerritories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usterritory>> GetUsterritory(Guid id)
+        public async Task<ActionResult<UsTerritoryDto>> GetUsterritory(Guid id)
         {
-            var usterritory = await _context.Usterritories.FindAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            if (result == null) return NotFound();
 
-            if (usterritory == null)
-            {
-                return NotFound();
-            }
-
-            return usterritory;
+            return Ok(result);
         }
 
-        // PUT: api/USTerritories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsterritory(Guid id, Usterritory usterritory)
+        public async Task<IActionResult> PutUsterritory(Guid id, UsTerritoryDto dto)
         {
-            if (id != usterritory.UsterritoryId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(usterritory).State = EntityState.Modified;
+            if (id != dto.UsTerritoryId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(dto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!UsterritoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/USTerritories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usterritory>> PostUsterritory(Usterritory usterritory)
+        public async Task<ActionResult<UsTerritoryDto>> PostUsterritory(UsTerritoryDto dto)
         {
-            _context.Usterritories.Add(usterritory);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUsterritory", new { id = usterritory.UsterritoryId }, usterritory);
+            var created = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetUsterritory), new { id = created.UsTerritoryId }, created);
         }
 
-        // DELETE: api/USTerritories/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsterritory(Guid id)
         {
-            var usterritory = await _context.Usterritories.FindAsync(id);
-            if (usterritory == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.Usterritories.Remove(usterritory);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool UsterritoryExists(Guid id)
-        {
-            return _context.Usterritories.Any(e => e.UsterritoryId == id);
         }
     }
 }

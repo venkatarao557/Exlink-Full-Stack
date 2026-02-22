@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class ProductClassificationsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IProductClassificationRepository _repository;
 
-        public ProductClassificationsController(ExdocContext context)
+        public ProductClassificationsController(IProductClassificationRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/ProductClassifications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductClassification>>> GetProductClassifications()
+        public async Task<ActionResult<IEnumerable<ProductClassificationDto>>> GetProductClassifications()
         {
-            return await _context.ProductClassifications.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/ProductClassifications/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductClassification>> GetProductClassification(Guid id)
+        public async Task<ActionResult<ProductClassificationDto>> GetProductClassification(Guid id)
         {
-            var productClassification = await _context.ProductClassifications.FindAsync(id);
-
-            if (productClassification == null)
-            {
-                return NotFound();
-            }
-
-            return productClassification;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/ProductClassifications/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductClassification(Guid id, ProductClassification productClassification)
+        public async Task<IActionResult> PutProductClassification(Guid id, ProductClassificationDto dto)
         {
-            if (id != productClassification.ProductClassificationId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(productClassification).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductClassificationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/ProductClassifications
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProductClassification>> PostProductClassification(ProductClassification productClassification)
+        public async Task<ActionResult<ProductClassificationDto>> PostProductClassification(ProductClassificationDto dto)
         {
-            _context.ProductClassifications.Add(productClassification);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProductClassification", new { id = productClassification.ProductClassificationId }, productClassification);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetProductClassification), new { id = result.ProductClassificationId }, result);
         }
 
-        // DELETE: api/ProductClassifications/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductClassification(Guid id)
         {
-            var productClassification = await _context.ProductClassifications.FindAsync(id);
-            if (productClassification == null)
-            {
-                return NotFound();
-            }
-
-            _context.ProductClassifications.Remove(productClassification);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ProductClassificationExists(Guid id)
-        {
-            return _context.ProductClassifications.Any(e => e.ProductClassificationId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

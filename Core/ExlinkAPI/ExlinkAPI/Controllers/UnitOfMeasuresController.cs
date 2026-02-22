@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,60 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class UnitOfMeasuresController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IUnitOfMeasureRepository _repository;
 
-        public UnitOfMeasuresController(ExdocContext context)
+        public UnitOfMeasuresController(IUnitOfMeasureRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/UnitOfMeasures
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UnitOfMeasure>>> GetUnitOfMeasures()
+        public async Task<ActionResult<IEnumerable<UnitOfMeasureDto>>> GetUnitOfMeasures()
         {
-            return await _context.UnitOfMeasures.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/UnitOfMeasures/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UnitOfMeasure>> GetUnitOfMeasure(Guid id)
+        public async Task<ActionResult<UnitOfMeasureDto>> GetUnitOfMeasure(Guid id)
         {
-            var unitOfMeasure = await _context.UnitOfMeasures.FindAsync(id);
+            var result = await _repository.GetByIdAsync(id);
+            if (result == null) return NotFound();
 
-            if (unitOfMeasure == null)
-            {
-                return NotFound();
-            }
-
-            return unitOfMeasure;
+            return Ok(result);
         }
 
-        // PUT: api/UnitOfMeasures/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUnitOfMeasure(Guid id, UnitOfMeasure unitOfMeasure)
+        public async Task<IActionResult> PutUnitOfMeasure(Guid id, UnitOfMeasureDto dto)
         {
-            if (id != unitOfMeasure.Uomid)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(unitOfMeasure).State = EntityState.Modified;
+            if (id != dto.UnitOfMeasureId) return BadRequest();
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(dto);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!UnitOfMeasureExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!await _repository.ExistsAsync(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/UnitOfMeasures
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UnitOfMeasure>> PostUnitOfMeasure(UnitOfMeasure unitOfMeasure)
+        public async Task<ActionResult<UnitOfMeasureDto>> PostUnitOfMeasure(UnitOfMeasureDto dto)
         {
-            _context.UnitOfMeasures.Add(unitOfMeasure);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUnitOfMeasure", new { id = unitOfMeasure.Uomid }, unitOfMeasure);
+            var created = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetUnitOfMeasure), new { id = created.UnitOfMeasureId }, created);
         }
 
-        // DELETE: api/UnitOfMeasures/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUnitOfMeasure(Guid id)
         {
-            var unitOfMeasure = await _context.UnitOfMeasures.FindAsync(id);
-            if (unitOfMeasure == null)
-            {
-                return NotFound();
-            }
+            if (!await _repository.ExistsAsync(id)) return NotFound();
 
-            _context.UnitOfMeasures.Remove(unitOfMeasure);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool UnitOfMeasureExists(Guid id)
-        {
-            return _context.UnitOfMeasures.Any(e => e.Uomid == id);
         }
     }
 }

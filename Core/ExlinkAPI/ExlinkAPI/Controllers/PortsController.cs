@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,49 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class PortsController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IPortRepository _repository;
 
-        public PortsController(ExdocContext context)
+        public PortsController(IPortRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Ports
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Port>>> GetPorts()
+        public async Task<ActionResult<IEnumerable<PortDto>>> GetPorts()
         {
-            return await _context.Ports.ToListAsync();
+            var ports = await _repository.GetAllAsync();
+            return Ok(ports);
         }
 
-        // GET: api/Ports/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Port>> GetPort(Guid id)
+        public async Task<ActionResult<PortDto>> GetPort(Guid id)
         {
-            var port = await _context.Ports.FindAsync(id);
-
-            if (port == null)
-            {
-                return NotFound();
-            }
-
-            return port;
+            var port = await _repository.GetByIdAsync(id);
+            if (port == null) return NotFound();
+            return Ok(port);
         }
 
-        // PUT: api/Ports/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPort(Guid id, Port port)
+        public async Task<IActionResult> PutPort(Guid id, PortDto portDto)
         {
-            if (id != port.PortId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(port).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PortExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            var updated = await _repository.UpdateAsync(id, portDto);
+            if (!updated) return NotFound();
             return NoContent();
         }
 
-        // POST: api/Ports
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Port>> PostPort(Port port)
+        public async Task<ActionResult<PortDto>> PostPort(PortDto portDto)
         {
-            _context.Ports.Add(port);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPort", new { id = port.PortId }, port);
+            var result = await _repository.CreateAsync(portDto);
+            return CreatedAtAction(nameof(GetPort), new { id = result.PortId }, result);
         }
 
-        // DELETE: api/Ports/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePort(Guid id)
         {
-            var port = await _context.Ports.FindAsync(id);
-            if (port == null)
-            {
-                return NotFound();
-            }
-
-            _context.Ports.Remove(port);
-            await _context.SaveChangesAsync();
-
+            var deleted = await _repository.DeleteAsync(id);
+            if (!deleted) return NotFound();
             return NoContent();
-        }
-
-        private bool PortExists(Guid id)
-        {
-            return _context.Ports.Any(e => e.PortId == id);
         }
     }
 }

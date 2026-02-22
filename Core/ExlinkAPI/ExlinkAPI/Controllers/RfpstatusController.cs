@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class RfpstatusController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IRfpstatusRepository _repository;
 
-        public RfpstatusController(ExdocContext context)
+        public RfpstatusController(IRfpstatusRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Rfpstatus
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rfpstatus>>> GetRfpstatuses()
+        public async Task<ActionResult<IEnumerable<RfpstatusDto>>> GetRfpstatuses()
         {
-            return await _context.Rfpstatuses.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/Rfpstatus/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Rfpstatus>> GetRfpstatus(Guid id)
+        public async Task<ActionResult<RfpstatusDto>> GetRfpstatus(Guid id)
         {
-            var rfpstatus = await _context.Rfpstatuses.FindAsync(id);
-
-            if (rfpstatus == null)
-            {
-                return NotFound();
-            }
-
-            return rfpstatus;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/Rfpstatus/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRfpstatus(Guid id, Rfpstatus rfpstatus)
+        public async Task<IActionResult> PutRfpstatus(Guid id, RfpstatusDto dto)
         {
-            if (id != rfpstatus.StatusId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(rfpstatus).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RfpstatusExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/Rfpstatus
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Rfpstatus>> PostRfpstatus(Rfpstatus rfpstatus)
+        public async Task<ActionResult<RfpstatusDto>> PostRfpstatus(RfpstatusDto dto)
         {
-            _context.Rfpstatuses.Add(rfpstatus);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRfpstatus", new { id = rfpstatus.StatusId }, rfpstatus);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetRfpstatus), new { id = result.StatusId }, result);
         }
 
-        // DELETE: api/Rfpstatus/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRfpstatus(Guid id)
         {
-            var rfpstatus = await _context.Rfpstatuses.FindAsync(id);
-            if (rfpstatus == null)
-            {
-                return NotFound();
-            }
-
-            _context.Rfpstatuses.Remove(rfpstatus);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool RfpstatusExists(Guid id)
-        {
-            return _context.Rfpstatuses.Any(e => e.StatusId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }

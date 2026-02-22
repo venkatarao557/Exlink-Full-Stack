@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Controllers
 {
@@ -13,95 +8,45 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class QualityQualifiersController : ControllerBase
     {
-        private readonly ExdocContext _context;
+        private readonly IQualityQualifierRepository _repository;
 
-        public QualityQualifiersController(ExdocContext context)
+        public QualityQualifiersController(IQualityQualifierRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/QualityQualifiers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<QualityQualifier>>> GetQualityQualifiers()
+        public async Task<ActionResult<IEnumerable<QualityQualifierDto>>> GetQualityQualifiers()
         {
-            return await _context.QualityQualifiers.ToListAsync();
+            return Ok(await _repository.GetAllAsync());
         }
 
-        // GET: api/QualityQualifiers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<QualityQualifier>> GetQualityQualifier(Guid id)
+        public async Task<ActionResult<QualityQualifierDto>> GetQualityQualifier(Guid id)
         {
-            var qualityQualifier = await _context.QualityQualifiers.FindAsync(id);
-
-            if (qualityQualifier == null)
-            {
-                return NotFound();
-            }
-
-            return qualityQualifier;
+            var result = await _repository.GetByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
         }
 
-        // PUT: api/QualityQualifiers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutQualityQualifier(Guid id, QualityQualifier qualityQualifier)
+        public async Task<IActionResult> PutQualityQualifier(Guid id, QualityQualifierDto dto)
         {
-            if (id != qualityQualifier.QualityQualifierId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(qualityQualifier).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QualityQualifierExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var success = await _repository.UpdateAsync(id, dto);
+            return success ? NoContent() : NotFound();
         }
 
-        // POST: api/QualityQualifiers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<QualityQualifier>> PostQualityQualifier(QualityQualifier qualityQualifier)
+        public async Task<ActionResult<QualityQualifierDto>> PostQualityQualifier(QualityQualifierDto dto)
         {
-            _context.QualityQualifiers.Add(qualityQualifier);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetQualityQualifier", new { id = qualityQualifier.QualityQualifierId }, qualityQualifier);
+            var result = await _repository.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetQualityQualifier), new { id = result.QualityQualifierId }, result);
         }
 
-        // DELETE: api/QualityQualifiers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQualityQualifier(Guid id)
         {
-            var qualityQualifier = await _context.QualityQualifiers.FindAsync(id);
-            if (qualityQualifier == null)
-            {
-                return NotFound();
-            }
-
-            _context.QualityQualifiers.Remove(qualityQualifier);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool QualityQualifierExists(Guid id)
-        {
-            return _context.QualityQualifiers.Any(e => e.QualityQualifierId == id);
+            var success = await _repository.DeleteAsync(id);
+            return success ? NoContent() : NotFound();
         }
     }
 }
