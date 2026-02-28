@@ -1,4 +1,7 @@
+using ExlinkAPI.Extensions;
 using ExlinkAPI.Models;
+using ExlinkAPI.Repositories.Implementations;
+using ExlinkAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +31,8 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddScoped<IAheccMappingRepository, AheccMappingRepository>();
+builder.Services.AddProjectRepositories();
 var app = builder.Build();
 
 

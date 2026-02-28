@@ -2,7 +2,7 @@ using ExlinkAPI.DTOs;
 
 namespace ExlinkAPI.Repositories.Interfaces
 {
-    public interface IUsTerritoryRepository
+    public interface IUSTerritoryRepository
     {
         Task<IEnumerable<UsTerritoryDto>> GetAllAsync();
         Task<UsTerritoryDto?> GetByIdAsync(Guid id);

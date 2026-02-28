@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExlinkAPI.Repositories.Implementations
 {
-    public class UsTerritoryRepository : IUsTerritoryRepository
+    public class USTerritoryRepository : IUSTerritoryRepository
     {
         private readonly ExdocContext _context;
 
-        public UsTerritoryRepository(ExdocContext context)
+        public USTerritoryRepository(ExdocContext context)
         {
             _context = context;
         }

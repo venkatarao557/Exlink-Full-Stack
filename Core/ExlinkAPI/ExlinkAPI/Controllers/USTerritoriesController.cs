@@ -8,9 +8,9 @@ namespace ExlinkAPI.Controllers
     [ApiController]
     public class USTerritoriesController : ControllerBase
     {
-        private readonly IUsTerritoryRepository _repository;
+        private readonly IUSTerritoryRepository _repository;
 
-        public USTerritoriesController(IUsTerritoryRepository repository)
+        public USTerritoriesController(IUSTerritoryRepository repository)
         {
             _repository = repository;
         }
