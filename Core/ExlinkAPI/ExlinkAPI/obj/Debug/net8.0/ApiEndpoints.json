@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.AheccproductMapping, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.AheccproductMappingDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -28,14 +28,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "mapping",
-        "Type": "ExlinkAPI.Models.AheccproductMapping",
+        "Name": "mappingDto",
+        "Type": "ExlinkAPI.DTOs.AheccproductMappingDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.AheccproductMapping",
+        "Type": "ExlinkAPI.DTOs.AheccproductMappingDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -61,7 +61,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.AheccproductMapping, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.AheccproductMappingDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -81,7 +81,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.ApprovedCertifier, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.ApprovedCertifierDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -100,14 +100,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "certifier",
-        "Type": "ExlinkAPI.Models.ApprovedCertifier",
+        "Name": "certifierDto",
+        "Type": "ExlinkAPI.DTOs.ApprovedCertifierDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ApprovedCertifier",
+        "Type": "ExlinkAPI.DTOs.ApprovedCertifierDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -133,7 +133,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ApprovedCertifier",
+        "Type": "ExlinkAPI.DTOs.ApprovedCertifierDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -157,8 +157,8 @@
         "IsRequired": true
       },
       {
-        "Name": "certifier",
-        "Type": "ExlinkAPI.Models.ApprovedCertifier",
+        "Name": "certifierDto",
+        "Type": "ExlinkAPI.DTOs.ApprovedCertifierDto",
         "IsRequired": true
       }
     ],
@@ -190,7 +190,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.CertificatePrintIndicator, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CertificatePrintIndicatorDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -209,14 +209,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "indicator",
-        "Type": "ExlinkAPI.Models.CertificatePrintIndicator",
+        "Name": "indicatorDto",
+        "Type": "ExlinkAPI.DTOs.CertificatePrintIndicatorDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CertificatePrintIndicator",
+        "Type": "ExlinkAPI.DTOs.CertificatePrintIndicatorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -242,7 +242,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CertificatePrintIndicator",
+        "Type": "ExlinkAPI.DTOs.CertificatePrintIndicatorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -266,8 +266,8 @@
         "IsRequired": true
       },
       {
-        "Name": "indicator",
-        "Type": "ExlinkAPI.Models.CertificatePrintIndicator",
+        "Name": "indicatorDto",
+        "Type": "ExlinkAPI.DTOs.CertificatePrintIndicatorDto",
         "IsRequired": true
       }
     ],
@@ -299,7 +299,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.CertificateReason, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CertificateReasonDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -318,14 +318,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "reason",
-        "Type": "ExlinkAPI.Models.CertificateReason",
+        "Name": "reasonDto",
+        "Type": "ExlinkAPI.DTOs.CertificateReasonDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CertificateReason",
+        "Type": "ExlinkAPI.DTOs.CertificateReasonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -351,7 +351,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CertificateReason",
+        "Type": "ExlinkAPI.DTOs.CertificateReasonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -375,8 +375,8 @@
         "IsRequired": true
       },
       {
-        "Name": "reason",
-        "Type": "ExlinkAPI.Models.CertificateReason",
+        "Name": "reasonDto",
+        "Type": "ExlinkAPI.DTOs.CertificateReasonDto",
         "IsRequired": true
       }
     ],
@@ -414,7 +414,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CertificateReason",
+        "Type": "ExlinkAPI.DTOs.CertificateReasonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -434,7 +434,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.CertificateRequestStatus, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CertificateRequestStatusDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -453,14 +453,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "status",
-        "Type": "ExlinkAPI.Models.CertificateRequestStatus",
+        "Name": "statusDto",
+        "Type": "ExlinkAPI.DTOs.CertificateRequestStatusDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CertificateRequestStatus",
+        "Type": "ExlinkAPI.DTOs.CertificateRequestStatusDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -486,7 +486,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CertificateRequestStatus",
+        "Type": "ExlinkAPI.DTOs.CertificateRequestStatusDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -510,8 +510,8 @@
         "IsRequired": true
       },
       {
-        "Name": "status",
-        "Type": "ExlinkAPI.Models.CertificateRequestStatus",
+        "Name": "statusDto",
+        "Type": "ExlinkAPI.DTOs.CertificateRequestStatusDto",
         "IsRequired": true
       }
     ],
@@ -543,7 +543,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Commodity, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CommodityDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -562,14 +562,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "commodity",
-        "Type": "ExlinkAPI.Models.Commodity",
+        "Name": "commodityDto",
+        "Type": "ExlinkAPI.DTOs.CommodityDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Commodity",
+        "Type": "ExlinkAPI.DTOs.CommodityDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -595,7 +595,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Commodity",
+        "Type": "ExlinkAPI.DTOs.CommodityDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -619,8 +619,8 @@
         "IsRequired": true
       },
       {
-        "Name": "commodity",
-        "Type": "ExlinkAPI.Models.Commodity",
+        "Name": "commodityDto",
+        "Type": "ExlinkAPI.DTOs.CommodityDto",
         "IsRequired": true
       }
     ],
@@ -652,7 +652,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Country, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CountryDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -671,14 +671,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "country",
-        "Type": "ExlinkAPI.Models.Country",
+        "Name": "countryDto",
+        "Type": "ExlinkAPI.DTOs.CountryDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Country",
+        "Type": "ExlinkAPI.DTOs.CountryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -704,7 +704,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Country",
+        "Type": "ExlinkAPI.DTOs.CountryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -728,8 +728,8 @@
         "IsRequired": true
       },
       {
-        "Name": "country",
-        "Type": "ExlinkAPI.Models.Country",
+        "Name": "countryDto",
+        "Type": "ExlinkAPI.DTOs.CountryDto",
         "IsRequired": true
       }
     ],
@@ -767,7 +767,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Country",
+        "Type": "ExlinkAPI.DTOs.CountryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -787,7 +787,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.CountryCommodity, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CountryCommodityDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -806,14 +806,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "mapping",
-        "Type": "ExlinkAPI.Models.CountryCommodity",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.CountryCommodityDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CountryCommodity",
+        "Type": "ExlinkAPI.DTOs.CountryCommodityDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -837,8 +837,8 @@
         "IsRequired": true
       },
       {
-        "Name": "mapping",
-        "Type": "ExlinkAPI.Models.CountryCommodity",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.CountryCommodityDto",
         "IsRequired": true
       }
     ],
@@ -876,7 +876,142 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CountryCommodity",
+        "Type": "ExlinkAPI.DTOs.CountryCommodityDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ExlinkAPI.Controllers.CurrenciesController",
+    "Method": "GetCurrencies",
+    "RelativePath": "api/Currencies",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CurrencyDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ExlinkAPI.Controllers.CurrenciesController",
+    "Method": "CreateCurrency",
+    "RelativePath": "api/Currencies",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.CurrencyDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ExlinkAPI.DTOs.CurrencyDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ExlinkAPI.Controllers.CurrenciesController",
+    "Method": "GetCurrency",
+    "RelativePath": "api/Currencies/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ExlinkAPI.DTOs.CurrencyDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ExlinkAPI.Controllers.CurrenciesController",
+    "Method": "UpdateCurrency",
+    "RelativePath": "api/Currencies/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.CurrencyDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExlinkAPI.Controllers.CurrenciesController",
+    "Method": "DeleteCurrency",
+    "RelativePath": "api/Currencies/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExlinkAPI.Controllers.CurrenciesController",
+    "Method": "GetByUnit",
+    "RelativePath": "api/Currencies/unit/{unit}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "unit",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ExlinkAPI.DTOs.CurrencyDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1005,7 +1140,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.CutType, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.CutTypeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1024,14 +1159,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "cutType",
-        "Type": "ExlinkAPI.Models.CutType",
+        "Name": "cutTypeDto",
+        "Type": "ExlinkAPI.DTOs.CutTypeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CutType",
+        "Type": "ExlinkAPI.DTOs.CutTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1057,7 +1192,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.CutType",
+        "Type": "ExlinkAPI.DTOs.CutTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1081,8 +1216,8 @@
         "IsRequired": true
       },
       {
-        "Name": "cutType",
-        "Type": "ExlinkAPI.Models.CutType",
+        "Name": "cutTypeDto",
+        "Type": "ExlinkAPI.DTOs.CutTypeDto",
         "IsRequired": true
       }
     ],
@@ -1114,7 +1249,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.DeclarationIndicator, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.DeclarationIndicatorDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1133,14 +1268,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "declarationIndicator",
-        "Type": "ExlinkAPI.Models.DeclarationIndicator",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.DeclarationIndicatorDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.DeclarationIndicator",
+        "Type": "ExlinkAPI.DTOs.DeclarationIndicatorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1166,7 +1301,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.DeclarationIndicator",
+        "Type": "ExlinkAPI.DTOs.DeclarationIndicatorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1190,8 +1325,8 @@
         "IsRequired": true
       },
       {
-        "Name": "declarationIndicator",
-        "Type": "ExlinkAPI.Models.DeclarationIndicator",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.DeclarationIndicatorDto",
         "IsRequired": true
       }
     ],
@@ -1223,7 +1358,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.DominantProduct, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.DominantProductDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1242,14 +1377,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dominantProduct",
-        "Type": "ExlinkAPI.Models.DominantProduct",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.DominantProductDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.DominantProduct",
+        "Type": "ExlinkAPI.DTOs.DominantProductDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1275,7 +1410,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.DominantProduct",
+        "Type": "ExlinkAPI.DTOs.DominantProductDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1299,8 +1434,8 @@
         "IsRequired": true
       },
       {
-        "Name": "dominantProduct",
-        "Type": "ExlinkAPI.Models.DominantProduct",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.DominantProductDto",
         "IsRequired": true
       }
     ],
@@ -1332,7 +1467,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Eucountry, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.EUCountryDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1344,21 +1479,21 @@
   },
   {
     "ContainingType": "ExlinkAPI.Controllers.EUCountriesController",
-    "Method": "PostEucountry",
+    "Method": "PostEUCountry",
     "RelativePath": "api/EUCountries",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "eucountry",
-        "Type": "ExlinkAPI.Models.Eucountry",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.EUCountryDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Eucountry",
+        "Type": "ExlinkAPI.DTOs.EUCountryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1370,7 +1505,7 @@
   },
   {
     "ContainingType": "ExlinkAPI.Controllers.EUCountriesController",
-    "Method": "GetEucountry",
+    "Method": "GetEUCountry",
     "RelativePath": "api/EUCountries/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -1384,7 +1519,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Eucountry",
+        "Type": "ExlinkAPI.DTOs.EUCountryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1396,7 +1531,7 @@
   },
   {
     "ContainingType": "ExlinkAPI.Controllers.EUCountriesController",
-    "Method": "PutEucountry",
+    "Method": "PutEUCountry",
     "RelativePath": "api/EUCountries/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -1408,8 +1543,8 @@
         "IsRequired": true
       },
       {
-        "Name": "eucountry",
-        "Type": "ExlinkAPI.Models.Eucountry",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.EUCountryDto",
         "IsRequired": true
       }
     ],
@@ -1417,7 +1552,7 @@
   },
   {
     "ContainingType": "ExlinkAPI.Controllers.EUCountriesController",
-    "Method": "DeleteEucountry",
+    "Method": "DeleteEUCountry",
     "RelativePath": "api/EUCountries/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -1441,7 +1576,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.IntendedUse, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.IntendedUseDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1460,14 +1595,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "intendedUse",
-        "Type": "ExlinkAPI.Models.IntendedUse",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.IntendedUseDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.IntendedUse",
+        "Type": "ExlinkAPI.DTOs.IntendedUseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1493,7 +1628,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.IntendedUse",
+        "Type": "ExlinkAPI.DTOs.IntendedUseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1517,8 +1652,8 @@
         "IsRequired": true
       },
       {
-        "Name": "intendedUse",
-        "Type": "ExlinkAPI.Models.IntendedUse",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.IntendedUseDto",
         "IsRequired": true
       }
     ],
@@ -1550,7 +1685,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.LocationQualifier, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.LocationQualifierDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1569,14 +1704,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "locationQualifier",
-        "Type": "ExlinkAPI.Models.LocationQualifier",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.LocationQualifierDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.LocationQualifier",
+        "Type": "ExlinkAPI.DTOs.LocationQualifierDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1602,7 +1737,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.LocationQualifier",
+        "Type": "ExlinkAPI.DTOs.LocationQualifierDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1626,8 +1761,8 @@
         "IsRequired": true
       },
       {
-        "Name": "locationQualifier",
-        "Type": "ExlinkAPI.Models.LocationQualifier",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.LocationQualifierDto",
         "IsRequired": true
       }
     ],
@@ -1659,7 +1794,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.NatureOfCommodity, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.NatureOfCommodityDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1678,14 +1813,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "natureOfCommodity",
-        "Type": "ExlinkAPI.Models.NatureOfCommodity",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.NatureOfCommodityDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.NatureOfCommodity",
+        "Type": "ExlinkAPI.DTOs.NatureOfCommodityDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1711,7 +1846,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.NatureOfCommodity",
+        "Type": "ExlinkAPI.DTOs.NatureOfCommodityDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1735,8 +1870,8 @@
         "IsRequired": true
       },
       {
-        "Name": "natureOfCommodity",
-        "Type": "ExlinkAPI.Models.NatureOfCommodity",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.NatureOfCommodityDto",
         "IsRequired": true
       }
     ],
@@ -1768,7 +1903,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.PackageType, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.PackageTypeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1787,14 +1922,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "packageType",
-        "Type": "ExlinkAPI.Models.PackageType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.PackageTypeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.PackageType",
+        "Type": "ExlinkAPI.DTOs.PackageTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1820,7 +1955,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.PackageType",
+        "Type": "ExlinkAPI.DTOs.PackageTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1844,8 +1979,8 @@
         "IsRequired": true
       },
       {
-        "Name": "packageType",
-        "Type": "ExlinkAPI.Models.PackageType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.PackageTypeDto",
         "IsRequired": true
       }
     ],
@@ -1877,7 +2012,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.PackType, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.PackTypeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1896,14 +2031,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "packType",
-        "Type": "ExlinkAPI.Models.PackType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.PackTypeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.PackType",
+        "Type": "ExlinkAPI.DTOs.PackTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1929,7 +2064,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.PackType",
+        "Type": "ExlinkAPI.DTOs.PackTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1953,8 +2088,8 @@
         "IsRequired": true
       },
       {
-        "Name": "packType",
-        "Type": "ExlinkAPI.Models.PackType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.PackTypeDto",
         "IsRequired": true
       }
     ],
@@ -1986,7 +2121,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Port, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.PortDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2005,14 +2140,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "port",
-        "Type": "ExlinkAPI.Models.Port",
+        "Name": "portDto",
+        "Type": "ExlinkAPI.DTOs.PortDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Port",
+        "Type": "ExlinkAPI.DTOs.PortDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2038,7 +2173,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Port",
+        "Type": "ExlinkAPI.DTOs.PortDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2062,8 +2197,8 @@
         "IsRequired": true
       },
       {
-        "Name": "port",
-        "Type": "ExlinkAPI.Models.Port",
+        "Name": "portDto",
+        "Type": "ExlinkAPI.DTOs.PortDto",
         "IsRequired": true
       }
     ],
@@ -2095,7 +2230,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.PreservationType, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.PreservationTypeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2114,14 +2249,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "preservationType",
-        "Type": "ExlinkAPI.Models.PreservationType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.PreservationTypeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.PreservationType",
+        "Type": "ExlinkAPI.DTOs.PreservationTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2147,7 +2282,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.PreservationType",
+        "Type": "ExlinkAPI.DTOs.PreservationTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2171,8 +2306,8 @@
         "IsRequired": true
       },
       {
-        "Name": "preservationType",
-        "Type": "ExlinkAPI.Models.PreservationType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.PreservationTypeDto",
         "IsRequired": true
       }
     ],
@@ -2204,7 +2339,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.ProcessType, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.ProcessTypeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2223,14 +2358,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "processType",
-        "Type": "ExlinkAPI.Models.ProcessType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProcessTypeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ProcessType",
+        "Type": "ExlinkAPI.DTOs.ProcessTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2256,7 +2391,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ProcessType",
+        "Type": "ExlinkAPI.DTOs.ProcessTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2280,8 +2415,8 @@
         "IsRequired": true
       },
       {
-        "Name": "processType",
-        "Type": "ExlinkAPI.Models.ProcessType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProcessTypeDto",
         "IsRequired": true
       }
     ],
@@ -2313,7 +2448,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.ProductClassification, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.ProductClassificationDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2332,14 +2467,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "productClassification",
-        "Type": "ExlinkAPI.Models.ProductClassification",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProductClassificationDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ProductClassification",
+        "Type": "ExlinkAPI.DTOs.ProductClassificationDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2365,7 +2500,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ProductClassification",
+        "Type": "ExlinkAPI.DTOs.ProductClassificationDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2389,8 +2524,8 @@
         "IsRequired": true
       },
       {
-        "Name": "productClassification",
-        "Type": "ExlinkAPI.Models.ProductClassification",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProductClassificationDto",
         "IsRequired": true
       }
     ],
@@ -2422,7 +2557,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Product, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.ProductDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2441,14 +2576,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "product",
-        "Type": "ExlinkAPI.Models.Product",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProductDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Product",
+        "Type": "ExlinkAPI.DTOs.ProductDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2474,7 +2609,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Product",
+        "Type": "ExlinkAPI.DTOs.ProductDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2498,8 +2633,8 @@
         "IsRequired": true
       },
       {
-        "Name": "product",
-        "Type": "ExlinkAPI.Models.Product",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProductDto",
         "IsRequired": true
       }
     ],
@@ -2531,7 +2666,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.ProductUseIndicator, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.ProductUseIndicatorDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2550,14 +2685,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "productUseIndicator",
-        "Type": "ExlinkAPI.Models.ProductUseIndicator",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProductUseIndicatorDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ProductUseIndicator",
+        "Type": "ExlinkAPI.DTOs.ProductUseIndicatorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2583,7 +2718,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.ProductUseIndicator",
+        "Type": "ExlinkAPI.DTOs.ProductUseIndicatorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2607,8 +2742,8 @@
         "IsRequired": true
       },
       {
-        "Name": "productUseIndicator",
-        "Type": "ExlinkAPI.Models.ProductUseIndicator",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.ProductUseIndicatorDto",
         "IsRequired": true
       }
     ],
@@ -2640,7 +2775,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.QualityQualifier, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.QualityQualifierDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2659,14 +2794,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "qualityQualifier",
-        "Type": "ExlinkAPI.Models.QualityQualifier",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.QualityQualifierDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.QualityQualifier",
+        "Type": "ExlinkAPI.DTOs.QualityQualifierDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2692,7 +2827,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.QualityQualifier",
+        "Type": "ExlinkAPI.DTOs.QualityQualifierDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2716,8 +2851,8 @@
         "IsRequired": true
       },
       {
-        "Name": "qualityQualifier",
-        "Type": "ExlinkAPI.Models.QualityQualifier",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.QualityQualifierDto",
         "IsRequired": true
       }
     ],
@@ -2749,7 +2884,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.RegionalOffice, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.RegionalOfficeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2768,14 +2903,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "regionalOffice",
-        "Type": "ExlinkAPI.Models.RegionalOffice",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RegionalOfficeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.RegionalOffice",
+        "Type": "ExlinkAPI.DTOs.RegionalOfficeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2801,7 +2936,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.RegionalOffice",
+        "Type": "ExlinkAPI.DTOs.RegionalOfficeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2825,8 +2960,8 @@
         "IsRequired": true
       },
       {
-        "Name": "regionalOffice",
-        "Type": "ExlinkAPI.Models.RegionalOffice",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RegionalOfficeDto",
         "IsRequired": true
       }
     ],
@@ -2858,7 +2993,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Region, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.RegionDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2877,14 +3012,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "region",
-        "Type": "ExlinkAPI.Models.Region",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RegionDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Region",
+        "Type": "ExlinkAPI.DTOs.RegionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2910,7 +3045,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Region",
+        "Type": "ExlinkAPI.DTOs.RegionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2934,8 +3069,8 @@
         "IsRequired": true
       },
       {
-        "Name": "region",
-        "Type": "ExlinkAPI.Models.Region",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RegionDto",
         "IsRequired": true
       }
     ],
@@ -2967,7 +3102,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.RegulatoryDocument, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.RegulatoryDocumentDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2986,14 +3121,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "regulatoryDocument",
-        "Type": "ExlinkAPI.Models.RegulatoryDocument",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RegulatoryDocumentDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.RegulatoryDocument",
+        "Type": "ExlinkAPI.DTOs.RegulatoryDocumentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3019,7 +3154,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.RegulatoryDocument",
+        "Type": "ExlinkAPI.DTOs.RegulatoryDocumentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3043,8 +3178,8 @@
         "IsRequired": true
       },
       {
-        "Name": "regulatoryDocument",
-        "Type": "ExlinkAPI.Models.RegulatoryDocument",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RegulatoryDocumentDto",
         "IsRequired": true
       }
     ],
@@ -3076,7 +3211,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Rfpreason, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.RfpreasonDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3095,14 +3230,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "rfpreason",
-        "Type": "ExlinkAPI.Models.Rfpreason",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RfpreasonDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Rfpreason",
+        "Type": "ExlinkAPI.DTOs.RfpreasonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3128,7 +3263,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Rfpreason",
+        "Type": "ExlinkAPI.DTOs.RfpreasonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3152,8 +3287,8 @@
         "IsRequired": true
       },
       {
-        "Name": "rfpreason",
-        "Type": "ExlinkAPI.Models.Rfpreason",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RfpreasonDto",
         "IsRequired": true
       }
     ],
@@ -3185,7 +3320,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Rfpstatus, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.RfpstatusDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3204,14 +3339,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "rfpstatus",
-        "Type": "ExlinkAPI.Models.Rfpstatus",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RfpstatusDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Rfpstatus",
+        "Type": "ExlinkAPI.DTOs.RfpstatusDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3237,7 +3372,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Rfpstatus",
+        "Type": "ExlinkAPI.DTOs.RfpstatusDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3261,8 +3396,8 @@
         "IsRequired": true
       },
       {
-        "Name": "rfpstatus",
-        "Type": "ExlinkAPI.Models.Rfpstatus",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.RfpstatusDto",
         "IsRequired": true
       }
     ],
@@ -3294,7 +3429,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.State, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.StateDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3313,14 +3448,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "state",
-        "Type": "ExlinkAPI.Models.State",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.StateDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.State",
+        "Type": "ExlinkAPI.DTOs.StateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3346,7 +3481,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.State",
+        "Type": "ExlinkAPI.DTOs.StateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3370,8 +3505,8 @@
         "IsRequired": true
       },
       {
-        "Name": "state",
-        "Type": "ExlinkAPI.Models.State",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.StateDto",
         "IsRequired": true
       }
     ],
@@ -3512,7 +3647,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.TransportMode, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.TransportModeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3531,14 +3666,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "transportMode",
-        "Type": "ExlinkAPI.Models.TransportMode",
+        "Name": "transportModeDto",
+        "Type": "ExlinkAPI.DTOs.TransportModeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TransportMode",
+        "Type": "ExlinkAPI.DTOs.TransportModeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3564,7 +3699,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TransportMode",
+        "Type": "ExlinkAPI.DTOs.TransportModeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3588,8 +3723,8 @@
         "IsRequired": true
       },
       {
-        "Name": "transportMode",
-        "Type": "ExlinkAPI.Models.TransportMode",
+        "Name": "transportModeDto",
+        "Type": "ExlinkAPI.DTOs.TransportModeDto",
         "IsRequired": true
       }
     ],
@@ -3621,7 +3756,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.TreatmentConcentration, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.TreatmentConcentrationDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3640,14 +3775,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "treatmentConcentration",
-        "Type": "ExlinkAPI.Models.TreatmentConcentration",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.TreatmentConcentrationDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TreatmentConcentration",
+        "Type": "ExlinkAPI.DTOs.TreatmentConcentrationDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3673,7 +3808,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TreatmentConcentration",
+        "Type": "ExlinkAPI.DTOs.TreatmentConcentrationDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3697,8 +3832,8 @@
         "IsRequired": true
       },
       {
-        "Name": "treatmentConcentration",
-        "Type": "ExlinkAPI.Models.TreatmentConcentration",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.TreatmentConcentrationDto",
         "IsRequired": true
       }
     ],
@@ -3730,7 +3865,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.TreatmentIngredient, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.TreatmentIngredientDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3749,14 +3884,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "treatmentIngredient",
-        "Type": "ExlinkAPI.Models.TreatmentIngredient",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.TreatmentIngredientDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TreatmentIngredient",
+        "Type": "ExlinkAPI.DTOs.TreatmentIngredientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3782,7 +3917,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TreatmentIngredient",
+        "Type": "ExlinkAPI.DTOs.TreatmentIngredientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3806,8 +3941,8 @@
         "IsRequired": true
       },
       {
-        "Name": "treatmentIngredient",
-        "Type": "ExlinkAPI.Models.TreatmentIngredient",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.TreatmentIngredientDto",
         "IsRequired": true
       }
     ],
@@ -3839,7 +3974,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Treatment, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.TreatmentDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3858,14 +3993,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "treatment",
-        "Type": "ExlinkAPI.Models.Treatment",
+        "Name": "treatmentDto",
+        "Type": "ExlinkAPI.DTOs.TreatmentDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Treatment",
+        "Type": "ExlinkAPI.DTOs.TreatmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3891,7 +4026,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Treatment",
+        "Type": "ExlinkAPI.DTOs.TreatmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3915,8 +4050,8 @@
         "IsRequired": true
       },
       {
-        "Name": "treatment",
-        "Type": "ExlinkAPI.Models.Treatment",
+        "Name": "treatmentDto",
+        "Type": "ExlinkAPI.DTOs.TreatmentDto",
         "IsRequired": true
       }
     ],
@@ -3948,7 +4083,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.TreatmentType, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.TreatmentTypeDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3967,14 +4102,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "treatmentType",
-        "Type": "ExlinkAPI.Models.TreatmentType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.TreatmentTypeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TreatmentType",
+        "Type": "ExlinkAPI.DTOs.TreatmentTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4000,7 +4135,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.TreatmentType",
+        "Type": "ExlinkAPI.DTOs.TreatmentTypeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4024,8 +4159,8 @@
         "IsRequired": true
       },
       {
-        "Name": "treatmentType",
-        "Type": "ExlinkAPI.Models.TreatmentType",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.TreatmentTypeDto",
         "IsRequired": true
       }
     ],
@@ -4057,7 +4192,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.UnitOfMeasure, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.UnitOfMeasureDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4076,14 +4211,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "unitOfMeasure",
-        "Type": "ExlinkAPI.Models.UnitOfMeasure",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.UnitOfMeasureDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.UnitOfMeasure",
+        "Type": "ExlinkAPI.DTOs.UnitOfMeasureDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4109,7 +4244,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.UnitOfMeasure",
+        "Type": "ExlinkAPI.DTOs.UnitOfMeasureDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4133,8 +4268,8 @@
         "IsRequired": true
       },
       {
-        "Name": "unitOfMeasure",
-        "Type": "ExlinkAPI.Models.UnitOfMeasure",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.UnitOfMeasureDto",
         "IsRequired": true
       }
     ],
@@ -4166,7 +4301,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.Usterritory, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.UsTerritoryDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4185,14 +4320,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "usterritory",
-        "Type": "ExlinkAPI.Models.Usterritory",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.UsTerritoryDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Usterritory",
+        "Type": "ExlinkAPI.DTOs.UsTerritoryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4218,7 +4353,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.Usterritory",
+        "Type": "ExlinkAPI.DTOs.UsTerritoryDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4242,8 +4377,8 @@
         "IsRequired": true
       },
       {
-        "Name": "usterritory",
-        "Type": "ExlinkAPI.Models.Usterritory",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.UsTerritoryDto",
         "IsRequired": true
       }
     ],
@@ -4275,7 +4410,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.WeightUnitAlternate, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.WeightUnitAlternateDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4294,14 +4429,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "weightUnitAlternate",
-        "Type": "ExlinkAPI.Models.WeightUnitAlternate",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.WeightUnitAlternateDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.WeightUnitAlternate",
+        "Type": "ExlinkAPI.DTOs.WeightUnitAlternateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4327,7 +4462,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.WeightUnitAlternate",
+        "Type": "ExlinkAPI.DTOs.WeightUnitAlternateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4351,8 +4486,8 @@
         "IsRequired": true
       },
       {
-        "Name": "weightUnitAlternate",
-        "Type": "ExlinkAPI.Models.WeightUnitAlternate",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.WeightUnitAlternateDto",
         "IsRequired": true
       }
     ],
@@ -4384,7 +4519,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.Models.WeightUnitShort, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExlinkAPI.DTOs.WeightUnitShortDto, ExlinkAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4403,14 +4538,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "weightUnitShort",
-        "Type": "ExlinkAPI.Models.WeightUnitShort",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.WeightUnitShortDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.WeightUnitShort",
+        "Type": "ExlinkAPI.DTOs.WeightUnitShortDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4436,7 +4571,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ExlinkAPI.Models.WeightUnitShort",
+        "Type": "ExlinkAPI.DTOs.WeightUnitShortDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4460,8 +4595,8 @@
         "IsRequired": true
       },
       {
-        "Name": "weightUnitShort",
-        "Type": "ExlinkAPI.Models.WeightUnitShort",
+        "Name": "dto",
+        "Type": "ExlinkAPI.DTOs.WeightUnitShortDto",
         "IsRequired": true
       }
     ],
