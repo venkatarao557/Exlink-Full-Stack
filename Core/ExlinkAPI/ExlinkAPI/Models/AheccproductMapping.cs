@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExlinkAPI.Models;
 
-[Keyless]
 [Table("AHECCProductMapping")]
 [Index("Ahecc", "ProductTypeCode", Name = "IX_AHECC_Lookup")]
 public partial class AheccproductMapping
 {
+    [Key]
     [Column("MappingID")]
     public Guid MappingId { get; set; }
 
