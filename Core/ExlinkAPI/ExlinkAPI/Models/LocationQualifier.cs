@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("LocationQualifier")]
-[Index("LocationQualifier1", Name = "UQ_LocQual_Name", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("LocationQualifier1", Name = "UQ_LocQual_Name", IsUnique = true)]
 public partial class LocationQualifier
 {
     [Key]

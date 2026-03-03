@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("State")]
-[Index("StateCode", Name = "UQ_State_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("StateCode", Name = "UQ_State_Code", IsUnique = true)]
 public partial class State
 {
     [Key]

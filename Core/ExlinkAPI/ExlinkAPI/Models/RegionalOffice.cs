@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("RegionalOffice")]
-[Index("State", Name = "IX_RegionalOffice_State")]
-[Index("OfficeCode", Name = "UQ_Office_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("State", Name = "IX_RegionalOffice_State")]
+[Microsoft.EntityFrameworkCore.Index("OfficeCode", Name = "UQ_Office_Code", IsUnique = true)]
 public partial class RegionalOffice
 {
     [Key]

@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("Country")]
-[Index("CountryName", Name = "IX_Country_Name")]
-[Index("CountryCode", Name = "UQ_Country_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("CountryName", Name = "IX_Country_Name")]
+[Microsoft.EntityFrameworkCore.Index("CountryCode", Name = "UQ_Country_Code", IsUnique = true)]
 public partial class Country
 {
     [Key]

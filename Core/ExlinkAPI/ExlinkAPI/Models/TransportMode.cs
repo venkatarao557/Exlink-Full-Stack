@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("TransportMode")]
-[Index("ModeCode", Name = "UQ_TransMode_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("ModeCode", Name = "UQ_TransMode_Code", IsUnique = true)]
 public partial class TransportMode
 {
     [Key]

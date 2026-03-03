@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("NatureOfCommodity")]
-[Index("NatureOfCommodityCode", Name = "UQ_CommNature_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("NatureOfCommodityCode", Name = "UQ_CommNature_Code", IsUnique = true)]
 public partial class NatureOfCommodity
 {
     [Key]

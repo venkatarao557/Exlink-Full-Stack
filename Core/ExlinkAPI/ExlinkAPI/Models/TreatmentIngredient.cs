@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("TreatmentIngredient")]
-[Index("IngredientCode", Name = "UQ_Ingredient_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("IngredientCode", Name = "UQ_Ingredient_Code", IsUnique = true)]
 public partial class TreatmentIngredient
 {
     [Key]

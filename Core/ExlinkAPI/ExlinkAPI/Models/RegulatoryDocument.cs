@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("RegulatoryDocument")]
-[Index("DocumentTypeCode", Name = "UQ_RegDoc_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("DocumentTypeCode", Name = "UQ_RegDoc_Code", IsUnique = true)]
 public partial class RegulatoryDocument
 {
     [Key]

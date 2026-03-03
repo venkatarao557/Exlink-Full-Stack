@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("ProductClassification")]
-[Index("Ahecc", Name = "IX_ProdClass_AHECC")]
+[Microsoft.EntityFrameworkCore.Index("Ahecc", Name = "IX_ProdClass_AHECC")]
 public partial class ProductClassification
 {
     [Key]

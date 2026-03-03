@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("PreservationType")]
-[Index("PreservationCode", Name = "UQ_Preservation_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("PreservationCode", Name = "UQ_Preservation_Code", IsUnique = true)]
 public partial class PreservationType
 {
     [Key]

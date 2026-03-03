@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("CertificatePrintIndicator")]
-[Index("IndicatorCode", Name = "UQ_CertPrint_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("IndicatorCode", Name = "UQ_CertPrint_Code", IsUnique = true)]
 public partial class CertificatePrintIndicator
 {
     [Key]

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("Currency")]
-[Index("CurrencyUnit", Name = "UQ_Currency_Unit", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("CurrencyUnit", Name = "UQ_Currency_Unit", IsUnique = true)]
 public partial class Currency
 {
     [Key]

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("CustomsWeightUnit")]
-[Index("WeightUnit", Name = "UQ_CustomsWeight_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("WeightUnit", Name = "UQ_CustomsWeight_Code", IsUnique = true)]
 public partial class CustomsWeightUnit
 {
     [Key]

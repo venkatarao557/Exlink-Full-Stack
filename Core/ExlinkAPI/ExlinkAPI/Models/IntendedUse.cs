@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("IntendedUse")]
-[Index("UseCode", Name = "UQ_IntendedUse_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("UseCode", Name = "UQ_IntendedUse_Code", IsUnique = true)]
 public partial class IntendedUse
 {
     [Key]

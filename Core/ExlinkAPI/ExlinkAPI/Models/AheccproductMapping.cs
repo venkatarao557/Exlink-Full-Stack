@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("AHECCProductMapping")]
-[Index("Ahecc", "ProductTypeCode", Name = "IX_AHECC_Lookup")]
+[Microsoft.EntityFrameworkCore.Index("Ahecc", "ProductTypeCode", Name = "IX_AHECC_Lookup")]
 public partial class AheccproductMapping
 {
     [Key]

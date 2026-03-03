@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("ProductType")]
-[Index("CommodityCode", "ProductTypeCode", Name = "UQ_ProductType_Commodity_Product", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("CommodityCode", "ProductTypeCode", Name = "UQ_ProductType_Commodity_Product", IsUnique = true)]
 public partial class ProductType
 {
     [Key]

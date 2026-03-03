@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("ProcessType")]
-[Index("ProcessTypeCode", Name = "UQ_ProcessType_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("ProcessTypeCode", Name = "UQ_ProcessType_Code", IsUnique = true)]
 public partial class ProcessType
 {
     [Key]

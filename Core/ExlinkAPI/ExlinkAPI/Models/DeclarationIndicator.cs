@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("DeclarationIndicator")]
-[Index("IndicatorCode", Name = "UQ_DeclInd_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("IndicatorCode", Name = "UQ_DeclInd_Code", IsUnique = true)]
 public partial class DeclarationIndicator
 {
     [Key]

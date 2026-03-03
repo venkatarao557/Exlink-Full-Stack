@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("QualityQualifier")]
-[Index("QualityQualifier1", Name = "UQ_QualityQual_Name", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("QualityQualifier1", Name = "UQ_QualityQual_Name", IsUnique = true)]
 public partial class QualityQualifier
 {
     [Key]

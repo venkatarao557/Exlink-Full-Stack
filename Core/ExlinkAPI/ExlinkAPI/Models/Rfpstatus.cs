@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("RFPStatus")]
-[Index("StatusCode", Name = "UQ_RFPStatus_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("StatusCode", Name = "UQ_RFPStatus_Code", IsUnique = true)]
 public partial class Rfpstatus
 {
     [Key]

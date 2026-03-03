@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("DominantProduct")]
-[Index("ProductName", Name = "UQ_DominantProduct_Name", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("ProductName", Name = "UQ_DominantProduct_Name", IsUnique = true)]
 public partial class DominantProduct
 {
     [Key]

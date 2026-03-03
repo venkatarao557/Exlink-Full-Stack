@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("Port")]
-[Index("PortName", Name = "IX_Port_Name")]
-[Index("PortCode", Name = "UQ_Port_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("PortName", Name = "IX_Port_Name")]
+[Microsoft.EntityFrameworkCore.Index("PortCode", Name = "UQ_Port_Code", IsUnique = true)]
 public partial class Port
 {
     [Key]

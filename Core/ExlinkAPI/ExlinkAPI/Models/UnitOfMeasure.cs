@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("UnitOfMeasure")]
-[Index("UnitType", Name = "IX_UOM_Type")]
-[Index("UnitCode", Name = "UQ_UOM_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("UnitType", Name = "IX_UOM_Type")]
+[Microsoft.EntityFrameworkCore.Index("UnitCode", Name = "UQ_UOM_Code", IsUnique = true)]
 public partial class UnitOfMeasure
 {
     [Key]

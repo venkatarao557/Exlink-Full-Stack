@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ExlinkAPI.Models;
 
 [Table("CertificateRequestStatus")]
-[Index("StatusCode", Name = "UQ_CertReqStatus_Code", IsUnique = true)]
+[Microsoft.EntityFrameworkCore.Index("StatusCode", Name = "UQ_CertReqStatus_Code", IsUnique = true)]
 public partial class CertificateRequestStatus
 {
     [Key]
