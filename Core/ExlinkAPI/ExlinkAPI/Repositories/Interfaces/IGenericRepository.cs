@@ -1,4 +1,6 @@
-﻿namespace ExlinkAPI.Repositories.Interfaces
+﻿using ExlinkAPI.DTOs;
+
+namespace ExlinkAPI.Repositories.Interfaces
 {
     public interface IGenericRepository<TEntity, TDto> where TEntity : class
     {
@@ -6,5 +8,6 @@
         Task<TDto?> GetByIdAsync(Guid id);
         Task<TDto> CreateAsync(TDto dto);
         Task<bool> DeleteAsync(Guid id);
+        Task<bool> UpdateAsync(Guid id, TDto dto);
     }
 }

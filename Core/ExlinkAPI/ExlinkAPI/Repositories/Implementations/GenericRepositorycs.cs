@@ -66,5 +66,10 @@ namespace ExlinkAPI.Repositories.Implementations
             // Return true if at least one row was affected
             return result > 0;
         }
+
+        Task<bool> IGenericRepository<TEntity, TDto>.UpdateAsync(Guid id, TDto dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

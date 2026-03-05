@@ -1,13 +1,9 @@
 ﻿using ExlinkAPI.DTOs;
+using ExlinkAPI.Models;
 
 namespace ExlinkAPI.Repositories.Interfaces
 {
-    public interface IApprovedCertifierRepository
+    public interface IApprovedCertifierRepository : IGenericRepository<ApprovedCertifier, ApprovedCertifierDto>
     {
-        Task<IEnumerable<ApprovedCertifierDto>> GetAllAsync();
-        Task<ApprovedCertifierDto?> GetByIdAsync(Guid id);
-        Task<ApprovedCertifierDto> CreateAsync(ApprovedCertifierDto certifierDto);
-        Task<bool> UpdateAsync(Guid id, ApprovedCertifierDto certifierDto);
-        Task<bool> DeleteAsync(Guid id);
     }
 }
